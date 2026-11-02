@@ -14,28 +14,29 @@ const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
   const cards=list.map((p,i)=>`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
+  const intro=opts.intro?`<section class="card intro"><div class="endbox">${CLOUD}<small>PIONEIRA COLCHÕES</small><h3>Black Friday</h3><span class="hair"></span><p>Ofertas selecionadas</p><em>Deslize para ver ↓</em></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
-  return `<div class="feed">${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
+  return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
-function wireFeed(list,start=0){
+function wireFeed(list,start=0,off=0){
   const feed=$(".feed"),count=$(".count"),fab=$(".fab"),cards=[...feed.querySelectorAll(".card")];
   const set=i=>{
     cards.forEach((c,j)=>c.classList.toggle("act",j===i));
-    const isEnd=i>=list.length;
+    const k=i-off,isEnd=k>=list.length||k<0;
     count.style.opacity=fab.style.opacity=isEnd?0:1;fab.style.pointerEvents=isEnd?"none":"auto";
-    if(!isEnd){count.textContent=`${i+1} / ${list.length}`;fab.href=waProd(list[i]);fab.innerHTML=WAI+"<span>Pedir no WhatsApp</span>"}
+    if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI+"<span>Pedir no WhatsApp</span>"}
   };
   cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(cards.indexOf(e.target))}),{root:feed,threshold:.6});
   cards.forEach(c=>io.observe(c));
-  feed.scrollTop=start*feed.clientHeight;set(start);
+  feed.scrollTop=(start+off)*feed.clientHeight;set(start+off);
 }
 
 const ROUTES={
   home(){
     const list=PRODUCTS.filter(p=>p.top);const l=list.length?list:PRODUCTS;
-    app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true})}<header class="over">${brand}<a class="pill" href="#/categorias">${GRID}Categorias</a></header></div>`;
-    wireFeed(l);
+    app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}<a class="pill" href="#/categorias">${GRID}Categorias</a></header></div>`;
+    wireFeed(l,0,1);
   },
   categorias(){
     app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div></div>`;
