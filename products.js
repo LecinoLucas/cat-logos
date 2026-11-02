@@ -18,8 +18,9 @@ window.STORE = {
   // Textos da capa de abertura (deixe "" para esconder uma linha)
   periodo: "01 a 30 de novembro",
   gancho: "Preços que não voltam mais.",
-  destaque: "Até 60% off",
-  subtitulo: "em todos os nossos produtos. Só em novembro.",
+  destaque: "Os menores preços do ano",
+  subtitulo: "em todos os nossos produtos.",
+  selo: "até 70% off",              // selo na frente da etiqueta (3 palavras: até / 70% / off). Deixe "" para esconder
   frase: "A **última chance** de garantir sua cama dos sonhos **com o menor preço!**"   // canto da capa; **texto** = negrito
 };
 window.CATEGORIES = [
