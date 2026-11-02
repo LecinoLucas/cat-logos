@@ -102,3 +102,20 @@ a{color:inherit;text-decoration:none}
 .feed{-webkit-overflow-scrolling:touch;touch-action:pan-y}
 /* alternativa para navegadores sem container queries (iPhone antigo) */
 @supports not (height:1cqh){.frame{height:min(calc(100vh - 170px),calc((100vw - 32px)*16/9))}}
+
+/* capa reorganizada: alinhada à esquerda, texto na parte de baixo */
+.intro{align-items:flex-end;justify-content:flex-start;text-align:left;padding:calc(70px + env(safe-area-inset-top,0px)) 26px calc(28px + env(safe-area-inset-bottom,0px))}
+.intro .endbox{max-width:none;width:100%;align-items:flex-start;text-align:left}
+.intro h3{text-align:left;font-size:clamp(3rem,10vh,4.4rem);line-height:.92;margin:0 0 18px}
+.intro .per{margin-top:2px}
+.intro .big{margin-top:10px}
+.intro .sub{margin-top:8px}
+.intro .cond{margin-top:18px;border-top:1px solid #ffffff26;padding-top:14px;width:100%;text-align:left;font-size:.6rem;letter-spacing:.12em}
+.intro .go,.intro .ghost{width:100%}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;width:100%;margin-top:24px}
+.foot .cloud{width:46px;flex:none;opacity:.95}
+.corner{margin:0;max-width:200px;text-align:right;font-size:.78rem;line-height:1.5;letter-spacing:.01em;color:#ffffffc7;text-transform:none}
+.corner b{color:#fff;font-weight:600}
+.ver{margin:26px 0 0;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);text-align:center}
+.intro .corner{margin:0;max-width:200px;text-align:right;font-size:.8rem;line-height:1.5;letter-spacing:.01em;text-transform:none;color:#ffffffc7;font-weight:400}
+.intro .corner b{color:#fff;font-weight:600}
