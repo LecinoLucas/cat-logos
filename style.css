@@ -249,3 +249,11 @@ a{color:inherit;text-decoration:none}
 .dockwa:active{transform:scale(.985)}
 @media(max-height:700px){.card.intro.v2{padding-top:calc(54px + env(safe-area-inset-top,0px))}.card.intro.v2 .tagimg{width:min(56vw,calc(34vh*.758),230px)}.v2 .copy h3{font-size:1.85rem}.v2 .copy .corner{display:none}.dockwa{padding:14px}}
 .v2 .when b,.seal b,.v2 .copy h3{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+
+/* capa sem WhatsApp: o convite é rolar */
+.v2 .dock{padding:6px 20px 0;align-items:center}
+.v2 .cue{flex-direction:column;gap:12px;padding:6px 0 4px;color:#17325a;font-size:.6rem;letter-spacing:.26em;font-weight:600}
+.v2 .cue .ring{width:54px;height:54px;border-radius:50%;border:1.5px solid #17325a;display:grid;place-items:center;background:#ffffff80;box-shadow:0 10px 24px -12px #17325a}
+.v2 .cue .ring svg{animation:bobsvg 1.6s ease-in-out infinite}
+.v2 .cue:active .ring{background:#17325a;color:#fff}
+@media(max-height:700px){.v2 .cue .ring{width:46px;height:46px;gap:8px}.v2 .cue{gap:8px}}
