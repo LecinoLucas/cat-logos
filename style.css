@@ -138,3 +138,15 @@ a{color:inherit;text-decoration:none}
 .intro.light .endbox{justify-content:space-around}
 .intro.light .tagimg{height:auto;width:min(52vw,calc(36vh*0.758),250px)}
 .intro.light .per{letter-spacing:.14em;font-size:.54rem;line-height:1.5}
+
+/* selo "até 70% off" na frente da etiqueta */
+.intro.light .tagwrap{position:relative;flex:none}
+.seal{position:absolute;right:4%;bottom:6%;width:clamp(78px,24vw,98px);aspect-ratio:1;border-radius:50%;background:#a9c8f2;color:#17325a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transform:rotate(-8deg);box-shadow:0 12px 26px -10px #17325a99;border:2px solid #ffffffb3}
+.seal small{font-size:.5rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;line-height:1;padding-left:.24em}
+.seal b{font-family:var(--serif);font-size:clamp(1.7rem,6vw,2.1rem);line-height:1;font-weight:600;letter-spacing:-.01em}
+.intro.light .hero{align-items:flex-start}
+.intro.light .htxt{padding-top:clamp(18px,5.5vh,50px)}
+.seal{right:-13%;bottom:-7%;width:min(22vw,11.5vh,92px)}
+.seal b{font-size:clamp(1.4rem,5.2vw,1.9rem)}
+.seal small{font-size:.44rem}
+.seal{right:-20%;bottom:-8%}
