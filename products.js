@@ -20,7 +20,7 @@ window.STORE = {
   gancho: "Preços que não voltam mais.",
   destaque: "Os menores preços do ano",
   subtitulo: "em todos os nossos produtos.",
-  selo: "até 70% off",              // selo na frente da etiqueta (3 palavras: até / 70% / off). Deixe "" para esconder
+  selo: "até 60% off",              // selo na frente da etiqueta (3 palavras: até / 70% / off). Deixe "" para esconder
   frase: "A **última chance** de garantir sua cama dos sonhos **com o menor preço!**"   // canto da capa; **texto** = negrito
 };
 window.CATEGORIES = [
