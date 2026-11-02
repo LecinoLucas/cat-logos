@@ -11,6 +11,6 @@ window.PRODUCTS = [
   {cat:"colchao",name:"Colchão Molas Firme + Bicama de Molas",size:"Casal 1,38 × 1,88 m",from:2985,price:2443,img:"bicama-casal.jpg",pix:"no Pix",inst:"ou 10x de R$ 279,00",note:"Verifique as cores."},
   {cat:"colchao",name:"Colchão Sealy Conforto Intermediário",size:"Queen 1,58 × 1,98 m",from:2899,price:2199,img:"sealy-queen.jpg",pix:"no Pix",inst:"ou 10x de R$ 240,00",note:"Não acompanha o box."},
   {cat:"colchao",name:"Colchão Simmons Firme",size:"Casal 1,38 × 1,88 m",from:4270,price:3297,img:"simmons-casal.jpg",pix:"no Pix",inst:"ou 10x de R$ 356,00",note:"Verifique as cores."},
-  {cat:"tricama",name:"Tricama 3 em 1",size:"Aço e MDF · 2 anos de garantia",img:"tricama-promo.jpg",note:"Cama de solteiro, solteiro com auxiliar ou cama de casal. Consulte valores.",gallery:["tricama-foto1.jpg","tricama-foto2.jpg","tricama-foto3.jpg","tricama-foto4.jpg"]},
+  {cat:"tricama",name:"Tricama 3 em 1",size:"Aço e MDF · 2 anos de garantia",img:"tricama-foto2.jpg",note:"Cama de solteiro, solteiro com auxiliar ou cama de casal. Consulte valores.",gallery:["tricama-foto1.jpg","tricama-foto3.jpg","tricama-foto4.jpg","folhetos/tricama-promo.jpg"]},
   {cat:"box",name:"Box Cama (simples)",size:"Vários tamanhos",img:"box-foto1.jpg",note:"Consulte medidas, cores e cabeceiras.",gallery:["box-foto2.jpg","box-foto3.jpg","box-foto4.jpg"]}
 ];
