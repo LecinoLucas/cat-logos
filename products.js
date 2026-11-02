@@ -23,8 +23,10 @@ window.CATEGORIES = [
 ];
 window.PRODUCTS = [
   // ── Black Friday ──
+  {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
   {cat:"camas",top:true,img:"tricama-promo.jpg",name:"Tricama 3 em 1"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",name:"Colchão Molas Firme + Bicama de Molas Casal"},
+  {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
   {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-solteirao.jpg",name:"Box Baú Solteirão (1,08 × 1,98 m)"},
