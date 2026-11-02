@@ -1,5 +1,5 @@
 // Edite aqui preços e produtos. Imagens em /img
-window.WHATSAPP = "5500000000000"; // TODO: número com DDI+DDD
+window.WHATSAPP = "5562981310293"; // TODO: número com DDI+DDD
 window.PRODUCTS = [
   {cat:"box-bau",name:"Box Baú Solteiro",size:"0,88 × 1,88 m",from:1399,price:999,img:"box-solteiro.jpg",pix:"+5% no Pix",inst:"até 10x sem juros",note:"Colchão não incluso. Verifique as cores."},
   {cat:"box-bau",name:"Box Baú Solteirão",size:"1,08 × 1,98 m",from:1490,price:1100,img:"box-solteirao.jpg",pix:"+5% no Pix",inst:"até 10x sem juros",note:"Colchão não incluso. Verifique as cores."},
