@@ -1,8 +1,24 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Pioneira Colchões</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap">
+<title>Pioneira Colchões · Black Friday</title>
+<meta name="theme-color" content="#17325a">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="style.css"></head><body>
-<header><div class="brand"><svg class="cloud" viewBox="0 0 64 40" aria-hidden="true"><path fill="#6db3f0" d="M16 38a12 12 0 0 1-2-23.8A15 15 0 0 1 43 11a13 13 0 0 1 6 27z"/></svg><div><b>pioneira</b><small>COLCHÕES</small></div></div>
-<nav id="tabs" aria-label="Categorias"></nav></header>
-<main id="feed"></main>
+<header>
+  <div class="brand"><svg class="cloud" viewBox="0 0 64 40" aria-hidden="true"><path fill="#6db3f0" d="M16 38a12 12 0 0 1-2-23.8A15 15 0 0 1 43 11a13 13 0 0 1 6 27z"/></svg><div><b>pioneira</b><small>COLCHÕES</small></div></div>
+  <div class="bf"><span>BLACK FRIDAY</span> ofertas imperdíveis</div>
+  <nav id="tabs" aria-label="Categorias"></nav>
+</header>
+<main id="grid"></main>
+<div id="sheet" class="sheet" hidden>
+  <div class="scrim" data-close></div>
+  <article class="panel" role="dialog" aria-modal="true" aria-labelledby="s-name">
+    <button class="x" data-close aria-label="Fechar">×</button>
+    <div class="gal" id="s-gal"></div><div class="dots" id="s-dots"></div>
+    <div class="body">
+      <div class="eyebrow" id="s-cat"></div><h2 id="s-name"></h2><div class="size" id="s-size"></div>
+      <div id="s-price"></div><p class="note" id="s-note"></p>
+      <a class="btn" id="s-wa" target="_blank" rel="noopener">Pedir no WhatsApp</a>
+    </div>
+  </article>
+</div>
 <script src="products.js"></script><script src="app.js"></script></body></html>
