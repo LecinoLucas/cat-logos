@@ -28,6 +28,7 @@ window.PRODUCTS = [
   {cat:"box-bau",top:true,img:"box-casal.jpg",name:"Box Baú Casal (1,38 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-queen.jpg",name:"Box Baú Queen (1,58 × 1,98 m)"},
   {cat:"box-bau",top:true,img:"box-king.jpg",name:"Box Baú King (1,93 × 2,03 m)"},
+  {cat:"box-bau",top:true,img:"molas-bau-king.jpg",name:"Colchão Molas Ensacadas + Box Baú King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"hotelaria-solteiro.jpg",name:"Colchão Molas de Hotelaria Firme + Box Solteiro"},
   {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",name:"Colchão King Koil Firme Solteiro"},
   {cat:"colchao",top:true,img:"simmons-casal.jpg",name:"Colchão Simmons Firme Casal"},
