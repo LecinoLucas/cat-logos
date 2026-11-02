@@ -1,40 +1,11 @@
-const brl=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:0});
 const $=id=>document.getElementById(id);
-const wa=t=>`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
-const CATS=[["all","Todos"],["box-bau","Box Baú"],["colchao","Colchões"],["tricama","Tricama"],["box","Box"]];
-const LABEL={"box-bau":"Box Baú",colchao:"Colchão",tricama:"Tricama",box:"Box"};
+const wa=p=>`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.name}`)}`;
+const ICON='<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.8-4.5-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.4-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.3z"/></svg>';
 let cat="all";
-
-function renderGrid(){
-  $("tabs").innerHTML=CATS.map(([k,n])=>`<button data-c="${k}" class="${k===cat?"on":""}">${n}</button>`).join("");
-  $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;renderGrid();window.scrollTo({top:0})});
-  const list=PRODUCTS.map((p,i)=>({p,i})).filter(({p})=>cat==="all"||p.cat===cat)
-    ;
-  $("grid").innerHTML=list.map(({p,i})=>`<button class="tile" data-i="${i}" aria-label="${p.name}"><img loading="lazy" src="img/${p.img}" alt="${p.name}"><span class="cap"><small>${LABEL[p.cat]}</small>${p.name.replace(/^(Box Baú|Colchão) /,"")}</span></button>`).join("");
-  $("grid").querySelectorAll(".tile").forEach(t=>t.onclick=()=>open(+t.dataset.i));
+function render(){
+  $("tabs").innerHTML=CATEGORIES.map(([k,n])=>`<button data-c="${k}" class="${k===cat?"on":""}">${n}</button>`).join("");
+  $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;render();$("feed").scrollTo({top:0})});
+  $("feed").innerHTML=PRODUCTS.filter(p=>cat==="all"||p.cat===cat).map(p=>
+    `<a class="card" target="_blank" rel="noopener" href="${wa(p)}" aria-label="${p.name} — pedir no WhatsApp"><img class="bg" src="img/ofertas/${p.img}" alt=""><img class="fg" loading="lazy" src="img/ofertas/${p.img}" alt="${p.name}"><span class="wa">${ICON}</span></a>`).join("");
 }
-
-function open(i){
-  const p=PRODUCTS[i],imgs=[p.img,...(p.gallery||[])];
-  $("s-gal").innerHTML=imgs.map(f=>`<div class="slide"><img src="img/${f}" alt="${p.name}"></div>`).join("");
-  $("s-gal").scrollLeft=0;
-  $("s-dots").innerHTML=imgs.length>1?imgs.map((_,k)=>`<i class="${k?"":"on"}"></i>`).join(""):"";
-  $("s-cat").textContent=LABEL[p.cat];
-  $("s-name").textContent=p.name;
-  $("s-size").textContent=p.size;
-  $("s-price").innerHTML=p.price
-    ?`<div class="price"><span class="from">${brl(p.from)}</span><span class="now">${brl(p.price)}</span></div><div class="cond">${p.pix} · ${p.inst}</div>`
-    :`<div class="ask">Consulte valores</div>`;
-  $("s-note").textContent=p.note||"";
-  $("s-wa").href=wa(`Olá! Vi a promoção no catálogo e tenho interesse em: ${p.name} (${p.size})`);
-  $("sheet").hidden=false;document.body.classList.add("lock");
-  requestAnimationFrame(()=>$("sheet").classList.add("in"));
-}
-function close(){
-  $("sheet").classList.remove("in");document.body.classList.remove("lock");
-  setTimeout(()=>{$("sheet").hidden=true},250);
-}
-document.querySelectorAll("[data-close]").forEach(e=>e.onclick=close);
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("sheet").hidden)close()});
-$("s-gal").onscroll=e=>{const g=e.target,k=Math.round(g.scrollLeft/g.clientWidth);[...$("s-dots").children].forEach((x,j)=>x.classList.toggle("on",j===k))};
-renderGrid();
+render();
