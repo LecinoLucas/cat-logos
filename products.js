@@ -34,5 +34,6 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"sealy-queen.jpg",name:"Colchão Sealy Conforto Intermediário Queen"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",name:"Colchão King Koil Hotelaria Dupla Face Queen"},
   {cat:"colchao",top:true,img:"simmons-queen.jpg",name:"Colchão Simmons Mola Extra Firme Queen (última peça)"},
-  {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"}
+  {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
+  {cat:"colchao",top:true,img:"kingkoil-diamond-queen.jpg",name:"Colchão com Látex Diamond King Koil Queen (última peça)"}
 ];
