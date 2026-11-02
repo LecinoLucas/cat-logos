@@ -38,11 +38,11 @@ const ROUTES={
     wireFeed(l);
   },
   categorias(){
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt=""><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div></div>`;
   },
   cat(k){
     const c=catOf(k);if(!c)return location.hash="#/";
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile" href="#/c/${k}/${i}"><img loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}"></a>`).join("")}</div></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile" href="#/c/${k}/${i}"><img class="bg" loading="lazy" src="img/ofertas/t/${p.img}" alt=""><img class="fg" loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}"></a>`).join("")}</div></div>`;
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";
