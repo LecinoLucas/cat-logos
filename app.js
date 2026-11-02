@@ -1,17 +1,16 @@
 const brl=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:0});
 const $=id=>document.getElementById(id);
 const wa=t=>`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
-const CATS=[["all","Promoções"],["box-bau","Box Baú"],["colchao","Colchões"],["tricama","Tricama"],["box","Box"]];
+const CATS=[["all","Todos"],["box-bau","Box Baú"],["colchao","Colchões"],["tricama","Tricama"],["box","Box"]];
 const LABEL={"box-bau":"Box Baú",colchao:"Colchão",tricama:"Tricama",box:"Box"};
-const off=p=>p.price?Math.round((1-p.price/p.from)*100):0;
 let cat="all";
 
 function renderGrid(){
   $("tabs").innerHTML=CATS.map(([k,n])=>`<button data-c="${k}" class="${k===cat?"on":""}">${n}</button>`).join("");
   $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;renderGrid();window.scrollTo({top:0})});
   const list=PRODUCTS.map((p,i)=>({p,i})).filter(({p})=>cat==="all"||p.cat===cat)
-    .sort((a,b)=>off(b.p)-off(a.p));
-  $("grid").innerHTML=list.map(({p,i})=>`<button class="tile" data-i="${i}" aria-label="${p.name}"><img loading="lazy" src="img/${p.img}" alt="${p.name}">${p.price?`<span class="badge">-${off(p)}%</span>`:""}</button>`).join("");
+    ;
+  $("grid").innerHTML=list.map(({p,i})=>`<button class="tile" data-i="${i}" aria-label="${p.name}"><img loading="lazy" src="img/${p.img}" alt="${p.name}"><span class="cap"><small>${LABEL[p.cat]}</small>${p.name.replace(/^(Box Baú|Colchão) /,"")}</span></button>`).join("");
   $("grid").querySelectorAll(".tile").forEach(t=>t.onclick=()=>open(+t.dataset.i));
 }
 
