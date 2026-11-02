@@ -4,6 +4,16 @@
 // cat      → categoria (precisa existir em CATEGORIES).
 // pos      → (opcional) enquadramento da foto, ex.: "50% 30%".
 window.WHATSAPP = "5562981310293"; // DDI + DDD + número
+// ── Dados da loja ──  (campos vazios ficam escondidos no site)
+window.STORE = {
+  instagram: "pioneiracolchoes",   // sem o @
+  endereco: "",                    // ex.: "Av. Exemplo, 123 - Centro, Cidade - UF"
+  mapa: "",                        // (opcional) link do Google Maps; se vazio, é gerado pelo endereço
+  horario: "",                     // ex.: "Seg a Sex 8h–18h · Sáb 8h–13h"
+  entrega: "",                     // ex.: "Entregamos em Goiânia e região"
+  telefone: "",                    // ex.: "5562999999999" (DDI+DDD+número) para o botão Ligar
+  validade: ""                     // ex.: "30/11" → mostra "Ofertas válidas até 30/11"
+};
 window.CATEGORIES = [
   {key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
   {key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},

@@ -8,14 +8,16 @@ const CLOSE='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke=
 const wa=t=>`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
 const waProd=p=>wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.name}`);
 const brand=`<a class="brand" href="#/">${CLOUD}<b>pioneira</b></a>`;
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const COND="Até 10x no cartão · Condições especiais no Pix";
 const catOf=k=>CATEGORIES.find(c=>c.key===k);
 const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
   const cards=list.map((p,i)=>`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
-  const intro=opts.intro?`<section class="card intro"><div class="endbox">${CLOUD}<small>PIONEIRA COLCHÕES</small><h3>Black Friday</h3><span class="hair"></span><p>Ofertas selecionadas</p><em>Deslize para ver ↓</em></div></section>`:"";
-  const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
+  const intro=opts.intro?`<section class="card intro"><div class="endbox">${CLOUD}<small>PIONEIRA COLCHÕES</small><h3>Black Friday</h3><span class="hair"></span><p>Ofertas selecionadas</p>${STORE.validade?`<b class="val">Válidas até ${esc(STORE.validade)}</b>`:""}<span class="cond">${COND}</span><em>Deslize para ver ↓</em></div></section>`:"";
+  const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
 function wireFeed(list,start=0,off=0){
@@ -36,10 +38,18 @@ const ROUTES={
   home(){
     const list=PRODUCTS.filter(p=>p.top);const l=list.length?list:PRODUCTS;
     app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}<a class="pill" href="#/categorias">${GRID}Categorias</a></header></div>`;
-    wireFeed(l,0,1);
+    wireFeed(l,-1,1);
   },
   categorias(){
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div><a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
+  },
+  loja(){
+    const S=STORE,rows=[];
+    if(S.endereco)rows.push(["Endereço",esc(S.endereco)]);
+    if(S.horario)rows.push(["Horário",esc(S.horario)]);
+    if(S.entrega)rows.push(["Entrega",esc(S.entrega)]);
+    const map=S.endereco?(S.mapa||`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(S.endereco)}`):"";
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>A Pioneira</h1><span></span></header><div class="about">${CLOUD}<p class="lead">Colchões, box baú, tricama e bicama com atendimento direto pelo WhatsApp.</p>${S.validade?`<p class="valid">Ofertas de Black Friday válidas até ${esc(S.validade)}</p>`:""}<dl class="perks"><div><dt>Pagamento</dt><dd>${COND}</dd></div><div><dt>Marcas</dt><dd>Sealy · Simmons · King Koil</dd></div><div><dt>Atendimento</dt><dd>Tire dúvidas e escolha o seu pelo WhatsApp</dd></div>${rows.map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join("")}</dl><div class="acts"><a class="solid dk" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a>${map?`<a class="ghost dk" target="_blank" rel="noopener" href="${esc(map)}">Ver no mapa</a>`:""}${S.telefone?`<a class="ghost dk" href="tel:+${esc(S.telefone)}">Ligar</a>`:""}${S.instagram?`<a class="ghost dk" target="_blank" rel="noopener" href="https://instagram.com/${esc(S.instagram)}">Instagram @${esc(S.instagram)}</a>`:""}</div></div></div>`;
   },
   cat(k){
     const c=catOf(k);if(!c)return location.hash="#/";
@@ -54,6 +64,7 @@ const ROUTES={
 function route(){
   const h=location.hash.replace(/^#\/?/,"").split("/");
   if(h[0]==="categorias")ROUTES.categorias();
+  else if(h[0]==="loja")ROUTES.loja();
   else if(h[0]==="c"&&h[2]!==undefined)ROUTES.viewer(h[1],h[2]);
   else if(h[0]==="c")ROUTES.cat(h[1]);
   else ROUTES.home();

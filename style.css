@@ -59,3 +59,19 @@ a{color:inherit;text-decoration:none}
 .intro p{margin:6px 0 0;letter-spacing:.3em;text-transform:uppercase;font-size:.62rem;color:#c9a96a}
 .intro em{margin-top:46px;font-style:normal;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#ffffff80;animation:nudge 1.8s ease-in-out infinite}
 @keyframes nudge{50%{transform:translateY(6px)}}
+.intro .cond{margin-top:22px;font-size:.58rem;letter-spacing:.14em;color:#ffffffb3;border-top:1px solid #ffffff26;padding-top:14px}
+.intro .val{margin-top:14px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-weight:500}
+.intro em{margin-top:34px}
+.endbox .ghost+.ghost{margin-top:-2px}
+.aboutlink{display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px 10px;font-family:var(--serif);font-style:italic;font-size:1.5rem;border-top:1px solid var(--line);margin-top:6px}
+.aboutlink small{font-family:var(--sans);font-style:normal;font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.about{max-width:520px;margin:0 auto;padding:30px 24px calc(34px + env(safe-area-inset-bottom,0px));text-align:center}
+.about .cloud{width:40px}
+.lead{font-family:var(--serif);font-size:1.45rem;line-height:1.35;margin:14px 0 6px}
+.valid{margin:10px 0 0;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.perks{margin:26px 0;text-align:left}
+.perks div{padding:16px 0;border-top:1px solid var(--line)}.perks div:last-child{border-bottom:1px solid var(--line)}
+.perks dt{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.perks dd{margin:6px 0 0;font-size:.85rem;line-height:1.5}
+.acts{display:grid;gap:10px}
+.solid.dk{background:var(--navy);color:#fff}.ghost.dk{border-color:var(--navy);color:var(--navy)}
