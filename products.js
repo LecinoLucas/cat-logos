@@ -17,9 +17,24 @@ window.STORE = {
   validade: ""                     // ex.: "30/11" → mostra "Ofertas válidas até 30/11"
 };
 window.CATEGORIES = [
-  {key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
-  {key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
-  {key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"}
+  // group: título da seção na tela de categorias. Sem "cover" = categoria sem fotos ainda (aparece como "Em breve").
+  // Para ativar uma categoria: ponha as fotos em img/ofertas/ (+ miniatura em img/ofertas/t/), use cat:"<key>" nos produtos e, se quiser, defina cover.
+  {group:"Black Friday",key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
+  {group:"Black Friday",key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
+  {group:"Black Friday",key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
+
+  {group:"Marcas",key:"king-koil",name:"King Koil"},
+  {group:"Marcas",key:"ecoflex",name:"Ecoflex"},
+  {group:"Marcas",key:"inducol",name:"Inducol"},
+  {group:"Marcas",key:"sealy",name:"Sealy"},
+  {group:"Marcas",key:"simmons",name:"Simmons"},
+  {group:"Marcas",key:"plumatex",name:"Plumatex"},
+  {group:"Marcas",key:"probel",name:"Probel"},
+  {group:"Marcas",key:"outras-marcas",name:"Outras marcas"},
+
+  {group:"Complementos",key:"cabeceiras",name:"Cabeceiras"},
+  {group:"Complementos",key:"travesseiros",name:"Travesseiros"},
+  {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
   // ── Black Friday ──

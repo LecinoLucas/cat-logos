@@ -50,7 +50,11 @@ const ROUTES={
     wireFeed(l,-1,1);
   },
   categorias(){
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div><a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
+    const groups=[];CATEGORIES.forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
+    const tile=c=>{const n=inCat(c.key).length;
+      return c.cover&&n?`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`
+      :`<a class="cat soon" href="#/c/${c.key}"><span><b>${c.name}</b><small>${n?`${n} ${n===1?"oferta":"ofertas"}`:"Em breve"}</small></span></a>`};
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header>${groups.map(g=>`<section class="grpbox">${g.n?`<h2 class="grp">${esc(g.n)}</h2>`:""}<div class="cats">${g.l.map(tile).join("")}</div></section>`).join("")}<a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
   },
   loja(){
     const S=STORE,rows=[];
@@ -62,6 +66,7 @@ const ROUTES={
   },
   cat(k){
     const c=catOf(k);if(!c)return location.hash="#/";
+    if(!inCat(k).length){app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="about">${CLOUD}<p class="lead">As fotos de ${esc(c.name)} chegam em breve.</p><p class="valid">Enquanto isso, fale com a gente</p><div class="acts"><a class="solid dk" target="_blank" rel="noopener" href="${wa(`Olá! Gostaria de ver as opções de ${c.name}.`)}">${WAI}Perguntar sobre ${esc(c.name)}</a><a class="ghost dk" href="#/categorias">Voltar às categorias</a></div></div></div>`;return}
     app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile${p.video?" isvid":""}" href="#/c/${k}/${i}"><img loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></a>`).join("")}</div></div>`;
   },
   viewer(k,n){
