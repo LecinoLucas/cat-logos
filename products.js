@@ -5,10 +5,12 @@
 // VÍDEO: {cat:"box-bau",top:true,video:"nome.mp4",img:"nome.jpg",name:"Vídeo: ...",wa:"Box Baú"}
 //         → o vídeo vai em img/ofertas/ (mp4, até ~20 MB) e a imagem de capa (img) em img/ofertas/ + miniatura em img/ofertas/t/.
 // pos      → (opcional) enquadramento da foto, ex.: "50% 30%".
-// Números de WhatsApp (DDI + DDD + número). Com mais de um, o catálogo alterna entre eles a cada clique.
-window.WHATSAPPS = [
-  "5562981310293"
-  // , "55DDDNUMERO"   ← coloque aqui o segundo número
+// Atendentes: quando a pessoa toca em qualquer botão de WhatsApp, abre uma janelinha para escolher com quem falar.
+// numero = DDI + DDD + número (só dígitos) · foto = caminho da imagem em img/atendentes/ (opcional; sem foto aparece a inicial)
+// Quem estiver sem número fica escondido; com um só atendente, o WhatsApp abre direto.
+window.ATENDENTES = [
+  {nome:"Vanuza",   numero:"",              foto:""},   // ← coloque o número da Vanuza
+  {nome:"Cleonice", numero:"5562981310293", foto:""}
 ];
 // ── Dados da loja ──  (campos vazios ficam escondidos no site)
 window.STORE = {
