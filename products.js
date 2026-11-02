@@ -18,7 +18,8 @@ window.STORE = {
   // Textos da capa de abertura (deixe "" para esconder uma linha)
   periodo: "01 a 30 de novembro",
   destaque: "Até 60% off",
-  subtitulo: "em todos os nossos produtos. Só em novembro."
+  subtitulo: "em todos os nossos produtos. Só em novembro.",
+  frase: "A **última chance** de garantir sua cama dos sonhos **com o menor preço!**"   // canto da capa; **texto** = negrito
 };
 window.CATEGORIES = [
   {key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
