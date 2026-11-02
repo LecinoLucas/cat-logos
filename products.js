@@ -21,6 +21,7 @@ window.STORE = {
   entrega: "",                     // ex.: "Entregamos em Goiânia e região"
   telefone: "",                    // ex.: "5562999999999" (DDI+DDD+número) para o botão Ligar
   validade: "30/11",               // aparece na página "A Pioneira": "Ofertas de Black Friday válidas até 30/11"
+  botao: "Falar no WhatsApp",      // texto do botão de WhatsApp nas ofertas (o mesmo em todas as telas)
   // Textos da capa de abertura (deixe "" para esconder uma linha)
   periodo: "01 a 30 de novembro",
   gancho: "Os menores preços do ano",
