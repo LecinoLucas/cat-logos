@@ -38,7 +38,7 @@ const ROUTES={
     wireFeed(l);
   },
   categorias(){
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt=""><span><b>${c.name}</b><small>${inCat(c.key).length} ofertas</small></span></a>`).join("")}</div></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt=""><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div></div>`;
   },
   cat(k){
     const c=catOf(k);if(!c)return location.hash="#/";
