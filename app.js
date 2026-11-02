@@ -16,7 +16,8 @@ const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
   const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
-  const intro=opts.intro?`<section class="card intro"><div class="endbox">${CLOUD}<small>PIONEIRA COLCHÕES</small><h3>Black Friday</h3><span class="hair"></span><p>Ofertas selecionadas</p>${STORE.validade?`<b class="val">Válidas até ${esc(STORE.validade)}</b>`:""}<span class="cond">${COND}</span><em>Deslize para ver ↓</em></div></section>`:"";
+  const dest=STORE.destaque?STORE.destaque.replace(/^(\S+)\s+(.+)$/,"$1 <i>$2</i>"):"";
+  const intro=opts.intro?`<section class="card intro"><div class="endbox">${CLOUD}<small>PIONEIRA COLCHÕES</small><h3>Black Friday</h3><span class="hair"></span>${STORE.periodo?`<b class="per">${esc(STORE.periodo)}</b>`:""}${dest?`<p class="big">${dest}</p>`:""}${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo)}</p>`:""}<span class="cond">${COND}</span><button class="go" type="button">Navegue pelas ofertas <span aria-hidden="true">↓</span></button><a class="ghost" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
@@ -40,6 +41,13 @@ function wireFeed(list,start=0,off=0){
   cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(cards.indexOf(e.target))}),{root:feed,threshold:.6});
   cards.forEach(c=>io.observe(c));
+  const go=feed.querySelector(".go");
+  if(go)go.onclick=()=>{
+    const top=feed.clientHeight;
+    feed.style.scrollSnapType="none";
+    try{feed.scrollTo({top,behavior:"smooth"})}catch(e){feed.scrollTop=top}
+    setTimeout(()=>{feed.scrollTop=top;feed.style.scrollSnapType=""},750);
+  };
   feed.scrollTop=(start+off)*feed.clientHeight;set(start+off);
 }
 

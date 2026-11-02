@@ -14,7 +14,11 @@ window.STORE = {
   horario: "",                     // ex.: "Seg a Sex 8h–18h · Sáb 8h–13h"
   entrega: "",                     // ex.: "Entregamos em Goiânia e região"
   telefone: "",                    // ex.: "5562999999999" (DDI+DDD+número) para o botão Ligar
-  validade: ""                     // ex.: "30/11" → mostra "Ofertas válidas até 30/11"
+  validade: "30/11",               // aparece na página "A Pioneira": "Ofertas de Black Friday válidas até 30/11"
+  // Textos da capa de abertura (deixe "" para esconder uma linha)
+  periodo: "01 a 30 de novembro",
+  destaque: "Até 60% off",
+  subtitulo: "em todos os nossos produtos. Só em novembro."
 };
 window.CATEGORIES = [
   // group: título da seção na tela de categorias. Sem "cover" = categoria sem fotos ainda (aparece como "Em breve").
