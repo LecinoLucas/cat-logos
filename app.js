@@ -65,7 +65,7 @@ function wireFeed(list,start=0,off=0){
     count.style.opacity=(isEnd||isIntro)?0:1;
     fab.style.opacity=hide?0:1;fab.style.pointerEvents=hide?"none":"auto";
     if(isIntro){fab.href=wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.");fab.innerHTML=WAI}
-    else if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI+`<span>${list[k].video?"Falar no WhatsApp":"Quero esse"}</span>`}
+    else if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"Falar no WhatsApp")}</span>`}
     fab.classList.toggle("lbl",!isIntro&&!isEnd)
   };
   cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
