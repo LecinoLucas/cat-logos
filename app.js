@@ -5,7 +5,13 @@ const WAI='<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" a
 const BACK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
 const GRID='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>';
 const CLOSE='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>';
-const wa=t=>`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
+const NUMS=(window.WHATSAPPS&&WHATSAPPS.length?WHATSAPPS:[window.WHATSAPP]).filter(Boolean);
+let ni=Math.floor(Math.random()*NUMS.length);
+const nextNum=()=>{ni=(ni+1)%NUMS.length;return NUMS[ni]};
+const wa=t=>`https://wa.me/${NUMS[ni]}?text=${encodeURIComponent(t)}`;
+// a cada clique num link do WhatsApp, troca para o próximo número da lista
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');if(!a||NUMS.length<2)return;
+  a.href="https://wa.me/"+nextNum()+a.href.slice(a.href.indexOf("?"))},true);
 const waProd=p=>wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.wa||p.name}`);
 const brand=`<a class="brand" href="#/">${CLOUD}<b>pioneira</b></a>`;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -17,10 +23,10 @@ const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
   const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
-  const dest=STORE.destaque?STORE.destaque.replace(/^(\S+)\s+(.+)$/,"$1 <i>$2</i>"):"";
+  const gancho=STORE.gancho?STORE.gancho.replace(/^(\S+)\s+(.+)$/,"$1 <i>$2</i>"):"";
   const sp=(STORE.selo||"").split(" ");
   const seal=sp.length>=2?`<div class="seal"><small>${esc(sp[0])}</small><b>${esc(sp[1])}</b><small>${esc(sp.slice(2).join(" "))}</small></div>`:"";
-  const intro=opts.intro?`<section class="card intro light"><div class="endbox"><div class="hero"><div class="tagwrap"><div class="tagscroll"><div class="tag3d"><img class="tagimg" src="img/etiqueta-3d.webp" alt="Black Friday Pioneira">${seal}</div></div></div><div class="htxt">${STORE.periodo?`<b class="per">${esc(STORE.periodo)}</b>`:""}${STORE.gancho?`<h3>${esc(STORE.gancho)}</h3>`:""}</div></div><div class="ibody">${dest?`<p class="big">${dest}</p>`:""}${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo)}</p>`:""}<span class="cond">${COND}</span>${STORE.frase?`<p class="corner">${fmt(STORE.frase)}</p>`:""}</div><button class="cue" type="button" aria-label="Ver as ofertas"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></section>`:"";
+  const intro=opts.intro?`<section class="card intro light"><div class="endbox"><div class="hero"><div class="tagwrap"><div class="tagscroll"><div class="tag3d"><img class="tagimg" src="img/etiqueta-3d.webp" alt="Black Friday Pioneira">${seal}</div></div></div><div class="htxt">${STORE.periodo?`<b class="per">${esc(STORE.periodo)}</b>`:""}${gancho?`<h3>${gancho}</h3>`:""}</div></div><div class="ibody">${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo.charAt(0).toUpperCase()+STORE.subtitulo.slice(1))}</p>`:""}<span class="cond">${COND}</span><a class="catbtn" href="#/categorias">Navegue pelas categorias</a>${STORE.frase?`<p class="corner">${fmt(STORE.frase)}</p>`:""}</div><button class="cue" type="button" aria-label="Ver as ofertas"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
@@ -43,7 +49,8 @@ function wireFeed(list,start=0,off=0){
     count.style.opacity=(isEnd||isIntro)?0:1;
     fab.style.opacity=hide?0:1;fab.style.pointerEvents=hide?"none":"auto";
     if(isIntro){fab.href=wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.");fab.innerHTML=WAI}
-    else if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI}
+    else if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI+`<span>${list[k].video?"Falar no WhatsApp":"Quero esse"}</span>`}
+    fab.classList.toggle("lbl",!isIntro&&!isEnd)
   };
   cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(cards.indexOf(e.target))}),{root:feed,threshold:.6});
