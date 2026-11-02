@@ -6,7 +6,7 @@ const BACK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="
 const GRID='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>';
 const CLOSE='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>';
 const wa=t=>`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
-const waProd=p=>wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.name}`);
+const waProd=p=>wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.wa||p.name}`);
 const brand=`<a class="brand" href="#/">${CLOUD}<b>pioneira</b></a>`;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const COND="Até 10x no cartão · Condições especiais no Pix";
@@ -15,15 +15,24 @@ const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
-  const cards=list.map((p,i)=>`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
+  const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
   const intro=opts.intro?`<section class="card intro"><div class="endbox">${CLOUD}<small>PIONEIRA COLCHÕES</small><h3>Black Friday</h3><span class="hair"></span><p>Ofertas selecionadas</p>${STORE.validade?`<b class="val">Válidas até ${esc(STORE.validade)}</b>`:""}<span class="cond">${COND}</span><em>Deslize para ver ↓</em></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
 function wireFeed(list,start=0,off=0){
   const feed=$(".feed"),count=$(".count"),fab=$(".fab"),cards=[...feed.querySelectorAll(".card")];
+  const SPK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/>',SPK_ON=SPK+'<path d="M16.500 8.500a5 5 0 0 1 0 7M19 6a8.500 8.500 0 0 1 0 12"/></svg>',SPK_OFF=SPK+'<path d="M17 9l5 6M22 9l-5 6"/></svg>';
+  let sound=false;
+  const vids=cards.map(c=>c.querySelector("video"));
+  const paint=()=>cards.forEach((c,j)=>{const b=c.querySelector(".snd");if(b)b.innerHTML=sound?SPK_ON:SPK_OFF});
+  cards.forEach((c,j)=>{const v=vids[j];if(!v)return;
+    c.querySelector(".snd").onclick=e=>{e.stopPropagation();sound=!sound;vids.forEach(x=>x&&(x.muted=!sound));paint()};
+    c.querySelector(".frame").onclick=()=>{v.paused?v.play().catch(()=>{}):v.pause()}});
+  paint();
   const set=i=>{
     cards.forEach((c,j)=>c.classList.toggle("act",j===i));
+    vids.forEach((v,j)=>{if(!v)return;if(j===i){v.muted=!sound;v.play().catch(()=>{})}else{v.pause()}});
     const k=i-off,isEnd=k>=list.length||k<0;
     count.style.opacity=fab.style.opacity=isEnd?0:1;fab.style.pointerEvents=isEnd?"none":"auto";
     if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI+"<span>Pedir no WhatsApp</span>"}
@@ -53,7 +62,7 @@ const ROUTES={
   },
   cat(k){
     const c=catOf(k);if(!c)return location.hash="#/";
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile" href="#/c/${k}/${i}"><img loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></a>`).join("")}</div></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile${p.video?" isvid":""}" href="#/c/${k}/${i}"><img loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></a>`).join("")}</div></div>`;
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";

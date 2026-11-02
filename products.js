@@ -2,6 +2,8 @@
 // Nova oferta: ponha a foto (formato em pé, 9:16) em img/ofertas/ e uma miniatura em img/ofertas/t/, e inclua uma linha abaixo.
 // top:true → aparece na rolagem da tela inicial (na ordem desta lista).
 // cat      → categoria (precisa existir em CATEGORIES).
+// VÍDEO: {cat:"box-bau",top:true,video:"nome.mp4",img:"nome.jpg",name:"Vídeo: ...",wa:"Box Baú"}
+//         → o vídeo vai em img/ofertas/ (mp4, até ~20 MB) e a imagem de capa (img) em img/ofertas/ + miniatura em img/ofertas/t/.
 // pos      → (opcional) enquadramento da foto, ex.: "50% 30%".
 window.WHATSAPP = "5562981310293"; // DDI + DDD + número
 // ── Dados da loja ──  (campos vazios ficam escondidos no site)
@@ -23,6 +25,7 @@ window.PRODUCTS = [
   // ── Black Friday ──
   {cat:"camas",top:true,img:"tricama-promo.jpg",name:"Tricama 3 em 1"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",name:"Colchão Molas Firme + Bicama de Molas Casal"},
+  {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-solteirao.jpg",name:"Box Baú Solteirão (1,08 × 1,98 m)"},
   {cat:"box-bau",top:true,img:"box-casal.jpg",name:"Box Baú Casal (1,38 × 1,88 m)"},
