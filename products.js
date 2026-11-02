@@ -17,6 +17,7 @@ window.STORE = {
   validade: "30/11",               // aparece na página "A Pioneira": "Ofertas de Black Friday válidas até 30/11"
   // Textos da capa de abertura (deixe "" para esconder uma linha)
   periodo: "01 a 30 de novembro",
+  gancho: "Preços que não voltam mais.",
   destaque: "Até 60% off",
   subtitulo: "em todos os nossos produtos. Só em novembro.",
   frase: "A **última chance** de garantir sua cama dos sonhos **com o menor preço!**"   // canto da capa; **texto** = negrito
