@@ -20,7 +20,7 @@ function feedHTML(list,opts={}){
   const dest=STORE.destaque?STORE.destaque.replace(/^(\S+)\s+(.+)$/,"$1 <i>$2</i>"):"";
   const sp=(STORE.selo||"").split(" ");
   const seal=sp.length>=2?`<div class="seal"><small>${esc(sp[0])}</small><b>${esc(sp[1])}</b><small>${esc(sp.slice(2).join(" "))}</small></div>`:"";
-  const intro=opts.intro?`<section class="card intro light"><div class="endbox"><div class="hero"><div class="tagwrap"><img class="tagimg" src="img/etiqueta-capa.webp" alt="Black Friday Pioneira">${seal}</div><div class="htxt">${STORE.periodo?`<b class="per">${esc(STORE.periodo)}</b>`:""}${STORE.gancho?`<h3>${esc(STORE.gancho)}</h3>`:""}</div></div><div class="ibody">${dest?`<p class="big">${dest}</p>`:""}${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo)}</p>`:""}<span class="cond">${COND}</span><button class="go" type="button">Navegue pelas ofertas <span aria-hidden="true">↓</span></button><a class="ghost" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a>${STORE.frase?`<p class="corner">${fmt(STORE.frase)}</p>`:""}</div></div></section>`:"";
+  const intro=opts.intro?`<section class="card intro light"><div class="endbox"><div class="hero"><div class="tagwrap"><img class="tagimg" src="img/etiqueta-capa.webp" alt="Black Friday Pioneira">${seal}</div><div class="htxt">${STORE.periodo?`<b class="per">${esc(STORE.periodo)}</b>`:""}${STORE.gancho?`<h3>${esc(STORE.gancho)}</h3>`:""}</div></div><div class="ibody">${dest?`<p class="big">${dest}</p>`:""}${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo)}</p>`:""}<span class="cond">${COND}</span>${STORE.frase?`<p class="corner">${fmt(STORE.frase)}</p>`:""}</div><button class="cue" type="button" aria-label="Ver as ofertas"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
@@ -39,14 +39,16 @@ function wireFeed(list,start=0,off=0){
     cards.forEach((c,j)=>c.classList.toggle("act",j===i));
     view.classList.toggle("onlight",!!cards[i]&&cards[i].classList.contains("light"));
     vids.forEach((v,j)=>{if(!v)return;if(j===i){v.muted=!sound;v.play().catch(()=>{})}else{v.pause()}});
-    const k=i-off,isEnd=k>=list.length||k<0;
-    count.style.opacity=fab.style.opacity=isEnd?0:1;fab.style.pointerEvents=isEnd?"none":"auto";
-    if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI+"<span>Pedir no WhatsApp</span>"}
+    const k=i-off,isEnd=k>=list.length,isIntro=k<0,hide=isEnd;
+    count.style.opacity=(isEnd||isIntro)?0:1;
+    fab.style.opacity=hide?0:1;fab.style.pointerEvents=hide?"none":"auto";
+    if(isIntro){fab.href=wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.");fab.innerHTML=WAI}
+    else if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI}
   };
   cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(cards.indexOf(e.target))}),{root:feed,threshold:.6});
   cards.forEach(c=>io.observe(c));
-  const go=feed.querySelector(".go");
+  const go=feed.querySelector(".cue");
   if(go)go.onclick=()=>{
     const top=feed.clientHeight;
     feed.style.scrollSnapType="none";

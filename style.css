@@ -150,3 +150,13 @@ a{color:inherit;text-decoration:none}
 .seal b{font-size:clamp(1.4rem,5.2vw,1.9rem)}
 .seal small{font-size:.44rem}
 .seal{right:-20%;bottom:-8%}
+
+/* simplificação: ícone de WhatsApp no cantinho e setinha de rolar */
+.fab{width:50px;height:50px;padding:0;justify-content:center;gap:0}
+.fab svg{width:24px;height:24px}
+.view.onlight .fab{background:#17325a;color:#fff}
+.card.intro.light{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+.intro.light .corner{margin:16px 0 0;max-width:none;text-align:left;font-size:.78rem}
+.cue{position:absolute;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:48px;height:48px;border:0;background:none;color:#17325a;display:grid;place-items:center;cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+.cue svg{animation:bobsvg 1.8s ease-in-out infinite}
+@keyframes bobsvg{50%{transform:translateY(7px)}}
