@@ -5,7 +5,11 @@
 // VÍDEO: {cat:"box-bau",top:true,video:"nome.mp4",img:"nome.jpg",name:"Vídeo: ...",wa:"Box Baú"}
 //         → o vídeo vai em img/ofertas/ (mp4, até ~20 MB) e a imagem de capa (img) em img/ofertas/ + miniatura em img/ofertas/t/.
 // pos      → (opcional) enquadramento da foto, ex.: "50% 30%".
-window.WHATSAPP = "5562981310293"; // DDI + DDD + número
+// Números de WhatsApp (DDI + DDD + número). Com mais de um, o catálogo alterna entre eles a cada clique.
+window.WHATSAPPS = [
+  "5562981310293"
+  // , "55DDDNUMERO"   ← coloque aqui o segundo número
+];
 // ── Dados da loja ──  (campos vazios ficam escondidos no site)
 window.STORE = {
   instagram: "pioneiracolchoes",   // sem o @
@@ -17,11 +21,11 @@ window.STORE = {
   validade: "30/11",               // aparece na página "A Pioneira": "Ofertas de Black Friday válidas até 30/11"
   // Textos da capa de abertura (deixe "" para esconder uma linha)
   periodo: "01 a 30 de novembro",
-  gancho: "Preços que não voltam mais.",
-  destaque: "Os menores preços do ano",
+  gancho: "Os menores preços do ano",
+  destaque: "",
   subtitulo: "em todos os nossos produtos.",
   selo: "até 60% off",              // selo na frente da etiqueta (3 palavras: até / 70% / off). Deixe "" para esconder
-  frase: "A **última chance** de garantir sua cama dos sonhos **com o menor preço!**"   // canto da capa; **texto** = negrito
+  frase: "A **última chance** de garantir sua cama dos sonhos."   // canto da capa; **texto** = negrito
 };
 window.CATEGORIES = [
   {key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},

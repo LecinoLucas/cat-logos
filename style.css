@@ -178,3 +178,19 @@ a{color:inherit;text-decoration:none}
 .brand .cloud{animation:spinY 8s ease-in-out infinite 2s}
 @keyframes spinY{0%,84%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
 @media(prefers-reduced-motion:reduce){.tagscroll,.tag3d,.tagwrap,.seal,.brand .cloud{animation:none!important}}
+
+/* capa: texto único ao lado da etiqueta e botão de categorias */
+.intro.light h3{font-style:normal;font-size:clamp(1.9rem,6.2vh,2.5rem);line-height:1.05}
+.intro.light h3 i{color:#3f86d6;font-style:italic}
+.intro.light .htxt .sub{margin:10px 0 0;font-size:.82rem;line-height:1.45;color:#4b6285}
+.intro.light .ibody{display:flex;flex-direction:column;align-items:stretch}
+.intro.light .cond{margin-top:0}
+.catbtn{display:flex;align-items:center;justify-content:center;margin-top:16px;padding:15px;border:1.5px solid #17325a;border-radius:99px;color:#17325a;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.catbtn:active{background:#17325a14}
+.intro.light .corner{margin-top:14px;font-size:.78rem}
+/* "Quero esse": botão com texto nos produtos */
+.fab.lbl{width:auto;padding:0 20px 0 16px;gap:10px;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+
+.intro.light h3{font-size:clamp(1.5rem,4.6vh,2rem);line-height:1.08}
+.intro.light .ibody .sub{margin:0 0 4px;font-size:.92rem;line-height:1.4;color:#17325a;text-transform:none;letter-spacing:.01em}
+.intro.light .ibody .sub{margin-bottom:12px}
