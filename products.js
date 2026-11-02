@@ -9,7 +9,7 @@
 // numero = DDI + DDD + número (só dígitos) · foto = caminho da imagem em img/atendentes/ (opcional; sem foto aparece a inicial)
 // Quem estiver sem número fica escondido; com um só atendente, o WhatsApp abre direto.
 window.ATENDENTES = [
-  {nome:"Vanuza",   numero:"",              foto:""},   // ← coloque o número da Vanuza
+  {nome:"Vanuza",   numero:"556232152561", foto:""},
   {nome:"Cleonice", numero:"5562981310293", foto:""}
 ];
 // ── Dados da loja ──  (campos vazios ficam escondidos no site)
