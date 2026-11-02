@@ -5,13 +5,29 @@ const WAI='<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" a
 const BACK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
 const GRID='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>';
 const CLOSE='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg>';
-const NUMS=(window.WHATSAPPS&&WHATSAPPS.length?WHATSAPPS:[window.WHATSAPP]).filter(Boolean);
-let ni=Math.floor(Math.random()*NUMS.length);
-const nextNum=()=>{ni=(ni+1)%NUMS.length;return NUMS[ni]};
-const wa=t=>`https://wa.me/${NUMS[ni]}?text=${encodeURIComponent(t)}`;
-// a cada clique num link do WhatsApp, troca para o próximo número da lista
-document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');if(!a||NUMS.length<2)return;
-  a.href="https://wa.me/"+nextNum()+a.href.slice(a.href.indexOf("?"))},true);
+const ATD=(window.ATENDENTES||[]).filter(a=>a&&a.numero);
+const wa=t=>`https://wa.me/${(ATD[0]&&ATD[0].numero)||window.WHATSAPP||""}?text=${encodeURIComponent(t)}`;
+// Janelinha "Com quem você quer falar?": aparece ao tocar em qualquer link do WhatsApp (quando há 2 ou mais atendentes)
+const wam=document.createElement("div");wam.id="wam";wam.hidden=true;
+wam.innerHTML='<div class="wam-scrim" data-x></div><div class="wam-box" role="dialog" aria-modal="true" aria-labelledby="wam-t"><button class="wam-x" data-x aria-label="Fechar"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button><h2 id="wam-t">Com quem você quer falar?</h2><p>Escolha quem vai te atender no WhatsApp</p><div class="wam-list"></div></div>';
+document.body.appendChild(wam);
+const closeWam=()=>{wam.classList.remove("in");setTimeout(()=>{wam.hidden=true},220)};
+wam.addEventListener("click",e=>{if(e.target.closest("[data-x]"))closeWam()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!wam.hidden)closeWam()});
+function openWam(text){
+  wam.querySelector(".wam-list").innerHTML=ATD.map(a=>{
+    const ini=esc(a.nome.charAt(0).toUpperCase());
+    const av=a.foto?`<img src="${esc(a.foto)}" alt="" loading="lazy">`:`<span>${ini}</span>`;
+    return `<a class="wam-opt" data-direct target="_blank" rel="noopener" href="https://wa.me/${esc(a.numero)}?text=${encodeURIComponent(text)}"><i class="wam-av">${av}</i><b>${esc(a.nome)}</b><span class="wam-go">${WAI}</span></a>`}).join("");
+  wam.hidden=false;requestAnimationFrame(()=>wam.classList.add("in"));
+}
+document.addEventListener("click",e=>{
+  const a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');
+  if(!a)return;
+  if(a.hasAttribute("data-direct")){setTimeout(closeWam,150);return}
+  if(ATD.length<2)return;
+  e.preventDefault();const q=new URL(a.href).searchParams.get("text")||"";openWam(q);
+},true);
 const waProd=p=>wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.wa||p.name}`);
 const brand=`<a class="brand" href="#/">${CLOUD}<b>pioneira</b></a>`;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -26,7 +42,9 @@ function feedHTML(list,opts={}){
   const gancho=STORE.gancho?STORE.gancho.replace(/^(\S+)\s+(.+)$/,"$1 <i>$2</i>"):"";
   const sp=(STORE.selo||"").split(" ");
   const seal=sp.length>=2?`<div class="seal"><small>${esc(sp[0])}</small><b>${esc(sp[1])}</b><small>${esc(sp.slice(2).join(" "))}</small></div>`:"";
-  const intro=opts.intro?`<section class="card intro light"><div class="endbox"><div class="hero"><div class="tagwrap"><div class="tagscroll"><div class="tag3d"><img class="tagimg" src="img/etiqueta-3d.webp" alt="Black Friday Pioneira">${seal}</div></div></div><div class="htxt">${STORE.periodo?`<b class="per">${esc(STORE.periodo)}</b>`:""}${gancho?`<h3>${gancho}</h3>`:""}</div></div><div class="ibody">${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo.charAt(0).toUpperCase()+STORE.subtitulo.slice(1))}</p>`:""}<span class="cond">${COND}</span><a class="catbtn" href="#/categorias">Navegue pelas categorias</a>${STORE.frase?`<p class="corner">${fmt(STORE.frase)}</p>`:""}</div><button class="cue" type="button" aria-label="Ver as ofertas"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></section>`:"";
+  const cats=CATEGORIES.map(c=>({c,n:PRODUCTS.filter(p=>p.cat===c.key).length})).filter(x=>x.n>0).slice(0,6);
+  const catChips=cats.length?`<div class="chips" role="navigation" aria-label="Categorias"><small>Categorias</small>${cats.map(x=>`<a href="#/c/${x.c.key}">${esc(x.c.name)}</a>`).join("")}<a class="all" href="#/categorias">Ver todas</a></div>`:"";
+  const intro=opts.intro?`<section class="card intro light"><div class="endbox"><div class="hero"><div class="tagwrap"><div class="tagscroll"><div class="tag3d"><img class="tagimg" src="img/etiqueta-3d.webp" alt="Black Friday Pioneira">${seal}</div></div></div><div class="htxt">${STORE.periodo?`<b class="per">${esc(STORE.periodo)}</b>`:""}${gancho?`<h3>${gancho}</h3>`:""}</div></div><div class="ibody">${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo.charAt(0).toUpperCase()+STORE.subtitulo.slice(1))}</p>`:""}<span class="cond">${COND}</span>${catChips}${STORE.frase?`<p class="corner">${fmt(STORE.frase)}</p>`:""}</div><button class="cue" type="button" aria-label="Ver as ofertas"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
