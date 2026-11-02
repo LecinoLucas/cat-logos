@@ -13,7 +13,7 @@ const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
-  const cards=list.map((p,i)=>`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><img class="bg" src="img/ofertas/t/${p.img}" alt=""><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}"></a>`).join("");
+  const cards=list.map((p,i)=>`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
@@ -23,7 +23,7 @@ function wireFeed(list,start=0){
     cards.forEach((c,j)=>c.classList.toggle("act",j===i));
     const isEnd=i>=list.length;
     count.style.opacity=fab.style.opacity=isEnd?0:1;fab.style.pointerEvents=isEnd?"none":"auto";
-    if(!isEnd){count.textContent=`${i+1} / ${list.length}`;fab.href=waProd(list[i]);fab.innerHTML=WAI}
+    if(!isEnd){count.textContent=`${i+1} / ${list.length}`;fab.href=waProd(list[i]);fab.innerHTML=WAI+"<span>Pedir no WhatsApp</span>"}
   };
   cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(cards.indexOf(e.target))}),{root:feed,threshold:.6});
@@ -42,7 +42,7 @@ const ROUTES={
   },
   cat(k){
     const c=catOf(k);if(!c)return location.hash="#/";
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile" href="#/c/${k}/${i}"><img class="bg" loading="lazy" src="img/ofertas/t/${p.img}" alt=""><img class="fg" loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}"></a>`).join("")}</div></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile" href="#/c/${k}/${i}"><img loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></a>`).join("")}</div></div>`;
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";

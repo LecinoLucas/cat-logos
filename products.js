@@ -14,7 +14,6 @@ window.PRODUCTS = [
   // ── Mais vendidos (top:true) ──
   {cat:"tricama",top:true,img:"tricama-promo.jpg",name:"Tricama 3 em 1"},
   {cat:"tricama",top:true,img:"tricama-colagem.jpg",name:"Tricama 3 em 1"},
-  {cat:"bicama-bau",top:true,img:"bicama-bau-capa.jpg",name:"Bicama com Baú"},
   {cat:"bicama-bau",top:true,img:"bicama-bau-colagem.jpg",name:"Bicama com Baú"},
   {cat:"bicama",top:true,img:"bicama-tradicional-1.jpg",name:"Bicama Tradicional"},
   {cat:"bicama",top:true,img:"bicama-tradicional-2.jpg",name:"Bicama Tradicional"},
