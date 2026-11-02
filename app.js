@@ -1,23 +1,16 @@
-const brl=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const brl=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:0});
 const $=id=>document.getElementById(id);
 const wa=t=>`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`;
-$("waTop").href=wa("Olá! Vim pelo catálogo da Pioneira Colchões.");
 const CATS=[["all","Tudo"],["box-bau","Box Baú"],["colchao","Colchões"],["tricama","Tricama"],["box","Box"]];
-let cat="all",list=[],idx=0;
-const photos=()=>PRODUCTS.filter(p=>cat==="all"||p.cat===cat).flatMap(p=>[p.img,...(p.gallery||[])].map((img,k)=>({img,p,main:k===0})));
+const LABEL={"box-bau":"Box Baú",colchao:"Colchão",tricama:"Tricama",box:"Box"};
+let cat="all";
 function render(){
-  $("chips").innerHTML=CATS.map(([k,n])=>`<button data-c="${k}" class="${k===cat?"on":""}">${n}</button>`).join("");
-  $("chips").querySelectorAll("button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;render()});
-  list=photos();
-  $("grid").innerHTML=list.map((s,i)=>`<figure data-i="${i}"><img loading="lazy" src="img/${s.img}" alt="${s.p.name}">${s.main?`<figcaption>${s.p.name}</figcaption>`:""}</figure>`).join("");
-  $("grid").querySelectorAll("figure").forEach(f=>f.onclick=()=>show(+f.dataset.i));
+  $("tabs").innerHTML=CATS.map(([k,n])=>`<button data-c="${k}" class="${k===cat?"on":""}">${n}</button>`).join("");
+  $("tabs").querySelectorAll("button").forEach(b=>b.onclick=()=>{cat=b.dataset.c;render();$("feed").scrollTo({top:0})});
+  $("feed").innerHTML=PRODUCTS.filter(p=>cat==="all"||p.cat===cat).map(p=>{
+    const imgs=[p.img,...(p.gallery||[])];
+    const price=p.price?`<div class="price"><span class="from">${brl(p.from)}</span><span class="now">${brl(p.price)}</span></div><div class="cond">${p.pix} · ${p.inst}</div>`:`<div class="ask">Consulte valores</div>`;
+    return `<section class="card"><div class="photo">${imgs.map(i=>`<div class="slide"><img class="bg" src="img/${i}" alt=""><img class="fg" loading="lazy" src="img/${i}" alt="${p.name}"></div>`).join("")}</div><div class="dots">${imgs.length>1?imgs.map((_,k)=>`<i class="${k?"":"on"}"></i>`).join(""):""}</div><div class="info"><div class="eyebrow">${LABEL[p.cat]}</div><h2>${p.name.replace(/^(Box Baú|Colchão) /,"")}</h2><div class="size">${p.size}</div>${price}<a class="btn" target="_blank" rel="noopener" href="${wa(`Olá! Tenho interesse em: ${p.name} (${p.size})`)}">Pedir no WhatsApp</a></div></section>`}).join("");
+  document.querySelectorAll(".photo").forEach(ph=>{const d=ph.nextElementSibling.children;if(d.length)ph.onscroll=()=>{const k=Math.round(ph.scrollLeft/ph.clientWidth);[...d].forEach((x,j)=>x.classList.toggle("on",j===k))}});
 }
-function show(i){
-  idx=(i+list.length)%list.length;const s=list[idx],p=s.p;
-  $("v").innerHTML=`<div class="stage"><button class="x" aria-label="Fechar">×</button><img src="img/${s.img}" alt="${p.name}"><button class="pv" aria-label="Anterior"></button><button class="nx" aria-label="Próxima"></button></div><div class="info"><div><b>${p.name}</b><small>${p.size}</small>${p.price?`<span class="p">${brl(p.price)}</span> <small style="display:inline">no Pix</small>`:""}</div><a class="wa" target="_blank" rel="noopener" href="${wa(`Olá! Tenho interesse em: ${p.name} (${p.size})`)}">Pedir</a></div>`;
-  $("v").hidden=false;document.body.style.overflow="hidden";
-  $("v").querySelector(".x").onclick=close;$("v").querySelector(".pv").onclick=()=>show(idx-1);$("v").querySelector(".nx").onclick=()=>show(idx+1);
-}
-function close(){$("v").hidden=true;document.body.style.overflow=""}
-document.addEventListener("keydown",e=>{if($("v").hidden)return;if(e.key==="Escape")close();if(e.key==="ArrowRight")show(idx+1);if(e.key==="ArrowLeft")show(idx-1)});
 render();
