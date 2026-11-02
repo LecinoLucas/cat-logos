@@ -119,3 +119,29 @@ a{color:inherit;text-decoration:none}
 .ver{margin:26px 0 0;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);text-align:center}
 .intro .corner{margin:0;max-width:200px;text-align:right;font-size:.8rem;line-height:1.5;letter-spacing:.01em;text-transform:none;color:#ffffffc7;font-weight:400}
 .intro .corner b{color:#fff;font-weight:600}
+
+/* capa clara (azul claro) com a etiqueta ao lado do texto */
+.card.intro.light{background:linear-gradient(#e9ecf2,#dce1e9);color:#17325a;align-items:stretch;justify-content:flex-start;padding:calc(60px + env(safe-area-inset-top,0px)) 0 calc(24px + env(safe-area-inset-bottom,0px));text-align:left}
+.intro.light .endbox{max-width:none;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;text-align:left}
+.intro.light .hero{display:flex;align-items:center;gap:6px}
+.intro.light .tagimg{display:block;flex:none;height:clamp(190px,36vh,330px);width:auto;margin-left:0}
+.intro.light .htxt{flex:1;min-width:0;padding-right:22px}
+.intro.light .per{display:block;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:#a98a55;font-weight:600;margin:0 0 10px}
+.intro.light h3{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.7rem,5.2vh,2.3rem);line-height:1.04;color:#17325a;margin:0;text-align:left}
+.intro.light .ibody{padding:0 26px}
+.intro.light .big{font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,6.6vh,3rem);line-height:1.02;margin:0;color:#17325a;text-transform:none;letter-spacing:0}
+.intro.light .big i{color:#3f86d6;font-weight:500}
+.intro.light .sub{margin:8px 0 0;font-size:.86rem;line-height:1.5;letter-spacing:.01em;color:#4b6285;text-transform:none}
+.intro.light .cond{display:block;margin-top:16px;padding-top:13px;border-top:1px solid #17325a22;font-size:.6rem;letter-spacing:.12em;color:#6c7f9c;width:100%}
+.intro.light .go{background:#17325a;color:#fff;margin-top:16px}
+.intro.light .ghost{border-color:#17325a;color:#17325a;margin-top:10px}
+.intro.light .corner{margin:18px 0 0;max-width:none;text-align:right;font-size:.8rem;line-height:1.5;color:#4b6285}
+.intro.light .corner b{color:#17325a}
+.view.onlight .brand b{color:#17325a}
+.view.onlight .pill{background:#17325a14;color:#17325a}
+
+/* ajustes da capa clara */
+.card.intro.light{background:linear-gradient(#e6e8ed 0,#e6e8ed 46%,#dde1e9 100%);justify-content:flex-start}
+.intro.light .endbox{justify-content:space-around}
+.intro.light .tagimg{height:auto;width:min(52vw,calc(36vh*0.758),250px)}
+.intro.light .per{letter-spacing:.14em;font-size:.54rem;line-height:1.5}
