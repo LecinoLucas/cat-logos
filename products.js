@@ -28,11 +28,80 @@ window.STORE = {
   subtitulo: "O conforto que você ama com o preço que **não volta mais.**"   // **texto** = destaque em azul
 };
 window.CATEGORIES = [
-  {key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
-  {key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
-  {key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"}
+  // group: título da seção na tela de categorias. Sem "cover" = categoria sem fotos ainda (aparece como "Em breve").
+  // Para ativar uma categoria: ponha as fotos em img/ofertas/ (+ miniatura em img/ofertas/t/), use cat:"<key>" nos produtos e, se quiser, defina cover.
+  {group:"Black Friday",key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
+  {group:"Black Friday",key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
+  {group:"Black Friday",key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
+
+  {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
+  {group:"Camas",key:"camas-loja",name:"Camas",cover:"camas-08.jpg",pos:"50% 50%"},
+
+  {group:"Box",key:"box-gold",name:"Box Gold",cover:"box-gold-10.jpg",pos:"50% 62%"},
+  {group:"Box",key:"box-tradicional",name:"Box Tradicional",cover:"box-trad-1.jpg",pos:"50% 45%"},
+
+  {group:"Marcas",key:"king-koil",name:"King Koil"},
+  {group:"Marcas",key:"ecoflex",name:"Ecoflex"},
+  {group:"Marcas",key:"inducol",name:"Inducol"},
+  {group:"Marcas",key:"sealy",name:"Sealy"},
+  {group:"Marcas",key:"simmons",name:"Simmons"},
+  {group:"Marcas",key:"plumatex",name:"Plumatex"},
+  {group:"Marcas",key:"probel",name:"Probel"},
+  {group:"Marcas",key:"outras-marcas",name:"Outras marcas"},
+
+  {group:"Complementos",key:"cabeceiras",name:"Cabeceiras"},
+  {group:"Complementos",key:"travesseiros",name:"Travesseiros"},
+  {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
+  // ── Bicamas (catálogo da loja) ──
+  {cat:"bicamas-loja",loja:true,img:"bicamas-01.jpg",name:"Bicama",ratio:"1280/1280"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-02.jpg",name:"Bicama",ratio:"1280/1280"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-03.jpg",name:"Bicama",ratio:"768/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-04.jpg",name:"Bicama",ratio:"768/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-05.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-06.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-07.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-08.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-09.jpg",name:"Bicama",ratio:"819/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-10.jpg",name:"Bicama",ratio:"540/675"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-11.jpg",name:"Bicama",ratio:"540/675"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-12.jpg",name:"Bicama",pos:"50% 60%"},
+  // ── Camas (catálogo da loja) ──
+  {cat:"camas-loja",loja:true,img:"camas-01.jpg",name:"Cama",ratio:"960/1280"},
+  {cat:"camas-loja",loja:true,img:"camas-02.jpg",name:"Cama",ratio:"1528/1528"},
+  {cat:"camas-loja",loja:true,img:"camas-03.jpg",name:"Cama",ratio:"1599/1599"},
+  {cat:"camas-loja",loja:true,img:"camas-04.jpg",name:"Cama",ratio:"1600/1600"},
+  {cat:"camas-loja",loja:true,img:"camas-05.jpg",name:"Cama",ratio:"1200/1600"},
+  {cat:"camas-loja",loja:true,img:"camas-06.jpg",name:"Cama",ratio:"1600/1600"},
+  {cat:"camas-loja",loja:true,img:"camas-07.jpg",name:"Cama"},
+  {cat:"camas-loja",loja:true,img:"camas-08.jpg",name:"Cama",ratio:"768/1024"},
+  {cat:"camas-loja",loja:true,img:"camas-09.jpg",name:"Cama",ratio:"768/1024"},
+  {cat:"camas-loja",loja:true,img:"camas-10.jpg",name:"Cama",ratio:"1280/853"},
+  {cat:"camas-loja",loja:true,img:"camas-11.jpg",name:"Cama",ratio:"1280/853"},
+  {cat:"camas-loja",loja:true,img:"camas-12.jpg",name:"Cama"},
+  // ── Box Tradicional (catálogo da loja) ──
+  {cat:"box-tradicional",loja:true,img:"box-trad-1.jpg",name:"Box Tradicional",ratio:"1080/872"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-2.jpg",name:"Box Tradicional",ratio:"1080/1441"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-3.jpg",name:"Box Tradicional",ratio:"1080/1442"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-4.jpg",name:"Box Tradicional",ratio:"864/1920"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-5.jpg",name:"Box Tradicional"},
+  // ── Box Gold (catálogo da loja) ──
+  {cat:"box-gold",loja:true,img:"box-gold-01.jpg",name:"Box Gold",ratio:"4/3"},
+  {cat:"box-gold",loja:true,img:"box-gold-02.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-03.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-04.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-05.jpg",name:"Box Gold",ratio:"16/9"},
+  {cat:"box-gold",loja:true,img:"box-gold-06.jpg",name:"Box Gold",ratio:"16/9"},
+  {cat:"box-gold",loja:true,img:"box-gold-07.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-08.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-09.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-10.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-11.jpg",name:"Box Gold",ratio:"1/1"},
+  {cat:"box-gold",loja:true,img:"box-gold-12.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-13.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-14.jpg",name:"Box Gold",ratio:"1/1"},
+  {cat:"box-gold",loja:true,img:"box-gold-15.jpg",name:"Box Gold",ratio:"1/1"},
   // ── Black Friday ──
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
   {cat:"camas",top:true,img:"tricama-promo.jpg",name:"Tricama 3 em 1"},

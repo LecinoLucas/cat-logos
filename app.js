@@ -28,17 +28,20 @@ document.addEventListener("click",e=>{
   if(ATD.length<2)return;
   e.preventDefault();const q=new URL(a.href).searchParams.get("text")||"";openWam(q);
 },true);
-const waProd=p=>wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.wa||p.name}`);
+const waProd=p=>wa(`Olá! Vi no catálogo ${p.remote||p.loja?"da Pioneira":"da Black Friday"} e tenho interesse em: ${p.wa||p.name}`);
 const brand=`<a class="brand" href="#/">${CLOUD}<b>pioneira</b></a>`;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
 const COND="Até 10x no cartão · Condições especiais no Pix";
+const imgFull=p=>p.url||`img/ofertas/${p.img}`;
+const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);
+const catThumb=c=>c.coverUrl||(c.cover?`img/ofertas/t/${c.cover}`:"");
 const catOf=k=>CATEGORIES.find(c=>c.key===k);
 const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
-  const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
+  const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"${p.ratio?` style="aspect-ratio:${p.ratio};height:auto;width:100%"`:""}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
   const big=dm?`<p class="big">${esc(dm[1].trim())} <span class="num" data-to="${dm[2]}">${dm[2]}</span><small>%</small> <i>${esc(dm[3])}</i></p>`:(STORE.destaque?`<p class="big">${esc(STORE.destaque)}</p>`:"");
   const sp=(STORE.selo||"").split(" ");
@@ -116,7 +119,11 @@ const ROUTES={
     wireFeed(l,-1,1);
   },
   categorias(){
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><div class="cats">${CATEGORIES.map(c=>`<a class="cat" href="#/c/${c.key}"><img src="img/ofertas/t/${c.cover}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${inCat(c.key).length} ${inCat(c.key).length===1?"oferta":"ofertas"}</small></span></a>`).join("")}</div><a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
+    const groups=[];CATEGORIES.filter(c=>inCat(c.key).length||c.mostrar).forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
+    const tile=c=>{const n=inCat(c.key).length;
+      return catThumb(c)&&n?`<a class="cat" href="#/c/${c.key}"><img src="${catThumb(c)}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`
+      :`<a class="cat soon" href="#/c/${c.key}"><span><b>${c.name}</b><small>${n?`${n} ${n===1?"oferta":"ofertas"}`:"Em breve"}</small></span></a>`};
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header>${groups.map(g=>`<section class="grpbox">${g.n?`<h2 class="grp">${esc(g.n)}</h2>`:""}<div class="cats">${g.l.map(tile).join("")}</div></section>`).join("")}<a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
   },
   loja(){
     const S=STORE,rows=[];
@@ -128,7 +135,8 @@ const ROUTES={
   },
   cat(k){
     const c=catOf(k);if(!c)return location.hash="#/";
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile${p.video?" isvid":""}" href="#/c/${k}/${i}"><img loading="lazy" src="img/ofertas/t/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></a>`).join("")}</div></div>`;
+    if(!inCat(k).length){app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="about">${CLOUD}<p class="lead">As fotos de ${esc(c.name)} chegam em breve.</p><p class="valid">Enquanto isso, fale com a gente</p><div class="acts"><a class="solid dk" target="_blank" rel="noopener" href="${wa(`Olá! Gostaria de ver as opções de ${c.name}.`)}">${WAI}Perguntar sobre ${esc(c.name)}</a><a class="ghost dk" href="#/categorias">Voltar às categorias</a></div></div></div>`;return}
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><a class="ic" href="#/categorias" aria-label="Voltar">${BACK}</a><h1>${c.name}</h1><span></span></header><div class="grid">${inCat(k).map((p,i)=>`<a class="tile${p.video?" isvid":""}" href="#/c/${k}/${i}"><img loading="lazy" src="${imgThumb(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></a>`).join("")}</div></div>`;
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";
@@ -145,7 +153,20 @@ function route(){
   else ROUTES.home();
   const sc=$(".scroll");if(sc)sc.scrollTop=0;
 }
-addEventListener("hashchange",route);route();
+// Conteúdo enviado pela área restrita (/admin): categorias e fotos vêm do Supabase, se configurado em config.js
+async function loadRemote(){
+  const S=window.SUPABASE;if(!S||!S.url||!S.key)return;
+  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),6000),h={apikey:S.key,Authorization:"Bearer "+S.key};
+  try{
+    const get=q=>fetch(S.url+"/rest/v1/"+q,{headers:h,signal:ctl.signal}).then(r=>r.ok?r.json():[]);
+    const [cs,is]=await Promise.all([get("categorias?select=*&ativo=eq.true&order=ordem.asc"),get("itens?select=*&ativo=eq.true&order=ordem.asc,created_at.desc")]);
+    cs.forEach(c=>{const ex=CATEGORIES.find(x=>x.key===c.slug);if(ex)ex.name=c.nome;else CATEGORIES.push({group:c.grupo,key:c.slug,name:c.nome})});
+    is.forEach(i=>{const c=CATEGORIES.find(x=>x.key===i.categoria);PRODUCTS.push({cat:i.categoria,top:!!i.destaque,url:i.url,thumb:i.thumb||i.url,name:i.nome||(c?c.name:"Produto"),remote:true})});
+    CATEGORIES.forEach(c=>{if(!c.cover&&!c.coverUrl){const f=is.find(i=>i.categoria===c.key);if(f)c.coverUrl=f.thumb||f.url}});
+  }catch(e){}finally{clearTimeout(t)}
+}
+addEventListener("hashchange",route);
+Promise.race([loadRemote(),new Promise(r=>setTimeout(r,1200))]).then(route);
 // abertura curta, só na primeira vez da sessão
 const sp=$("#splash");let seen=false;try{seen=sessionStorage.getItem("sp")}catch(e){}
 if(seen)sp.remove();else{try{sessionStorage.setItem("sp","1")}catch(e){}setTimeout(()=>{sp.classList.add("out");setTimeout(()=>sp.remove(),600)},1000)}

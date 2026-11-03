@@ -1,2 +1,5 @@
 /*
   Cache-Control: no-cache
+
+/admin/*
+  X-Robots-Tag: noindex, nofollow
