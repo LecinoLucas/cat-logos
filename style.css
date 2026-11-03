@@ -335,3 +335,14 @@ a{color:inherit;text-decoration:none}
 #splash{gap:0}#splash .logo{color:#fff;animation:rise .9s ease-out both}#splash .logo .cloud{width:54px}#splash .logo b{font-size:2.2rem}
 .about .logo{margin:0 auto}
 #splash .logo b{color:#fff}#splash .logo small{color:#ffffffcc}
+/* capa: etiqueta mais alta e espaçamento melhor */
+.card.intro.v3{--tw:min(62vw,calc(37vh*.78),280px);--rl:clamp(58px,9vh,96px)}
+.v3 .copy{margin-top:clamp(20px,4.2vh,44px)}
+.v3 .dock{padding-top:clamp(18px,3.4vh,34px)}
+.v3 .big{margin-top:12px}
+.v3 .hair{margin:16px 0 14px}
+@media(max-height:700px){.card.intro.v3{--tw:min(48vw,calc(29vh*.78),200px);--rl:clamp(54px,9vh,76px)}.v3 .copy{margin-top:14px}.v3 .dock{padding-top:12px}}
+.card.intro.v3{--tw:min(66vw,calc(41vh*.78),310px)}
+.v3 .copy{margin-top:auto}
+.v3 .dock{margin-top:auto;padding-top:0}
+@media(max-height:700px){.card.intro.v3{--tw:min(50vw,calc(31vh*.78),215px)}}
