@@ -35,6 +35,7 @@ window.CATEGORIES = [
   {group:"Black Friday",key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Box",key:"box-gold",name:"Box Gold",cover:"box-gold-10.jpg",pos:"50% 62%"},
+  {group:"Box",key:"box-tradicional",name:"Box Tradicional",cover:"box-trad-1.jpg",pos:"50% 45%"},
 
   {group:"Marcas",key:"king-koil",name:"King Koil"},
   {group:"Marcas",key:"ecoflex",name:"Ecoflex"},
@@ -50,6 +51,12 @@ window.CATEGORIES = [
   {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
+  // ── Box Tradicional (catálogo da loja) ──
+  {cat:"box-tradicional",loja:true,img:"box-trad-1.jpg",name:"Box Tradicional",ratio:"718/580"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-2.jpg",name:"Box Tradicional"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-3.jpg",name:"Box Tradicional"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-4.jpg",name:"Box Tradicional"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-5.jpg",name:"Box Tradicional"},
   // ── Box Gold (catálogo da loja) ──
   {cat:"box-gold",loja:true,img:"box-gold-01.jpg",name:"Box Gold",ratio:"4/3"},
   {cat:"box-gold",loja:true,img:"box-gold-02.jpg",name:"Box Gold"},
