@@ -36,8 +36,9 @@ const COND="Até 10x no cartão · Condições especiais no Pix";
 const imgFull=p=>p.url||`img/ofertas/${p.img}`;
 const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);
 const catThumb=c=>c.coverUrl||(c.cover?`img/ofertas/t/${c.cover}`:"");
-const catOf=k=>CATEGORIES.find(c=>c.key===k);
-const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
+const catOf=k=>{const c=CATEGORIES.find(c=>c.key===k);return visCat(c)?c:undefined};
+const visCat=c=>!!c&&(!STORE.soBlack||c.group==="Black Friday");
+const inCat=k=>visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===k):[];
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
@@ -119,7 +120,7 @@ const ROUTES={
     wireFeed(l,-1,1);
   },
   categorias(){
-    const groups=[];CATEGORIES.filter(c=>inCat(c.key).length||c.mostrar).forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
+    const groups=[];CATEGORIES.filter(c=>visCat(c)&&(inCat(c.key).length||c.mostrar)).forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
     const tile=c=>{const n=inCat(c.key).length;
       return catThumb(c)&&n?`<a class="cat" href="#/c/${c.key}"><img src="${catThumb(c)}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`
       :`<a class="cat soon" href="#/c/${c.key}"><span><b>${c.name}</b><small>${n?`${n} ${n===1?"oferta":"ofertas"}`:"Em breve"}</small></span></a>`};
