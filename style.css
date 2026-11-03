@@ -294,3 +294,12 @@ a{color:inherit;text-decoration:none}
 .v3 .sub{max-width:310px;text-wrap:balance}
 @media(max-height:700px){.card.intro.v3{--tw:min(50vw,calc(31vh*.78),210px);--rl:clamp(96px,17vh,130px)}.v3 .cue .ring{width:44px;height:44px}}
 
+
+/* botão "Categorias" bem visível */
+.pill{padding:11px 18px;gap:9px;background:#faf8f4;color:#17325a;backdrop-filter:none;-webkit-backdrop-filter:none;font-size:.64rem;letter-spacing:.18em;font-weight:700;box-shadow:0 8px 20px -8px #000a,0 0 0 1px #ffffff40}
+.pill svg{width:16px;height:16px}
+.view.onlight .pill{background:#17325a;color:#fff;box-shadow:0 10px 22px -10px #17325a}
+.pill:active{transform:scale(.96)}
+@keyframes pillpulse{0%,100%{box-shadow:0 8px 20px -8px #000a,0 0 0 0 #5aa5e8aa}50%{box-shadow:0 8px 20px -8px #000a,0 0 0 8px #5aa5e800}}
+.over .pill{animation:pillpulse 2.4s ease-in-out 1.8s 3}
+@media(prefers-reduced-motion:reduce){.over .pill{animation:none}}

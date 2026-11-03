@@ -37,8 +37,8 @@ const imgFull=p=>p.url||`img/ofertas/${p.img}`;
 const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);
 const catThumb=c=>c.coverUrl||(c.cover?`img/ofertas/t/${c.cover}`:"");
 const catOf=k=>{const c=CATEGORIES.find(c=>c.key===k);return visCat(c)?c:undefined};
-const visCat=c=>!!c&&(!STORE.soBlack||c.group==="Black Friday");
-const inCat=k=>visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===k):[];
+const visCat=c=>!!c&&(!STORE.soBlack||!!c.black);
+const inCat=k=>visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===k||(p.tags&&p.tags.includes(k))):[];
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
@@ -124,7 +124,7 @@ const ROUTES={
     const tile=c=>{const n=inCat(c.key).length;
       return catThumb(c)&&n?`<a class="cat" href="#/c/${c.key}"><img src="${catThumb(c)}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`
       :`<a class="cat soon" href="#/c/${c.key}"><span><b>${c.name}</b><small>${n?`${n} ${n===1?"oferta":"ofertas"}`:"Em breve"}</small></span></a>`};
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header>${groups.map(g=>`<section class="grpbox">${g.n?`<h2 class="grp">${esc(g.n)}</h2>`:""}<div class="cats">${g.l.map(tile).join("")}</div></section>`).join("")}<a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header>${groups.map(g=>`<section class="grpbox">${g.n?`<h2 class="grp">${esc(g.n==="Marcas"&&STORE.soBlack?"Black por marca":g.n)}</h2>`:""}<div class="cats">${g.l.map(tile).join("")}</div></section>`).join("")}<a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
   },
   loja(){
     const S=STORE,rows=[];

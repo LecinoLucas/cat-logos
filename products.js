@@ -31,9 +31,9 @@ window.STORE = {
 window.CATEGORIES = [
   // group: título da seção na tela de categorias. Sem "cover" = categoria sem fotos ainda (aparece como "Em breve").
   // Para ativar uma categoria: ponha as fotos em img/ofertas/ (+ miniatura em img/ofertas/t/), use cat:"<key>" nos produtos e, se quiser, defina cover.
-  {group:"Black Friday",key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
-  {group:"Black Friday",key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
-  {group:"Black Friday",key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
+  {group:"Black Friday",black:true,key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
+  {group:"Black Friday",black:true,key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
+  {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
   {group:"Camas",key:"camas-loja",name:"Camas",cover:"camas-08.jpg",pos:"50% 50%"},
@@ -41,11 +41,11 @@ window.CATEGORIES = [
   {group:"Box",key:"box-gold",name:"Box Gold",cover:"box-gold-10.jpg",pos:"50% 62%"},
   {group:"Box",key:"box-tradicional",name:"Box Tradicional",cover:"box-trad-1.jpg",pos:"50% 45%"},
 
-  {group:"Marcas",key:"king-koil",name:"King Koil"},
+  {group:"Marcas",key:"king-koil",name:"King Koil",cover:"kingkoil-queen.jpg",black:true},
   {group:"Marcas",key:"ecoflex",name:"Ecoflex"},
   {group:"Marcas",key:"inducol",name:"Inducol"},
-  {group:"Marcas",key:"sealy",name:"Sealy"},
-  {group:"Marcas",key:"simmons",name:"Simmons"},
+  {group:"Marcas",key:"sealy",name:"Sealy",cover:"sealy-queen.jpg",black:true},
+  {group:"Marcas",key:"simmons",name:"Simmons",cover:"simmons-casal.jpg",black:true},
   {group:"Marcas",key:"plumatex",name:"Plumatex"},
   {group:"Marcas",key:"probel",name:"Probel"},
   {group:"Marcas",key:"outras-marcas",name:"Outras marcas"},
@@ -115,13 +115,13 @@ window.PRODUCTS = [
   {cat:"box-bau",top:true,img:"box-king.jpg",name:"Box Baú King (1,93 × 2,03 m)"},
   {cat:"box-bau",top:true,img:"molas-bau-king.jpg",name:"Colchão Molas Ensacadas + Box Baú King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"hotelaria-solteiro.jpg",name:"Colchão Molas de Hotelaria Firme + Box Solteiro"},
-  {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",name:"Colchão King Koil Firme Solteiro"},
-  {cat:"colchao",top:true,img:"simmons-casal.jpg",name:"Colchão Simmons Firme Casal"},
-  {cat:"colchao",top:true,img:"sealy-queen.jpg",name:"Colchão Sealy Conforto Intermediário Queen"},
-  {cat:"colchao",top:true,img:"sealy-joy.jpg",name:"Colchão Sealy Joy Molas Ensacadas Conforto Intermediário (Solteiro e Solteirão)"},
-  {cat:"colchao",top:true,img:"sealy-miami.jpg",name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
-  {cat:"colchao",top:true,img:"kingkoil-queen.jpg",name:"Colchão King Koil Hotelaria Dupla Face Queen"},
-  {cat:"colchao",top:true,img:"simmons-queen.jpg",name:"Colchão Simmons Mola Extra Firme Queen (última peça)"},
-  {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
-  {cat:"colchao",top:true,img:"kingkoil-diamond-queen.jpg",name:"Colchão com Látex Diamond King Koil Queen (última peça)"}
+  {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",tags:["king-koil"],name:"Colchão King Koil Firme Solteiro"},
+  {cat:"colchao",top:true,img:"simmons-casal.jpg",tags:["simmons"],name:"Colchão Simmons Firme Casal"},
+  {cat:"colchao",top:true,img:"sealy-queen.jpg",tags:["sealy"],name:"Colchão Sealy Conforto Intermediário Queen"},
+  {cat:"colchao",top:true,img:"sealy-joy.jpg",tags:["sealy"],name:"Colchão Sealy Joy Molas Ensacadas Conforto Intermediário (Solteiro e Solteirão)"},
+  {cat:"colchao",top:true,img:"sealy-miami.jpg",tags:["sealy"],name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
+  {cat:"colchao",top:true,img:"kingkoil-queen.jpg",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
+  {cat:"colchao",top:true,img:"simmons-queen.jpg",tags:["simmons"],name:"Colchão Simmons Mola Extra Firme Queen (última peça)"},
+  {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
+  {cat:"colchao",top:true,img:"kingkoil-diamond-queen.jpg",tags:["king-koil"],name:"Colchão com Látex Diamond King Koil Queen (última peça)"}
 ];
