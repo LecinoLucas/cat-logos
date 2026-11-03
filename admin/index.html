@@ -1,0 +1,270 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Pioneira · Área restrita</title>
+<link rel="icon" href="../icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+:root{--ivory:#faf8f4;--line:#e7e1d6;--blue:#5aa5e8;--navy:#17325a;--mut:#7a8799;--gold:#a98a55;--red:#c0392b;--ok:#1f8a4c;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Montserrat",system-ui,sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}body{background:var(--ivory);color:var(--navy);font-family:var(--sans);min-height:100vh}
+[hidden]{display:none!important}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(12px + env(safe-area-inset-top,0px)) 18px 12px;border-bottom:1px solid var(--line);background:var(--ivory);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--blue);font-size:1.02rem}.brand svg{width:28px}.brand small{display:block;font-size:.5rem;letter-spacing:.34em;color:var(--navy);font-weight:500}
+.who{font-size:.68rem;color:var(--mut);text-align:right;line-height:1.4}.who button{margin-left:8px}
+main{max-width:760px;margin:0 auto;padding:22px 18px calc(60px + env(safe-area-inset-bottom,0px))}
+h1{font-family:var(--serif);font-weight:500;font-size:2rem;margin:6px 0 4px}h2{font-family:var(--serif);font-weight:500;font-size:1.4rem;margin:0 0 12px}
+.sub{font-size:.8rem;color:var(--mut);margin:0 0 18px;line-height:1.5}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+label{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 6px}
+input[type=text],input[type=email],input[type=password],select{width:100%;padding:13px 14px;border:1px solid #d9d2c4;border-radius:10px;font:inherit;font-size:.9rem;background:#fff;color:var(--navy)}
+input:focus,select:focus{outline:2px solid #5aa5e855;border-color:var(--blue)}
+.row{display:grid;gap:12px;margin-bottom:12px}.row.two{grid-template-columns:1fr 1fr}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border:0;border-radius:10px;background:var(--navy);color:#fff;font:inherit;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.5;cursor:default}.btn.ghost{background:none;color:var(--navy);border:1px solid var(--navy)}.btn.sm{padding:8px 12px;font-size:.6rem}.btn.danger{background:none;color:var(--red);border:1px solid #e7c3be}
+button.link{background:none;border:0;color:var(--blue);font:inherit;font-size:.68rem;text-decoration:underline;cursor:pointer;padding:0}
+.drop{border:2px dashed #cfc6b4;border-radius:14px;padding:26px 16px;text-align:center;color:var(--mut);font-size:.82rem;line-height:1.5;cursor:pointer;background:#fdfcf9}
+.drop.over{border-color:var(--blue);background:#eef6fe}.drop b{color:var(--navy)}
+.chk{display:flex;align-items:center;gap:10px;font-size:.84rem;margin:14px 0 4px;color:var(--navy);text-transform:none;letter-spacing:0;font-weight:500}
+.chk input{width:20px;height:20px}
+.msg{font-size:.8rem;margin:12px 0 0;line-height:1.5}.msg.err{color:var(--red)}.msg.ok{color:var(--ok)}
+.prog{height:6px;background:#eee6d6;border-radius:6px;overflow:hidden;margin-top:12px}.prog i{display:block;height:100%;width:0;background:var(--blue);transition:width .2s}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.it{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.it img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#eee}
+.it .bd{padding:10px;display:grid;gap:8px}
+.it input[type=text]{padding:8px 10px;font-size:.78rem}
+.it .ac{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;background:#eef6fe;color:#2d6db3;border-radius:99px;padding:3px 8px;font-weight:600;justify-self:start}
+.empty{text-align:center;color:var(--mut);font-size:.85rem;padding:26px 10px}
+.login{max-width:380px;margin:12vh auto 0;padding:0 18px}.login .card{padding:24px}
+.login .brand{justify-content:center;margin-bottom:18px;font-size:1.2rem}
+.hint{font-size:.7rem;color:var(--mut);margin-top:14px;line-height:1.5;text-align:center}
+</style></head><body>
+
+<section id="vLogin" class="login" hidden>
+  <div class="brand"><svg viewBox="0 0 64 40"><path fill="#6db3f0" d="M16 38a12 12 0 0 1-2-23.8A15 15 0 0 1 43 11a13 13 0 0 1 6 27z"/></svg><div>pioneira<small>COLCHÕES</small></div></div>
+  <form class="card" id="fLogin" autocomplete="on">
+    <h2 style="text-align:center">Área restrita</h2>
+    <div class="row"><div><label for="em">E-mail</label><input id="em" type="email" autocomplete="username" required></div></div>
+    <div class="row"><div><label for="pw">Senha</label><input id="pw" type="password" autocomplete="current-password" required></div></div>
+    <button class="btn" style="width:100%" id="bLogin">Entrar</button>
+    <p class="msg err" id="mLogin" hidden></p>
+  </form>
+  <p class="hint">Acesso só para a equipe. Quem cria os acessos é o administrador do Supabase.</p>
+</section>
+
+<section id="vApp" hidden>
+  <div class="top">
+    <div class="brand"><svg viewBox="0 0 64 40" width="28"><path fill="#6db3f0" d="M16 38a12 12 0 0 1-2-23.8A15 15 0 0 1 43 11a13 13 0 0 1 6 27z"/></svg><div>pioneira<small>ÁREA RESTRITA</small></div></div>
+    <div class="who"><span id="who"></span><button class="link" id="bOut">Sair</button></div>
+  </div>
+  <main>
+    <h1>Fotos do catálogo</h1>
+    <p class="sub">Escolha a categoria, arraste as fotos e pronto: elas aparecem no catálogo na hora. As fotos são reduzidas automaticamente para carregar rápido no celular.</p>
+
+    <div class="card">
+      <div class="row two">
+        <div><label for="cat">Categoria</label><select id="cat"></select></div>
+        <div style="align-self:end"><button class="btn ghost" id="bNewCat" type="button" style="width:100%">+ Nova categoria</button></div>
+      </div>
+      <div id="newCat" hidden>
+        <div class="row two">
+          <div><label for="ncN">Nome</label><input id="ncN" type="text" placeholder="Ex.: Ecoflex"></div>
+          <div><label for="ncG">Seção</label><select id="ncG"><option>Marcas</option><option>Complementos</option><option>Black Friday</option><option>Outras</option></select></div>
+        </div>
+        <button class="btn sm" id="bSaveCat" type="button">Criar categoria</button>
+        <button class="link" id="bCancelCat" type="button" style="margin-left:10px">cancelar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Subir fotos</h2>
+      <div class="drop" id="drop"><b>Toque aqui</b> para escolher as fotos<br>ou arraste para esta área<input id="files" type="file" accept="image/*" multiple hidden></div>
+      <div class="row" style="margin-top:14px"><div><label for="nm">Nome (opcional)</label><input id="nm" type="text" placeholder="Ex.: Colchão King Koil Firme Casal — vai na mensagem do WhatsApp"></div></div>
+      <label class="chk"><input type="checkbox" id="top"> Mostrar também na tela inicial (mais vendidos)</label>
+      <p class="sub" id="sel" style="margin:10px 0 0"></p>
+      <div style="margin-top:12px"><button class="btn" id="bUp" disabled>Enviar fotos</button></div>
+      <div class="prog" id="prog" hidden><i></i></div>
+      <p class="msg" id="mUp" hidden></p>
+    </div>
+
+    <div class="card">
+      <h2 id="hList">Fotos da categoria</h2>
+      <div class="grid" id="list"></div>
+      <p class="empty" id="empty" hidden>Nenhuma foto nesta categoria ainda.</p>
+    </div>
+  </main>
+</section>
+
+<p class="msg err" id="mBoot" hidden style="max-width:520px;margin:12vh auto;padding:0 18px"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const esc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const show=(id,on)=>$(id).hidden=!on;
+const say=(id,t,cls)=>{const e=$(id);e.textContent=t||"";e.className="msg"+(cls?" "+cls:"");e.hidden=!t};
+const BUCKET="fotos";
+let sb=null,cats=[],items=[],picked=[];
+
+function boot(){
+  const C=window.SUPABASE||{};
+  if(!C.url||!C.key||!window.supabase){
+    say("mBoot","A área restrita ainda não está ligada ao Supabase. Preencha a URL e a chave (anon public) no arquivo config.js, rode o arquivo supabase/schema.sql e publique de novo.","err");show("mBoot",true);return;
+  }
+  sb=window.supabase.createClient(C.url,C.key,{auth:{persistSession:true,autoRefreshToken:true}});
+  sb.auth.getSession().then(({data})=>enter(data&&data.session));
+}
+
+async function enter(session){
+  if(!session){show("vApp",false);show("vLogin",true);return}
+  const email=(session.user&&session.user.email)||"";
+  const {data,error}=await sb.from("admins").select("email").limit(1);
+  if(error||!data||!data.length){
+    await sb.auth.signOut();show("vApp",false);show("vLogin",true);
+    say("mLogin","Este e-mail não tem permissão de administrador.","err");return;
+  }
+  $("who").textContent=email;show("vLogin",false);show("vApp",true);
+  await loadCats();
+}
+
+$("fLogin").addEventListener("submit",async e=>{
+  e.preventDefault();say("mLogin","");$("bLogin").disabled=true;
+  const {data,error}=await sb.auth.signInWithPassword({email:$("em").value.trim(),password:$("pw").value});
+  $("bLogin").disabled=false;
+  if(error){say("mLogin","E-mail ou senha incorretos.","err");return}
+  $("pw").value="";enter(data.session);
+});
+$("bOut").onclick=async()=>{await sb.auth.signOut();location.reload()};
+
+async function loadCats(sel){
+  const {data,error}=await sb.from("categorias").select("*").order("ordem",{ascending:true});
+  if(error){say("mUp","Não consegui carregar as categorias: "+error.message,"err");return}
+  cats=data||[];
+  const keep=sel||$("cat").value;
+  $("cat").innerHTML=cats.map(c=>`<option value="${esc(c.slug)}">${esc(c.grupo)} · ${esc(c.nome)}</option>`).join("");
+  if(keep&&cats.some(c=>c.slug===keep))$("cat").value=keep;
+  await loadItems();
+}
+$("cat").onchange=loadItems;
+
+const slugify=t=>t.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+$("bNewCat").onclick=()=>show("newCat",true);
+$("bCancelCat").onclick=()=>show("newCat",false);
+$("bSaveCat").onclick=async()=>{
+  const nome=$("ncN").value.trim();if(!nome){return}
+  let slug=slugify(nome);if(!slug)return;
+  if(cats.some(c=>c.slug===slug))slug+="-"+Math.floor(Math.random()*900+100);
+  const ordem=(cats.reduce((m,c)=>Math.max(m,c.ordem||0),0))+10;
+  const {error}=await sb.from("categorias").insert({slug,nome,grupo:$("ncG").value,ordem});
+  if(error){say("mUp","Não consegui criar a categoria: "+error.message,"err");return}
+  $("ncN").value="";show("newCat",false);await loadCats(slug);say("mUp","Categoria criada.","ok");
+};
+
+// ───── escolher fotos ─────
+const drop=$("drop"),inp=$("files");
+drop.onclick=()=>inp.click();
+inp.onchange=()=>setPicked([...inp.files]);
+["dragenter","dragover"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add("over")}));
+["dragleave","drop"].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove("over")}));
+drop.addEventListener("drop",e=>setPicked([...e.dataTransfer.files].filter(f=>f.type.startsWith("image/"))));
+function setPicked(f){picked=f;$("sel").textContent=f.length?`${f.length} foto${f.length>1?"s":""} selecionada${f.length>1?"s":""}.`:"";$("bUp").disabled=!f.length}
+
+// reduz a foto (tamanho e peso) antes de enviar
+async function shrink(file,maxSide,q){
+  const bmp=await createImageBitmap(file,{imageOrientation:"from-image"});
+  const k=Math.min(1,maxSide/Math.max(bmp.width,bmp.height));
+  const w=Math.round(bmp.width*k),h=Math.round(bmp.height*k);
+  const cv=document.createElement("canvas");cv.width=w;cv.height=h;
+  const cx=cv.getContext("2d");cx.fillStyle="#fff";cx.fillRect(0,0,w,h);cx.drawImage(bmp,0,0,w,h);
+  if(bmp.close)bmp.close();
+  return await new Promise(r=>cv.toBlob(r,"image/jpeg",q));
+}
+
+$("bUp").onclick=async()=>{
+  const slug=$("cat").value;if(!slug||!picked.length)return;
+  $("bUp").disabled=true;show("prog",true);say("mUp","");
+  const bar=$("prog").firstElementChild;let done=0,fail=0;
+  const nome=$("nm").value.trim(),destaque=$("top").checked;
+  const base=-Math.floor(Date.now()/1000);
+  for(let i=0;i<picked.length;i++){
+    try{
+      const big=await shrink(picked[i],1600,.85),sm=await shrink(picked[i],480,.78);
+      const id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+      const p1=`${slug}/${id}.jpg`,p2=`${slug}/t/${id}.jpg`;
+      let r=await sb.storage.from(BUCKET).upload(p1,big,{contentType:"image/jpeg",cacheControl:"31536000"});if(r.error)throw r.error;
+      r=await sb.storage.from(BUCKET).upload(p2,sm,{contentType:"image/jpeg",cacheControl:"31536000"});if(r.error)throw r.error;
+      const u1=sb.storage.from(BUCKET).getPublicUrl(p1).data.publicUrl,u2=sb.storage.from(BUCKET).getPublicUrl(p2).data.publicUrl;
+      const ins=await sb.from("itens").insert({categoria:slug,nome,url:u1,thumb:u2,path:p1,thumb_path:p2,destaque,ordem:base-i});
+      if(ins.error)throw ins.error;
+      done++;
+    }catch(err){fail++;console.error(err)}
+    bar.style.width=Math.round((i+1)/picked.length*100)+"%";
+  }
+  show("prog",false);bar.style.width="0";
+  say("mUp",fail?`${done} enviada(s), ${fail} com erro. Tente de novo as que falharam.`:`${done} foto${done>1?"s":""} enviada${done>1?"s":""}. Já está no catálogo.`,fail?"err":"ok");
+  inp.value="";setPicked([]);$("nm").value="";await loadItems();
+};
+
+// ───── lista da categoria ─────
+async function loadItems(){
+  const slug=$("cat").value;const c=cats.find(x=>x.slug===slug);
+  $("hList").textContent=c?`Fotos · ${c.nome}`:"Fotos da categoria";
+  if(!slug){$("list").innerHTML="";return}
+  const {data,error}=await sb.from("itens").select("*").eq("categoria",slug).order("ordem",{ascending:true}).order("created_at",{ascending:false});
+  if(error){say("mUp","Não consegui carregar as fotos: "+error.message,"err");return}
+  items=data||[];render();
+}
+function render(){
+  show("empty",!items.length);
+  $("list").innerHTML=items.map((it,i)=>`<div class="it" data-id="${esc(it.id)}">
+    <img src="${esc(it.thumb||it.url)}" alt="" loading="lazy">
+    <div class="bd">
+      ${it.destaque?'<span class="tag">Tela inicial</span>':""}
+      <input type="text" value="${esc(it.nome)}" placeholder="Nome (WhatsApp)" data-a="nome">
+      <div class="ac">
+        <button class="btn ghost sm" data-a="up" ${i===0?"disabled":""} title="Subir">↑</button>
+        <button class="btn ghost sm" data-a="down" ${i===items.length-1?"disabled":""} title="Descer">↓</button>
+        <button class="btn ghost sm" data-a="top">${it.destaque?"Tirar do início":"Pôr no início"}</button>
+        <button class="btn danger sm" data-a="del">Apagar</button>
+      </div></div></div>`).join("");
+}
+$("list").addEventListener("click",async e=>{
+  const b=e.target.closest("button[data-a]");if(!b)return;
+  const box=b.closest(".it"),id=box.dataset.id,i=items.findIndex(x=>x.id===id),it=items[i];if(!it)return;
+  const a=b.dataset.a;
+  if(a==="del"){
+    if(!confirm("Apagar esta foto do catálogo?"))return;
+    const paths=[it.path,it.thumb_path].filter(Boolean);
+    await sb.storage.from(BUCKET).remove(paths);
+    const {error}=await sb.from("itens").delete().eq("id",id);
+    if(error){say("mUp","Erro ao apagar: "+error.message,"err");return}
+    items.splice(i,1);render();return;
+  }
+  if(a==="top"){
+    const {error}=await sb.from("itens").update({destaque:!it.destaque}).eq("id",id);
+    if(error){say("mUp","Erro: "+error.message,"err");return}
+    it.destaque=!it.destaque;render();return;
+  }
+  if(a==="up"||a==="down"){
+    const j=a==="up"?i-1:i+1;if(j<0||j>=items.length)return;
+    [items[i],items[j]]=[items[j],items[i]];
+    // regrava a ordem de toda a categoria (simples e sem repetição)
+    const ups=items.map((x,k)=>sb.from("itens").update({ordem:k}).eq("id",x.id));
+    items.forEach((x,k)=>x.ordem=k);render();
+    const rs=await Promise.all(ups);if(rs.some(r=>r.error))say("mUp","Erro ao reordenar.","err");
+  }
+});
+$("list").addEventListener("change",async e=>{
+  const t=e.target;if(t.dataset.a!=="nome")return;
+  const id=t.closest(".it").dataset.id;
+  const {error}=await sb.from("itens").update({nome:t.value.trim()}).eq("id",id);
+  if(error)say("mUp","Erro ao salvar o nome: "+error.message,"err");
+  else{const it=items.find(x=>x.id===id);if(it)it.nome=t.value.trim()}
+});
+
+boot();
+</script>
+</body></html>
