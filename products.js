@@ -33,7 +33,7 @@ window.CATEGORIES = [
   // Para ativar uma categoria: ponha as fotos em img/ofertas/ (+ miniatura em img/ofertas/t/), use cat:"<key>" nos produtos e, se quiser, defina cover.
   {group:"Black Friday",key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
   {group:"Black Friday",key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
-  {group:"Black Friday",key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
+  {group:"Black Friday",key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
   {group:"Camas",key:"camas-loja",name:"Camas",cover:"camas-08.jpg",pos:"50% 50%"},
@@ -104,11 +104,10 @@ window.PRODUCTS = [
   {cat:"box-gold",loja:true,img:"box-gold-14.jpg",name:"Box Gold",ratio:"1/1"},
   {cat:"box-gold",loja:true,img:"box-gold-15.jpg",name:"Box Gold",ratio:"1/1"},
   // ── Black Friday ──
+  {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
-  {cat:"camas",top:true,img:"tricama-promo.jpg",name:"Tricama 3 em 1"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
-  {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-solteirao.jpg",name:"Box Baú Solteirão (1,08 × 1,98 m)"},
   {cat:"box-bau",top:true,img:"box-casal.jpg",name:"Box Baú Casal (1,38 × 1,88 m)"},
@@ -119,6 +118,7 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",name:"Colchão King Koil Firme Solteiro"},
   {cat:"colchao",top:true,img:"simmons-casal.jpg",name:"Colchão Simmons Firme Casal"},
   {cat:"colchao",top:true,img:"sealy-queen.jpg",name:"Colchão Sealy Conforto Intermediário Queen"},
+  {cat:"colchao",top:true,img:"sealy-joy.jpg",name:"Colchão Sealy Joy Molas Ensacadas Conforto Intermediário (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"sealy-miami.jpg",name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",name:"Colchão King Koil Hotelaria Dupla Face Queen"},
   {cat:"colchao",top:true,img:"simmons-queen.jpg",name:"Colchão Simmons Mola Extra Firme Queen (última peça)"},
