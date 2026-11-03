@@ -22,7 +22,7 @@ window.STORE = {
   telefone: "556232152561",        // ex.: "5562999999999" (DDI+DDD+número) para o botão Ligar
   validade: "30/11",               // aparece na página "A Pioneira": "Ofertas de Black Friday válidas até 30/11"
   soBlack: true,                   // true = o site mostra só a Black Friday (esconde Box Gold, Camas, Bicamas etc.). Mude para false para liberar o catálogo da loja.
-  botao: "Falar no WhatsApp",      // texto do botão de WhatsApp nas ofertas (o mesmo em todas as telas)
+  botao: "WhatsApp",      // texto do botão de WhatsApp nas ofertas (o mesmo em todas as telas)
   // Textos da capa de abertura (deixe "" para esconder uma linha)
   periodo: "De 01 a 30 de novembro",
   destaque: "Até 60% off",           // o número antes do % conta de 0 até ele quando a página abre

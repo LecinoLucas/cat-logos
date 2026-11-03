@@ -48,12 +48,12 @@ function feedHTML(list,opts={}){
   const sp=(STORE.selo||"").split(" ");
   const seal=sp.length>=2?`<div class="seal"><small>${esc(sp[0])}</small><b>${esc(sp[1])}</b><small>${esc(sp.slice(2).join(" "))}</small></div>`:"";
   const puff=(l,t,dx,dl)=>`<i class="puff" style="left:${l}%;top:${t}%;--dx:${dx}px;animation-delay:${dl}s">${CLOUD}</i>`;
-  const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Ver as ofertas"><span>Deslize para ver as ofertas</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button></div></section>`:"";
+  const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Ver as ofertas"><span>Deslize para ver as ofertas</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button><a class="catcover" href="#/categorias">${GRID}<span>Ver categorias</span></a></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
-  return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
+  return `<div class="feed">${intro}${cards}${end}</div><div class="dock2 off"><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
 }
 function wireFeed(list,start=0,off=0){
-  const feed=$(".feed"),count=$(".count"),fab=$(".fab"),cards=[...feed.querySelectorAll(".card")];
+  const feed=$(".feed"),count=$(".count"),fab=$(".fab"),dock=$(".dock2"),cards=[...feed.querySelectorAll(".card")];
   const SPK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/>',SPK_ON=SPK+'<path d="M16.500 8.500a5 5 0 0 1 0 7M19 6a8.500 8.500 0 0 1 0 12"/></svg>',SPK_OFF=SPK+'<path d="M17 9l5 6M22 9l-5 6"/></svg>';
   let sound=false;
   const vids=cards.map(c=>c.querySelector("video"));
@@ -68,11 +68,11 @@ function wireFeed(list,start=0,off=0){
     view.classList.toggle("onlight",!!cards[i]&&cards[i].classList.contains("light"));
     vids.forEach((v,j)=>{if(!v)return;if(j===i){v.muted=!sound;v.play().catch(()=>{})}else{v.pause()}});
     const k=i-off,isEnd=k>=list.length,isIntro=k<0,hide=isEnd||isIntro;
-    count.style.opacity=(isEnd||isIntro)?0:1;
-    fab.style.opacity=hide?0:1;fab.style.pointerEvents=hide?"none":"auto";
-    if(isIntro){fab.href=wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.");fab.innerHTML=WAI}
-    else if(!isEnd){count.textContent=`${k+1} / ${list.length}`;fab.href=waProd(list[k]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"Falar no WhatsApp")}</span>`}
-    fab.classList.toggle("lbl",!isIntro&&!isEnd)
+    dock.classList.toggle("off",isEnd||isIntro);
+    if(!isEnd&&!isIntro){
+      const last=k>=list.length-1;
+      count.innerHTML=`<span class="n">${k+1} / ${list.length}</span><span class="hint">${last?"Deslize para ver mais opções":"Deslize para ver mais"}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>`;
+      fab.href=waProd(list[k]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`}
   };
   cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(cards.indexOf(e.target))}),{root:feed,threshold:.6});
@@ -116,7 +116,7 @@ function wireFeed(list,start=0,off=0){
 const ROUTES={
   home(){
     const list=PRODUCTS.filter(p=>p.top);const l=list.length?list:PRODUCTS;
-    app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}<a class="pill" href="#/categorias">${GRID}Categorias</a></header></div>`;
+    app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}</header></div>`;
     wireFeed(l,-1,1);
   },
   categorias(){
