@@ -1,0 +1,28 @@
+# Cutuca o Supabase a cada 3 dias para o plano grátis não pausar o projeto por inatividade (7 dias).
+# Lê a URL e a chave PÚBLICA (anon) do config.js da branch catalogo-loja. Não usa segredo nenhum.
+# Se o Supabase não responder 200, a execução fica vermelha e o GitHub avisa por e-mail.
+name: Manter Supabase acordado
+
+on:
+  schedule:
+    - cron: "17 9 */3 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cutucar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: catalogo-loja
+      - name: Fazer um pedido ao Supabase
+        run: |
+          url=$(sed -n 's/.*url: *"\([^"]*\)".*/\1/p' config.js | head -1)
+          key=$(sed -n 's/.*key: *"\([^"]*\)".*/\1/p' config.js | head -1)
+          if [ -z "$url" ] || [ -z "$key" ]; then echo "config.js ainda está vazio; nada a fazer."; exit 0; fi
+          code=$(curl -s -o /dev/null -w "%{http_code}" -H "apikey: $key" -H "Authorization: Bearer $key" "$url/rest/v1/categorias?select=slug&limit=1")
+          echo "Supabase respondeu: $code"
+          [ "$code" = "200" ]
