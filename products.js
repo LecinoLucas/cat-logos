@@ -34,6 +34,7 @@ window.CATEGORIES = [
   {group:"Black Friday",key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
   {group:"Black Friday",key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
+  {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
   {group:"Camas",key:"camas-loja",name:"Camas",cover:"camas-08.jpg",pos:"50% 50%"},
 
   {group:"Box",key:"box-gold",name:"Box Gold",cover:"box-gold-10.jpg",pos:"50% 62%"},
@@ -53,6 +54,19 @@ window.CATEGORIES = [
   {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
+  // ── Bicamas (catálogo da loja) ──
+  {cat:"bicamas-loja",loja:true,img:"bicamas-01.jpg",name:"Bicama",ratio:"1280/1280"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-02.jpg",name:"Bicama",ratio:"1280/1280"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-03.jpg",name:"Bicama",ratio:"768/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-04.jpg",name:"Bicama",ratio:"768/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-05.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-06.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-07.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-08.jpg",name:"Bicama",ratio:"769/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-09.jpg",name:"Bicama",ratio:"819/1024"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-10.jpg",name:"Bicama",ratio:"540/675"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-11.jpg",name:"Bicama",ratio:"540/675"},
+  {cat:"bicamas-loja",loja:true,img:"bicamas-12.jpg",name:"Bicama",pos:"50% 60%"},
   // ── Camas (catálogo da loja) ──
   {cat:"camas-loja",loja:true,img:"camas-01.jpg",name:"Cama",ratio:"960/1280"},
   {cat:"camas-loja",loja:true,img:"camas-02.jpg",name:"Cama",ratio:"1528/1528"},
