@@ -39,10 +39,12 @@ const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
   const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="img/ofertas/${p.img}" alt="${p.name}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
-  const gancho=STORE.gancho?STORE.gancho.replace(/^(\S+)\s+(.+)$/,"$1 <i>$2</i>"):"";
+  const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
+  const big=dm?`<p class="big">${esc(dm[1].trim())} <span class="num" data-to="${dm[2]}">${dm[2]}</span><small>%</small> <i>${esc(dm[3])}</i></p>`:(STORE.destaque?`<p class="big">${esc(STORE.destaque)}</p>`:"");
   const sp=(STORE.selo||"").split(" ");
   const seal=sp.length>=2?`<div class="seal"><small>${esc(sp[0])}</small><b>${esc(sp[1])}</b><small>${esc(sp.slice(2).join(" "))}</small></div>`:"";
-  const intro=opts.intro?`<section class="card intro light v2"><div class="stage"><div class="tagwrap"><div class="tagscroll"><div class="tag3d"><img class="tagimg" src="img/etiqueta-3d.webp" alt="Black Friday Pioneira">${seal}</div></div></div>${STORE.periodo?`<div class="when">${esc(STORE.periodo).replace(/^(.+?) de (.+)$/i,"<b>$1</b><span>de $2</span>")}</div>`:""}</div><div class="copy">${gancho?`<h3>${gancho}</h3>`:""}${STORE.subtitulo?`<p class="sub">${esc(STORE.subtitulo.charAt(0).toUpperCase()+STORE.subtitulo.slice(1))}</p>`:""}${STORE.frase?`<p class="corner">${fmt(STORE.frase)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Ver as ofertas"><span>Deslize para ver as ofertas</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button></div></section>`:"";
+  const puff=(l,t,dx,dl)=>`<i class="puff" style="left:${l}%;top:${t}%;--dx:${dx}px;animation-delay:${dl}s">${CLOUD}</i>`;
+  const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Ver as ofertas"><span>Deslize para ver as ofertas</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${CLOUD}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   return `<div class="feed">${intro}${cards}${end}</div><div class="count" aria-hidden="true"></div><a class="fab" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp"></a>`;
 }
@@ -73,6 +75,11 @@ function wireFeed(list,start=0,off=0){
   cards.forEach(c=>io.observe(c));
   const introEl=feed.querySelector(".intro");
   if(introEl){
+    const num=introEl.querySelector(".num");
+    if(num){const to=+num.dataset.to,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(!reduce){num.textContent="0";const t0=performance.now()+1250,dur=1700;
+        const step=now=>{const k=Math.max(0,Math.min(1,(now-t0)/dur));num.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1&&document.body.contains(num))requestAnimationFrame(step)};
+        requestAnimationFrame(step)}}
     let ticking=false;
     feed.addEventListener("scroll",()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{
       const p=Math.max(0,Math.min(1,feed.scrollTop/(feed.clientHeight*.42)));
