@@ -49,7 +49,7 @@ window.CATEGORIES = [
   {group:"Marcas",key:"sealy",name:"Sealy",cover:"sealy-queen.jpg",black:true},
   {group:"Marcas",key:"simmons",name:"Simmons",cover:"simmons-casal.jpg",black:true},
   {group:"Marcas",key:"plumatex",name:"Plumatex"},
-  {group:"Marcas",key:"probel",name:"Probel"},
+  {group:"Marcas",key:"probel",name:"Probel",cover:"probel-guarda-costas-king.jpg",black:true},
   {group:"Marcas",key:"outras-marcas",name:"Outras marcas"},
 
   {group:"Complementos",key:"cabeceiras",name:"Cabeceiras"},
@@ -123,6 +123,7 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"sealy-queen.jpg",tags:["sealy"],name:"Colchão Sealy Conforto Intermediário Queen"},
   {cat:"colchao",top:true,img:"sealy-joy.jpg",tags:["sealy"],name:"Colchão Sealy Joy Molas Ensacadas Conforto Intermediário (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"sealy-miami.jpg",tags:["sealy"],name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
+  {cat:"colchao",top:true,img:"probel-guarda-costas-king.jpg",tags:["probel"],name:"Colchão Probel Espuma Firme com Gel Linha Guarda Costas + Box King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
   {cat:"colchao",top:true,img:"simmons-queen.jpg",tags:["simmons"],name:"Colchão Simmons Mola Extra Firme Queen (última peça)"},
   {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
