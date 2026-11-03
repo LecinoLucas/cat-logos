@@ -61,6 +61,11 @@ window.PRODUCTS = [
   {cat:"box-gold",loja:true,img:"box-gold-08.jpg",name:"Box Gold"},
   {cat:"box-gold",loja:true,img:"box-gold-09.jpg",name:"Box Gold"},
   {cat:"box-gold",loja:true,img:"box-gold-10.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-11.jpg",name:"Box Gold",ratio:"1/1"},
+  {cat:"box-gold",loja:true,img:"box-gold-12.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-13.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-14.jpg",name:"Box Gold",ratio:"1/1"},
+  {cat:"box-gold",loja:true,img:"box-gold-15.jpg",name:"Box Gold",ratio:"1/1"},
   // ── Black Friday ──
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
   {cat:"camas",top:true,img:"tricama-promo.jpg",name:"Tricama 3 em 1"},
