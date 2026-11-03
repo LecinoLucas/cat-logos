@@ -19,16 +19,13 @@ window.STORE = {
   mapa: "",                        // (opcional) link do Google Maps; se vazio, é gerado pelo endereço
   horario: "",                     // ex.: "Seg a Sex 8h–18h · Sáb 8h–13h"
   entrega: "",                     // ex.: "Entregamos em Goiânia e região"
-  telefone: "",                    // ex.: "5562999999999" (DDI+DDD+número) para o botão Ligar
+  telefone: "556232152561",        // ex.: "5562999999999" (DDI+DDD+número) para o botão Ligar
   validade: "30/11",               // aparece na página "A Pioneira": "Ofertas de Black Friday válidas até 30/11"
   botao: "Falar no WhatsApp",      // texto do botão de WhatsApp nas ofertas (o mesmo em todas as telas)
   // Textos da capa de abertura (deixe "" para esconder uma linha)
-  periodo: "01 a 30 de novembro",
-  gancho: "Os menores preços do ano",
-  destaque: "",
-  subtitulo: "em todos os nossos produtos.",
-  selo: "até 60% off",              // selo na frente da etiqueta (3 palavras: até / 70% / off). Deixe "" para esconder
-  frase: "A **última chance** de garantir sua cama dos sonhos."   // canto da capa; **texto** = negrito
+  periodo: "De 01 a 30 de novembro",
+  destaque: "Até 60% off",           // o número antes do % conta de 0 até ele quando a página abre
+  subtitulo: "O conforto que você ama com o preço que **não volta mais.**"   // **texto** = destaque em azul
 };
 window.CATEGORIES = [
   {key:"box-bau",name:"Box Baú",cover:"box-queen.jpg"},
