@@ -119,7 +119,7 @@ const ROUTES={
     wireFeed(l,-1,1);
   },
   categorias(){
-    const groups=[];CATEGORIES.forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
+    const groups=[];CATEGORIES.filter(c=>inCat(c.key).length||c.mostrar).forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
     const tile=c=>{const n=inCat(c.key).length;
       return catThumb(c)&&n?`<a class="cat" href="#/c/${c.key}"><img src="${catThumb(c)}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`
       :`<a class="cat soon" href="#/c/${c.key}"><span><b>${c.name}</b><small>${n?`${n} ${n===1?"oferta":"ofertas"}`:"Em breve"}</small></span></a>`};
