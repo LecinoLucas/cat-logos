@@ -52,10 +52,10 @@ window.CATEGORIES = [
 ];
 window.PRODUCTS = [
   // ── Box Tradicional (catálogo da loja) ──
-  {cat:"box-tradicional",loja:true,img:"box-trad-1.jpg",name:"Box Tradicional",ratio:"718/580"},
-  {cat:"box-tradicional",loja:true,img:"box-trad-2.jpg",name:"Box Tradicional"},
-  {cat:"box-tradicional",loja:true,img:"box-trad-3.jpg",name:"Box Tradicional"},
-  {cat:"box-tradicional",loja:true,img:"box-trad-4.jpg",name:"Box Tradicional"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-1.jpg",name:"Box Tradicional",ratio:"1080/872"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-2.jpg",name:"Box Tradicional",ratio:"1080/1441"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-3.jpg",name:"Box Tradicional",ratio:"1080/1442"},
+  {cat:"box-tradicional",loja:true,img:"box-trad-4.jpg",name:"Box Tradicional",ratio:"864/1920"},
   {cat:"box-tradicional",loja:true,img:"box-trad-5.jpg",name:"Box Tradicional"},
   // ── Box Gold (catálogo da loja) ──
   {cat:"box-gold",loja:true,img:"box-gold-01.jpg",name:"Box Gold",ratio:"4/3"},
