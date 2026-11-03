@@ -322,3 +322,16 @@ a{color:inherit;text-decoration:none}
 .v3 .dock{gap:0}
 .v3 .cue .ring{width:44px;height:44px}
 @media(max-height:700px){.dock2 .dk-cat,.dock2 .fab{height:46px}.dock2{padding-top:30px;gap:8px}.card{padding-bottom:calc(122px + env(safe-area-inset-bottom,0px))}.v3 .catcover{height:42px;margin-top:6px}.v3 .cue .ring{width:38px;height:38px}}
+
+/* logo oficial: nuvem + apioneira + COLCHÕES */
+.logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;color:#fff}
+.logo .cloud{width:22px;margin-bottom:-1px}
+.logo b{font-family:"Comfortaa","Montserrat",system-ui,sans-serif;font-weight:700;font-size:1.12rem;letter-spacing:-.02em;color:inherit;text-transform:none}
+.logo small{font-family:var(--sans);font-size:.4rem;letter-spacing:.5em;margin:5px -.5em 0 0;font-weight:500;color:inherit}
+.logo.big .cloud{width:34px}.logo.big b{font-size:1.9rem}.logo.big small{font-size:.58rem;margin-top:8px}
+.logo.dk{color:#17325a}
+.brand{gap:0}
+.view.onlight .logo{color:#17325a}
+#splash{gap:0}#splash .logo{color:#fff;animation:rise .9s ease-out both}#splash .logo .cloud{width:54px}#splash .logo b{font-size:2.2rem}
+.about .logo{margin:0 auto}
+#splash .logo b{color:#fff}#splash .logo small{color:#ffffffcc}

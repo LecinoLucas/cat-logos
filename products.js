@@ -14,6 +14,7 @@ window.ATENDENTES = [
 ];
 // ── Dados da loja ──  (campos vazios ficam escondidos no site)
 window.STORE = {
+  marca: "apioneira",              // nome na logo (a logo oficial no Instagram está escrita "apioneira")
   instagram: "pioneiracolchoes",   // sem o @
   endereco: "",                    // ex.: "Av. Exemplo, 123 - Centro, Cidade - UF"
   mapa: "",                        // (opcional) link do Google Maps; se vazio, é gerado pelo endereço
