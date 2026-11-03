@@ -34,6 +34,8 @@ window.CATEGORIES = [
   {group:"Black Friday",key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
   {group:"Black Friday",key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
+  {group:"Camas",key:"camas-loja",name:"Camas",cover:"camas-08.jpg",pos:"50% 50%"},
+
   {group:"Box",key:"box-gold",name:"Box Gold",cover:"box-gold-10.jpg",pos:"50% 62%"},
   {group:"Box",key:"box-tradicional",name:"Box Tradicional",cover:"box-trad-1.jpg",pos:"50% 45%"},
 
@@ -51,6 +53,19 @@ window.CATEGORIES = [
   {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
+  // ── Camas (catálogo da loja) ──
+  {cat:"camas-loja",loja:true,img:"camas-01.jpg",name:"Cama",ratio:"960/1280"},
+  {cat:"camas-loja",loja:true,img:"camas-02.jpg",name:"Cama",ratio:"1528/1528"},
+  {cat:"camas-loja",loja:true,img:"camas-03.jpg",name:"Cama",ratio:"1599/1599"},
+  {cat:"camas-loja",loja:true,img:"camas-04.jpg",name:"Cama",ratio:"1600/1600"},
+  {cat:"camas-loja",loja:true,img:"camas-05.jpg",name:"Cama",ratio:"1200/1600"},
+  {cat:"camas-loja",loja:true,img:"camas-06.jpg",name:"Cama",ratio:"1600/1600"},
+  {cat:"camas-loja",loja:true,img:"camas-07.jpg",name:"Cama"},
+  {cat:"camas-loja",loja:true,img:"camas-08.jpg",name:"Cama",ratio:"768/1024"},
+  {cat:"camas-loja",loja:true,img:"camas-09.jpg",name:"Cama",ratio:"768/1024"},
+  {cat:"camas-loja",loja:true,img:"camas-10.jpg",name:"Cama",ratio:"1280/853"},
+  {cat:"camas-loja",loja:true,img:"camas-11.jpg",name:"Cama",ratio:"1280/853"},
+  {cat:"camas-loja",loja:true,img:"camas-12.jpg",name:"Cama"},
   // ── Box Tradicional (catálogo da loja) ──
   {cat:"box-tradicional",loja:true,img:"box-trad-1.jpg",name:"Box Tradicional",ratio:"1080/872"},
   {cat:"box-tradicional",loja:true,img:"box-trad-2.jpg",name:"Box Tradicional",ratio:"1080/1441"},
