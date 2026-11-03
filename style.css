@@ -293,3 +293,4 @@ a{color:inherit;text-decoration:none}
 .v3 .big small{color:inherit;letter-spacing:0;text-transform:none;font-size:.6em;line-height:1;vertical-align:baseline;margin-left:2px}
 .v3 .sub{max-width:310px;text-wrap:balance}
 @media(max-height:700px){.card.intro.v3{--tw:min(50vw,calc(31vh*.78),210px);--rl:clamp(96px,17vh,130px)}.v3 .cue .ring{width:44px;height:44px}}
+

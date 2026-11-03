@@ -34,6 +34,8 @@ window.CATEGORIES = [
   {group:"Black Friday",key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
   {group:"Black Friday",key:"camas",name:"Tricama e Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
+  {group:"Box",key:"box-gold",name:"Box Gold",cover:"box-gold-10.jpg",pos:"50% 62%"},
+
   {group:"Marcas",key:"king-koil",name:"King Koil"},
   {group:"Marcas",key:"ecoflex",name:"Ecoflex"},
   {group:"Marcas",key:"inducol",name:"Inducol"},
@@ -48,6 +50,17 @@ window.CATEGORIES = [
   {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
+  // ── Box Gold (catálogo da loja) ──
+  {cat:"box-gold",loja:true,img:"box-gold-01.jpg",name:"Box Gold",ratio:"4/3"},
+  {cat:"box-gold",loja:true,img:"box-gold-02.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-03.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-04.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-05.jpg",name:"Box Gold",ratio:"16/9"},
+  {cat:"box-gold",loja:true,img:"box-gold-06.jpg",name:"Box Gold",ratio:"16/9"},
+  {cat:"box-gold",loja:true,img:"box-gold-07.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-08.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-09.jpg",name:"Box Gold"},
+  {cat:"box-gold",loja:true,img:"box-gold-10.jpg",name:"Box Gold"},
   // ── Black Friday ──
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
   {cat:"camas",top:true,img:"tricama-promo.jpg",name:"Tricama 3 em 1"},

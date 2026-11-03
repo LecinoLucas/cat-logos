@@ -28,7 +28,7 @@ document.addEventListener("click",e=>{
   if(ATD.length<2)return;
   e.preventDefault();const q=new URL(a.href).searchParams.get("text")||"";openWam(q);
 },true);
-const waProd=p=>wa(`Olá! Vi no catálogo ${p.remote?"da Pioneira":"da Black Friday"} e tenho interesse em: ${p.wa||p.name}`);
+const waProd=p=>wa(`Olá! Vi no catálogo ${p.remote||p.loja?"da Pioneira":"da Black Friday"} e tenho interesse em: ${p.wa||p.name}`);
 const brand=`<a class="brand" href="#/">${CLOUD}<b>pioneira</b></a>`;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmt=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
@@ -41,7 +41,7 @@ const inCat=k=>PRODUCTS.filter(p=>p.cat===k);
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
-  const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
+  const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"${p.ratio?` style="aspect-ratio:${p.ratio};height:auto;width:100%"`:""}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span></a>`).join("");
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
   const big=dm?`<p class="big">${esc(dm[1].trim())} <span class="num" data-to="${dm[2]}">${dm[2]}</span><small>%</small> <i>${esc(dm[3])}</i></p>`:(STORE.destaque?`<p class="big">${esc(STORE.destaque)}</p>`:"");
   const sp=(STORE.selo||"").split(" ");
