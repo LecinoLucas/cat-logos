@@ -387,3 +387,22 @@ a{color:inherit;text-decoration:none}
 @media(min-width:700px){.car .track{--sw:min(34cqw,calc(100cqh*9/16))}}
 .car .track{--sw:min(76cqw,calc((100cqh - 46px)*9/16))}
 @media(min-width:700px){.car .track{--sw:min(34cqw,calc((100cqh - 46px)*9/16))}}
+/* ===== computador: tela toda, foto grande pela altura ===== */
+@media(min-width:700px){
+  .feed,.view.dark .feed{left:0;right:0;width:auto;transform:none}
+  .car .track{--sw:calc((100cqh - 46px)*9/16)}
+  .car .slide{transform:scale(.88)}
+  .car .slide.act{transform:none}
+  .car .nav{width:48px;height:48px;top:calc(50% - 46px)}
+  .car .nav.prev{left:calc(50% - var(--sw)/2 - 74px)}
+  .car .nav.next{right:calc(50% - var(--sw)/2 - 74px)}
+  .dock2{left:50%;right:auto;width:min(560px,92vw);transform:translateX(-50%);background:linear-gradient(#0d1a2e00,#0d1a2ee8 42%,#0d1a2e);border-radius:22px 22px 0 0}
+  .dock2.off{transform:translateX(-50%) translateY(14px)}
+  .card.intro.v3{--tw:min(30vw,calc(34vh*.78),330px);--rl:clamp(70px,10vh,110px)}
+  .v3 .copy,.v3 .dock{max-width:520px}
+  .card.end .endbox{max-width:420px}
+  .over{padding-left:32px;padding-right:32px}
+  .grid{max-width:1000px}
+}
+@media(min-width:700px){.card.car{--sw:calc((100cqh - 46px)*9/16)}}
+.car .cap em{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
