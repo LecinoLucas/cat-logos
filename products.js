@@ -122,6 +122,7 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"simmons-casal.jpg",leg:"Simmons Firme Casal",preco:"R$ 3.297 no Pix",tags:["simmons"],name:"Colchão Simmons Firme Casal"},
   {cat:"colchao",top:true,img:"sealy-queen.jpg",leg:"Sealy Intermediário Queen",preco:"R$ 2.199 no Pix",tags:["sealy"],name:"Colchão Sealy Conforto Intermediário Queen"},
   {cat:"colchao",top:true,img:"sealy-joy.jpg",leg:"Sealy Joy Intermediário",preco:"Solteiro R$ 1.049 · Solteirão R$ 1.396",tags:["sealy"],name:"Colchão Sealy Joy Molas Ensacadas Conforto Intermediário (Solteiro e Solteirão)"},
+  {cat:"colchao",top:true,img:"sealy-royal-foam-queen.jpg",tags:["sealy"],leg:"Sealy Royal Foam Látex Queen",preco:"R$ 2.798 no Pix",name:"Colchão Sealy Royal Foam Látex Queen (1,58 × 1,98 m)"},
   {cat:"colchao",top:true,img:"sealy-miami.jpg",leg:"Sealy Miami Macio",preco:"Solteiro R$ 1.097 · Solteirão R$ 1.449",tags:["sealy"],name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"probel-guarda-costas-king.jpg",leg:"Probel Guarda Costas King",preco:"R$ 4.998 no Pix",tags:["probel"],name:"Colchão Probel Espuma Firme com Gel Linha Guarda Costas + Box King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",leg:"King Koil Hotelaria Queen",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
