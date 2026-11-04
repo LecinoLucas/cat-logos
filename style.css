@@ -346,3 +346,12 @@ a{color:inherit;text-decoration:none}
 .v3 .copy{margin-top:auto}
 .v3 .dock{margin-top:auto;padding-top:0}
 @media(max-height:700px){.card.intro.v3{--tw:min(50vw,calc(31vh*.78),215px)}}
+
+/* ===== próxima foto espiando embaixo (escurecida), para mostrar que tem mais ===== */
+.card{padding-bottom:calc(200px + env(safe-area-inset-bottom,0px))}
+.frame{overflow:visible}
+.frame>.fg,.frame>video{border-radius:18px}
+.peek{position:absolute;top:calc(100% + 10px);left:6%;right:6%;height:74px;overflow:hidden;border-radius:16px 16px 0 0;opacity:.6;pointer-events:none;-webkit-mask-image:linear-gradient(#000 20%,transparent);mask-image:linear-gradient(#000 20%,transparent)}
+.peek img{position:absolute;inset:0;width:100%;height:auto;min-height:100%;object-fit:cover;object-position:top;filter:blur(2.5px) brightness(.62) saturate(.9);transform:scale(1.04)}
+@media(max-height:700px){.card{padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))}.peek{height:56px}}
+@media(prefers-reduced-motion:reduce){.peek img{transform:none}}
