@@ -370,29 +370,20 @@ a{color:inherit;text-decoration:none}
 .car .slide.act{transform:none;opacity:1}
 @media(min-width:700px){.car .track{--sw:min(34cqw,calc(100cqh*9/16))}}
 
-/* ===== tema único: tudo claro, igual à capa ===== */
-.view.lt{background:linear-gradient(#e8ebf1 0,#e6e8ed 50%,#dbe0e8 100%);color:#17325a}
-.view.lt .feed{background:none}
-.view.lt .logo{color:#17325a}
-.view.lt .pill{background:#17325a;color:#fff;box-shadow:0 10px 22px -10px #17325a;animation:none}
-.view.lt .dock2{background:linear-gradient(#dfe3ea00,#dfe3eaf0 42%,#dbe0e8)}
-.view.lt .dock2 .count{color:#4b6285}
-.view.lt .dock2 .count .hint{color:#17325a}
-.view.lt .dock2 .dk-cat{border-color:#17325a;color:#17325a;background:#ffffff99}
-.view.lt .dock2 .fab{background:#17325a;color:#fff;box-shadow:0 12px 24px -12px #17325a}
-.view.lt .dock2 .fab svg{color:#6fe3a0}
-.view.lt .car .slide{filter:blur(2.5px) saturate(.75);opacity:.5}
-.view.lt .car .slide.act{filter:none;opacity:1}
-.view.lt .frame{box-shadow:0 24px 40px -24px #17325aaa}
-.view.lt .car .nav{background:#17325a;border-color:#ffffffb3;color:#fff;box-shadow:0 8px 18px -8px #17325a}
-.view.lt .card.end{background:linear-gradient(#e8ebf1,#dbe0e8);color:#17325a}
-.view.lt .end .logo{color:#17325a}
-.view.lt .end p{color:#4b6285}
-.view.lt .end .ghost{border-color:#17325a;color:#17325a;background:#ffffff80}
-.view.lt .end .solid{background:#17325a;color:#fff}
-.view.lt .end .solid svg{color:#6fe3a0}
-.dock2 .prog{display:block;height:3px;margin:0 4px;border-radius:3px;background:#17325a22;overflow:hidden}
-.dock2 .prog b{display:block;height:100%;width:0;background:#3f86d6;border-radius:3px;transition:width .35s ease}
+/* ===== ofertas em tema escuro; só a capa é clara ===== */
+.dock2 .prog{display:block;height:3px;margin:0 4px;border-radius:3px;background:#ffffff26;overflow:hidden}
+.dock2 .prog b{display:block;height:100%;width:0;background:#5aa5e8;border-radius:3px;transition:width .35s ease}
+.car .cap{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:12px;text-align:center;opacity:0;transition:opacity .3s}
+.car .slide.act .cap{opacity:1}
+.car .cap b{font-family:var(--serif);font-weight:600;font-size:1.15rem;line-height:1.15;color:#fff;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.car .cap em{font-style:normal;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#8fbdf0;font-weight:600}
+.car .slide .frame{height:auto}
+.dock2 .count .hint.rt{animation:hintpulse 1.6s ease-in-out 3}
+.dock2 .count .hint.rt svg{animation:nudgex .9s ease-in-out 6}
+.dock2 .count .hint.gone{opacity:0;transition:opacity .5s}
+@keyframes hintpulse{50%{transform:translateX(-6px)}}
 /* foto maior */
 .car .track{--sw:min(76cqw,calc(100cqh*9/16))}
 @media(min-width:700px){.car .track{--sw:min(34cqw,calc(100cqh*9/16))}}
+.car .track{--sw:min(76cqw,calc((100cqh - 46px)*9/16))}
+@media(min-width:700px){.car .track{--sw:min(34cqw,calc((100cqh - 46px)*9/16))}}

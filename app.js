@@ -44,11 +44,12 @@ const inCat=k=>visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
+  const cap=p=>{const t=String(p.leg||p.name||"").replace(/^Vídeo: /,"");return `<span class="cap"><b>${esc(t)}</b>${p.preco?`<em>${esc(p.preco)}</em>`:""}</span>`};
   const slides=list.map((p,i)=>{
     const st=p.ratio?` style="aspect-ratio:${p.ratio.replace("/"," / ")}"`:"";
     return p.video
-      ?`<div class="slide vid" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`
-      :`<a class="slide" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span></a>`}).join("");
+      ?`<div class="slide vid" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span>${cap(p)}</div>`
+      :`<a class="slide" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span>${cap(p)}</a>`}).join("");
   const ARW=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Foto anterior">${ARW("M15 5l-7 7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima foto">${ARW("M9 5l7 7-7 7")}</button></section>`;
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
@@ -66,7 +67,7 @@ function wireFeed(list,start=0,hasIntro=false){
   const car=feed.querySelector(".car"),track=car.querySelector(".track"),slides=[...track.querySelectorAll(".slide")];
   const prev=car.querySelector(".prev"),next=car.querySelector(".next");
   const SPK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/>',SPK_ON=SPK+'<path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',SPK_OFF=SPK+'<path d="M17 9l5 6M22 9l-5 6"/></svg>';
-  let sound=false,cur=-1,carOn=false;
+  let sound=false,cur=-1,carOn=false,swiped=false,first=true;
   const vids=slides.map(c=>c.querySelector("video"));
   const paint=()=>slides.forEach(c=>{const b=c.querySelector(".snd");if(b)b.innerHTML=sound?SPK_ON:SPK_OFF});
   slides.forEach((c,j)=>{const v=vids[j];if(!v)return;
@@ -85,7 +86,7 @@ function wireFeed(list,start=0,hasIntro=false){
     vids.forEach((v,j)=>{if(!v)return;if(j===cur&&carOn){v.muted=!sound;v.play().catch(()=>{})}else v.pause()});
     const last=cur>=slides.length-1;
     const pb=dock.querySelector(".prog b");if(pb)pb.style.width=((cur+1)/slides.length*100)+"%";
-    count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint ${last?"dn":"rt"}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para o lado"}${last&&hasIntro?DN:(last?"":ARR)}</span>`;
+    count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint ${last?"dn":"rt"}${swiped&&!last?" gone":""}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para o lado"}${last&&hasIntro?DN:(last?"":ARR)}</span>`;
     fab.href=waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
     prev.classList.toggle("dis",cur===0);next.classList.toggle("dis",last&&true);
   };
@@ -93,7 +94,7 @@ function wireFeed(list,start=0,hasIntro=false){
   const onScroll=()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{tk=false;
     const mid=track.scrollLeft+track.clientWidth/2;let best=0,bd=1e9;
     slides.forEach((s,j)=>{const d=Math.abs(s.offsetLeft+s.offsetWidth/2-mid);if(d<bd){bd=d;best=j}});
-    if(best!==cur){cur=best;sync()}})};
+    if(best!==cur){if(cur>=0&&!first)swiped=true;first=false;cur=best;sync()}})};
   track.addEventListener("scroll",onScroll,{passive:true});
   prev.onclick=()=>goTo(cur-1);next.onclick=()=>{if(cur<slides.length-1)goTo(cur+1);else if(hasIntro){const t=feed.scrollTop+feed.clientHeight;feed.scrollTo({top:t,behavior:"smooth"})}};
   track.addEventListener("click",e=>{const s=e.target.closest(".slide");if(!s)return;const j=+s.dataset.i;if(j!==cur){e.preventDefault();goTo(j)}},true);
@@ -101,6 +102,7 @@ function wireFeed(list,start=0,hasIntro=false){
     if(e.key==="ArrowRight")goTo(cur+1);else if(e.key==="ArrowLeft")goTo(cur-1)});
   const io=new IntersectionObserver(es=>es.forEach(e=>{
     if(e.target===car){carOn=e.isIntersecting&&e.intersectionRatio>=.6;sync()}
+    if(hasIntro&&e.target===secs[0])view.classList.toggle("onlight",e.isIntersecting&&e.intersectionRatio>=.5);
   }),{root:feed,threshold:[0,.5,.6,.8,1]});
   secs.forEach(c=>io.observe(c));
   const introEl=feed.querySelector(".intro");
@@ -143,7 +145,7 @@ function wireFeed(list,start=0,hasIntro=false){
 const ROUTES={
   home(){
     const list=PRODUCTS.filter(p=>p.top);const l=list.length?list:PRODUCTS;
-    app.innerHTML=`<div class="view dark lt">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}</header></div>`;
+    app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}</header></div>`;
     wireFeed(l,0,true);
   },
   categorias(){
@@ -168,7 +170,7 @@ const ROUTES={
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";
-    app.innerHTML=`<div class="view dark lt">${feedHTML(l)}<header class="over"><a class="pill" href="#/c/${k}">${BACK}${c.name}</a>${brand}</header></div>`;
+    app.innerHTML=`<div class="view dark">${feedHTML(l)}<header class="over"><a class="pill" href="#/c/${k}">${BACK}${c.name}</a>${brand}</header></div>`;
     wireFeed(l,Math.min(+n||0,l.length-1));
   }
 };
