@@ -347,11 +347,25 @@ a{color:inherit;text-decoration:none}
 .v3 .dock{margin-top:auto;padding-top:0}
 @media(max-height:700px){.card.intro.v3{--tw:min(50vw,calc(31vh*.78),215px)}}
 
-/* ===== próxima foto espiando embaixo (escurecida), para mostrar que tem mais ===== */
-.card{padding-bottom:calc(200px + env(safe-area-inset-bottom,0px))}
-.frame{overflow:visible}
-.frame>.fg,.frame>video{border-radius:18px}
-.peek{position:absolute;top:calc(100% + 10px);left:6%;right:6%;height:74px;overflow:hidden;border-radius:16px 16px 0 0;opacity:.6;pointer-events:none;-webkit-mask-image:linear-gradient(#000 20%,transparent);mask-image:linear-gradient(#000 20%,transparent)}
-.peek img{position:absolute;inset:0;width:100%;height:auto;min-height:100%;object-fit:cover;object-position:top;filter:blur(2.5px) brightness(.62) saturate(.9);transform:scale(1.04)}
-@media(max-height:700px){.card{padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))}.peek{height:56px}}
-@media(prefers-reduced-motion:reduce){.peek img{transform:none}}
+/* ===== carrossel das ofertas: foto do meio nítida, vizinhas escurecidas; setas e deslize para o lado ===== */
+.card.car{padding:calc(66px + env(safe-area-inset-top,0px)) 0 calc(142px + env(safe-area-inset-bottom,0px));display:block;position:relative}
+.car .track{--sw:min(74cqw,calc(100cqh*9/16));display:flex;gap:10px;align-items:center;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 calc((100cqw - var(--sw))/2);overscroll-behavior-x:contain;position:relative;-webkit-overflow-scrolling:touch}
+.car .track::-webkit-scrollbar{display:none}
+.car .slide{flex:0 0 var(--sw);width:var(--sw);scroll-snap-align:center;display:block;transform:scale(.86);opacity:.5;filter:blur(2.5px) brightness(.62);transition:transform .35s ease,opacity .35s ease,filter .35s ease;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.car .slide.act{transform:none;opacity:1;filter:none;cursor:default}
+.car .slide .frame{width:100%;height:auto;aspect-ratio:9 / 16;overflow:hidden;display:block}
+.car .nav{position:absolute;top:calc(50% - 38px);width:40px;height:40px;border-radius:50%;border:1px solid #ffffff4d;background:#0d1a2ecc;color:#fff;display:grid;place-items:center;z-index:4;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .2s}
+.car .nav.prev{left:8px}.car .nav.next{right:8px}
+.car .nav.dis{opacity:.28}
+.car .nav:active{transform:scale(.94)}
+.dock2 .count .hint.rt svg{animation:nudgex 1.4s ease-in-out infinite}
+@keyframes nudgex{50%{transform:translateX(5px)}}
+@media(max-height:700px){.card.car{padding-bottom:calc(122px + env(safe-area-inset-bottom,0px))}}
+@media(min-width:700px){.car .track{--sw:min(40cqw,calc(100cqh*9/16))}}
+@media(prefers-reduced-motion:reduce){.car .slide{transition:none}.dock2 .count .hint.rt svg{animation:none}}
+.card.car{display:block!important}
+.car .track{width:100%;max-width:100%;box-sizing:border-box}
+.car .track{--sw:min(70cqw,calc(100cqh*9/16))}
+.car .slide{transform:scale(.9);opacity:.6}
+.car .slide.act{transform:none;opacity:1}
+@media(min-width:700px){.car .track{--sw:min(34cqw,calc(100cqh*9/16))}}

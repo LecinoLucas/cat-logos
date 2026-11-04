@@ -44,8 +44,13 @@ const inCat=k=>visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
-  const peek=i=>list[i+1]?`<i class="peek" aria-hidden="true"><img src="${imgThumb(list[i+1])}" alt="" loading="lazy"></i>`:"";
-  const cards=list.map((p,i)=>p.video?`<div class="card vid" aria-label="${p.name}"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button>${peek(i)}</span></div>`:`<a class="card" target="_blank" rel="noopener" href="${waProd(p)}" aria-label="${p.name} — pedir no WhatsApp"><span class="frame"${p.ratio?` style="aspect-ratio:${p.ratio};height:auto;width:100%"`:""}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}">${peek(i)}</span></a>`).join("");
+  const slides=list.map((p,i)=>{
+    const st=p.ratio?` style="aspect-ratio:${p.ratio.replace("/"," / ")}"`:"";
+    return p.video
+      ?`<div class="slide vid" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span></div>`
+      :`<a class="slide" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span></a>`}).join("");
+  const ARW=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+  const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Foto anterior">${ARW("M15 5l-7 7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima foto">${ARW("M9 5l7 7-7 7")}</button></section>`;
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
   const big=dm?`<p class="big">${esc(dm[1].trim())} <span class="num" data-to="${dm[2]}">${dm[2]}</span><small>%</small> <i>${esc(dm[3])}</i></p>`:(STORE.destaque?`<p class="big">${esc(STORE.destaque)}</p>`:"");
   const sp=(STORE.selo||"").split(" ");
@@ -53,33 +58,51 @@ function feedHTML(list,opts={}){
   const puff=(l,t,dx,dl)=>`<i class="puff" style="left:${l}%;top:${t}%;--dx:${dx}px;animation-delay:${dl}s">${CLOUD}</i>`;
   const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Ver as ofertas"><span>Deslize para ver as ofertas</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button><a class="catcover" href="#/categorias">${GRID}<span>Ver categorias</span></a></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${LOGO("big")}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
-  return `<div class="feed">${intro}${cards}${end}</div><div class="dock2 off"><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
+  return `<div class="feed">${intro}${car}${end}</div><div class="dock2 off"><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
 }
-function wireFeed(list,start=0,off=0){
-  const feed=$(".feed"),count=$(".count"),fab=$(".fab"),dock=$(".dock2"),cards=[...feed.querySelectorAll(".card")];
-  const SPK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/>',SPK_ON=SPK+'<path d="M16.500 8.500a5 5 0 0 1 0 7M19 6a8.500 8.500 0 0 1 0 12"/></svg>',SPK_OFF=SPK+'<path d="M17 9l5 6M22 9l-5 6"/></svg>';
-  let sound=false;
-  const vids=cards.map(c=>c.querySelector("video"));
-  const paint=()=>cards.forEach((c,j)=>{const b=c.querySelector(".snd");if(b)b.innerHTML=sound?SPK_ON:SPK_OFF});
-  cards.forEach((c,j)=>{const v=vids[j];if(!v)return;
+function wireFeed(list,start=0,hasIntro=false){
+  const feed=$(".feed"),count=$(".count"),fab=$(".fab"),dock=$(".dock2"),view=feed.closest(".view");
+  const secs=[...feed.querySelectorAll(":scope>.card")];
+  const car=feed.querySelector(".car"),track=car.querySelector(".track"),slides=[...track.querySelectorAll(".slide")];
+  const prev=car.querySelector(".prev"),next=car.querySelector(".next");
+  const SPK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/>',SPK_ON=SPK+'<path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',SPK_OFF=SPK+'<path d="M17 9l5 6M22 9l-5 6"/></svg>';
+  let sound=false,cur=-1,carOn=false;
+  const vids=slides.map(c=>c.querySelector("video"));
+  const paint=()=>slides.forEach(c=>{const b=c.querySelector(".snd");if(b)b.innerHTML=sound?SPK_ON:SPK_OFF});
+  slides.forEach((c,j)=>{const v=vids[j];if(!v)return;
     c.querySelector(".snd").onclick=e=>{e.stopPropagation();sound=!sound;vids.forEach(x=>x&&(x.muted=!sound));paint()};
-    c.querySelector(".frame").onclick=()=>{v.paused?v.play().catch(()=>{}):v.pause()}});
+    c.querySelector(".frame").onclick=()=>{if(j!==cur)return;v.paused?v.play().catch(()=>{}):v.pause()}});
   paint();
-  const view=feed.closest(".view");
-  const set=i=>{
-    cards.forEach((c,j)=>c.classList.toggle("act",j===i));
-    view.classList.toggle("onlight",!!cards[i]&&cards[i].classList.contains("light"));
-    vids.forEach((v,j)=>{if(!v)return;if(j===i){v.muted=!sound;v.play().catch(()=>{})}else{v.pause()}});
-    const k=i-off,isEnd=k>=list.length,isIntro=k<0,hide=isEnd||isIntro;
-    dock.classList.toggle("off",isEnd||isIntro);
-    if(!isEnd&&!isIntro){
-      const last=k>=list.length-1;
-      count.innerHTML=`<span class="n">${k+1} / ${list.length}</span><span class="hint">${last?"Deslize para ver mais opções":"Deslize para ver mais"}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>`;
-      fab.href=waProd(list[k]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`}
+  slides.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
+  const goTo=(k,smooth=true)=>{k=Math.max(0,Math.min(slides.length-1,k));const s=slides[k];
+    track.scrollTo({left:s.offsetLeft+s.offsetWidth/2-track.clientWidth/2,behavior:smooth?"smooth":"auto"})};
+  const ARR='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',DN='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  const sync=()=>{
+    dock.classList.toggle("off",!carOn);
+    if(cur<0)return;
+    slides.forEach((c,j)=>{c.classList.toggle("act",j===cur);
+      if(c.dataset.href){j===cur?c.setAttribute("href",c.dataset.href):c.removeAttribute("href")}});
+    vids.forEach((v,j)=>{if(!v)return;if(j===cur&&carOn){v.muted=!sound;v.play().catch(()=>{})}else v.pause()});
+    const last=cur>=slides.length-1;
+    count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint ${last?"dn":"rt"}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para o lado"}${last&&hasIntro?DN:(last?"":ARR)}</span>`;
+    fab.href=waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
+    prev.classList.toggle("dis",cur===0);next.classList.toggle("dis",last&&true);
   };
-  cards.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)set(cards.indexOf(e.target))}),{root:feed,threshold:.6});
-  cards.forEach(c=>io.observe(c));
+  let tk=false;
+  const onScroll=()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{tk=false;
+    const mid=track.scrollLeft+track.clientWidth/2;let best=0,bd=1e9;
+    slides.forEach((s,j)=>{const d=Math.abs(s.offsetLeft+s.offsetWidth/2-mid);if(d<bd){bd=d;best=j}});
+    if(best!==cur){cur=best;sync()}})};
+  track.addEventListener("scroll",onScroll,{passive:true});
+  prev.onclick=()=>goTo(cur-1);next.onclick=()=>{if(cur<slides.length-1)goTo(cur+1);else if(hasIntro){const t=feed.scrollTop+feed.clientHeight;feed.scrollTo({top:t,behavior:"smooth"})}};
+  track.addEventListener("click",e=>{const s=e.target.closest(".slide");if(!s)return;const j=+s.dataset.i;if(j!==cur){e.preventDefault();goTo(j)}},true);
+  document.addEventListener("keydown",function kd(e){if(!document.body.contains(track)){document.removeEventListener("keydown",kd);return}
+    if(e.key==="ArrowRight")goTo(cur+1);else if(e.key==="ArrowLeft")goTo(cur-1)});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.target===car){carOn=e.isIntersecting&&e.intersectionRatio>=.6;sync()}
+    const intro=secs[0];if(hasIntro&&e.target===intro)view.classList.toggle("onlight",e.isIntersecting&&e.intersectionRatio>=.5)
+  }),{root:feed,threshold:[0,.5,.6,.8,1]});
+  secs.forEach(c=>io.observe(c));
   const introEl=feed.querySelector(".intro");
   if(introEl){
     const num=introEl.querySelector(".num");
@@ -113,14 +136,15 @@ function wireFeed(list,start=0,off=0){
     try{feed.scrollTo({top,behavior:"smooth"})}catch(e){feed.scrollTop=top}
     setTimeout(()=>{feed.scrollTop=top;feed.style.scrollSnapType=""},750);
   };
-  feed.scrollTop=(start+off)*feed.clientHeight;set(start+off);
+  requestAnimationFrame(()=>{goTo(Math.max(0,start),false);cur=Math.max(0,start);sync();onScroll()});
+  if(!hasIntro){feed.scrollTop=0;carOn=true}
 }
 
 const ROUTES={
   home(){
     const list=PRODUCTS.filter(p=>p.top);const l=list.length?list:PRODUCTS;
     app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}</header></div>`;
-    wireFeed(l,-1,1);
+    wireFeed(l,0,true);
   },
   categorias(){
     const groups=[];CATEGORIES.filter(c=>visCat(c)&&(inCat(c.key).length||c.mostrar)).forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
