@@ -369,3 +369,30 @@ a{color:inherit;text-decoration:none}
 .car .slide{transform:scale(.9);opacity:.6}
 .car .slide.act{transform:none;opacity:1}
 @media(min-width:700px){.car .track{--sw:min(34cqw,calc(100cqh*9/16))}}
+
+/* ===== tema único: tudo claro, igual à capa ===== */
+.view.lt{background:linear-gradient(#e8ebf1 0,#e6e8ed 50%,#dbe0e8 100%);color:#17325a}
+.view.lt .feed{background:none}
+.view.lt .logo{color:#17325a}
+.view.lt .pill{background:#17325a;color:#fff;box-shadow:0 10px 22px -10px #17325a;animation:none}
+.view.lt .dock2{background:linear-gradient(#dfe3ea00,#dfe3eaf0 42%,#dbe0e8)}
+.view.lt .dock2 .count{color:#4b6285}
+.view.lt .dock2 .count .hint{color:#17325a}
+.view.lt .dock2 .dk-cat{border-color:#17325a;color:#17325a;background:#ffffff99}
+.view.lt .dock2 .fab{background:#17325a;color:#fff;box-shadow:0 12px 24px -12px #17325a}
+.view.lt .dock2 .fab svg{color:#6fe3a0}
+.view.lt .car .slide{filter:blur(2.5px) saturate(.75);opacity:.5}
+.view.lt .car .slide.act{filter:none;opacity:1}
+.view.lt .frame{box-shadow:0 24px 40px -24px #17325aaa}
+.view.lt .car .nav{background:#17325a;border-color:#ffffffb3;color:#fff;box-shadow:0 8px 18px -8px #17325a}
+.view.lt .card.end{background:linear-gradient(#e8ebf1,#dbe0e8);color:#17325a}
+.view.lt .end .logo{color:#17325a}
+.view.lt .end p{color:#4b6285}
+.view.lt .end .ghost{border-color:#17325a;color:#17325a;background:#ffffff80}
+.view.lt .end .solid{background:#17325a;color:#fff}
+.view.lt .end .solid svg{color:#6fe3a0}
+.dock2 .prog{display:block;height:3px;margin:0 4px;border-radius:3px;background:#17325a22;overflow:hidden}
+.dock2 .prog b{display:block;height:100%;width:0;background:#3f86d6;border-radius:3px;transition:width .35s ease}
+/* foto maior */
+.car .track{--sw:min(76cqw,calc(100cqh*9/16))}
+@media(min-width:700px){.car .track{--sw:min(34cqw,calc(100cqh*9/16))}}

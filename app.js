@@ -58,7 +58,7 @@ function feedHTML(list,opts={}){
   const puff=(l,t,dx,dl)=>`<i class="puff" style="left:${l}%;top:${t}%;--dx:${dx}px;animation-delay:${dl}s">${CLOUD}</i>`;
   const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Ver as ofertas"><span>Deslize para ver as ofertas</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button><a class="catcover" href="#/categorias">${GRID}<span>Ver categorias</span></a></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${LOGO("big")}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
-  return `<div class="feed">${intro}${car}${end}</div><div class="dock2 off"><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
+  return `<div class="feed">${intro}${car}${end}</div><div class="dock2 off"><i class="prog" aria-hidden="true"><b></b></i><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
 }
 function wireFeed(list,start=0,hasIntro=false){
   const feed=$(".feed"),count=$(".count"),fab=$(".fab"),dock=$(".dock2"),view=feed.closest(".view");
@@ -84,6 +84,7 @@ function wireFeed(list,start=0,hasIntro=false){
       if(c.dataset.href){j===cur?c.setAttribute("href",c.dataset.href):c.removeAttribute("href")}});
     vids.forEach((v,j)=>{if(!v)return;if(j===cur&&carOn){v.muted=!sound;v.play().catch(()=>{})}else v.pause()});
     const last=cur>=slides.length-1;
+    const pb=dock.querySelector(".prog b");if(pb)pb.style.width=((cur+1)/slides.length*100)+"%";
     count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint ${last?"dn":"rt"}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para o lado"}${last&&hasIntro?DN:(last?"":ARR)}</span>`;
     fab.href=waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
     prev.classList.toggle("dis",cur===0);next.classList.toggle("dis",last&&true);
@@ -100,7 +101,6 @@ function wireFeed(list,start=0,hasIntro=false){
     if(e.key==="ArrowRight")goTo(cur+1);else if(e.key==="ArrowLeft")goTo(cur-1)});
   const io=new IntersectionObserver(es=>es.forEach(e=>{
     if(e.target===car){carOn=e.isIntersecting&&e.intersectionRatio>=.6;sync()}
-    const intro=secs[0];if(hasIntro&&e.target===intro)view.classList.toggle("onlight",e.isIntersecting&&e.intersectionRatio>=.5)
   }),{root:feed,threshold:[0,.5,.6,.8,1]});
   secs.forEach(c=>io.observe(c));
   const introEl=feed.querySelector(".intro");
@@ -143,7 +143,7 @@ function wireFeed(list,start=0,hasIntro=false){
 const ROUTES={
   home(){
     const list=PRODUCTS.filter(p=>p.top);const l=list.length?list:PRODUCTS;
-    app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}</header></div>`;
+    app.innerHTML=`<div class="view dark lt">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}</header></div>`;
     wireFeed(l,0,true);
   },
   categorias(){
@@ -168,7 +168,7 @@ const ROUTES={
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";
-    app.innerHTML=`<div class="view dark">${feedHTML(l)}<header class="over"><a class="pill" href="#/c/${k}">${BACK}${c.name}</a>${brand}</header></div>`;
+    app.innerHTML=`<div class="view dark lt">${feedHTML(l)}<header class="over"><a class="pill" href="#/c/${k}">${BACK}${c.name}</a>${brand}</header></div>`;
     wireFeed(l,Math.min(+n||0,l.length-1));
   }
 };
