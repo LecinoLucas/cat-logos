@@ -35,6 +35,7 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"box-bau",name:"Baús",cover:"box-queen.jpg"},
   {group:"Black Friday",black:true,key:"colchao-bau",name:"Colchão + Box Baú",cover:"molas-bau-queen.jpg"},
   {group:"Black Friday",black:true,key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
+  {group:"Black Friday",black:true,key:"tricama",name:"Tricama 3 em 1",cover:"tricama-promo.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
@@ -108,6 +109,7 @@ window.PRODUCTS = [
   // ── Black Friday ──
   {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",leg:"Box Baú · todos os tamanhos",preco:"Solteiro ao King · a partir de R$ 999",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
+  {cat:"tricama",top:true,img:"tricama-promo.jpg",leg:"Tricama 3 em 1 · aço e 2 anos de garantia",preco:"10x R$ 333,87 · R$ 3.050 à vista",name:"Tricama 3 em 1 (estrutura em aço, 2 anos de garantia)"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",leg:"Box Baú Solteiro",preco:"R$ 999",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
