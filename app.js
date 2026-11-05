@@ -51,7 +51,7 @@ function feedHTML(list,opts={}){
       ?`<div class="slide vid" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span>${cap(p)}</div>`
       :`<a class="slide" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span>${cap(p)}</a>`}).join("");
   const ARW=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
-  const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Foto anterior">${ARW("M15 5l-7 7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima foto">${ARW("M9 5l7 7-7 7")}</button></section>`;
+  const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Oferta anterior">${ARW("M5 15l7-7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima oferta">${ARW("M5 9l7 7 7-7")}</button></section>`;
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
   const big=dm?`<p class="big">${esc(dm[1].trim())} <span class="num" data-to="${dm[2]}">${dm[2]}</span><small>%</small> <i>${esc(dm[3])}</i></p>`:(STORE.destaque?`<p class="big">${esc(STORE.destaque)}</p>`:"");
   const sp=(STORE.selo||"").split(" ");
@@ -76,7 +76,7 @@ function wireFeed(list,start=0,hasIntro=false){
   paint();
   slides.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const goTo=(k,smooth=true)=>{k=Math.max(0,Math.min(slides.length-1,k));const s=slides[k];
-    track.scrollTo({left:s.offsetLeft+s.offsetWidth/2-track.clientWidth/2,behavior:smooth?"smooth":"auto"})};
+    track.scrollTo({top:s.offsetTop+s.offsetHeight/2-track.clientHeight/2,behavior:smooth?"smooth":"auto"})};
   const ARR='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',DN='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   const sync=()=>{
     dock.classList.toggle("off",!carOn);
@@ -86,20 +86,20 @@ function wireFeed(list,start=0,hasIntro=false){
     vids.forEach((v,j)=>{if(!v)return;if(j===cur&&carOn){v.muted=!sound;v.play().catch(()=>{})}else v.pause()});
     const last=cur>=slides.length-1;
     const pb=dock.querySelector(".prog b");if(pb)pb.style.width=((cur+1)/slides.length*100)+"%";
-    count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint ${last?"dn":"rt"}${swiped&&!last?" gone":""}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para o lado"}${last&&hasIntro?DN:(last?"":ARR)}</span>`;
+    count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint dn${swiped&&!last?" gone":""}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para baixo"}${last&&!hasIntro?"":DN}</span>`;
     fab.href=waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
     prev.classList.toggle("dis",cur===0);next.classList.toggle("dis",last&&true);
   };
   let tk=false;
   const onScroll=()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{tk=false;
-    const mid=track.scrollLeft+track.clientWidth/2;let best=0,bd=1e9;
-    slides.forEach((s,j)=>{const d=Math.abs(s.offsetLeft+s.offsetWidth/2-mid);if(d<bd){bd=d;best=j}});
+    const mid=track.scrollTop+track.clientHeight/2;let best=0,bd=1e9;
+    slides.forEach((s,j)=>{const d=Math.abs(s.offsetTop+s.offsetHeight/2-mid);if(d<bd){bd=d;best=j}});
     if(best!==cur){if(cur>=0&&!first)swiped=true;first=false;cur=best;sync()}})};
   track.addEventListener("scroll",onScroll,{passive:true});
   prev.onclick=()=>goTo(cur-1);next.onclick=()=>{if(cur<slides.length-1)goTo(cur+1);else if(hasIntro){const t=feed.scrollTop+feed.clientHeight;feed.scrollTo({top:t,behavior:"smooth"})}};
   track.addEventListener("click",e=>{const s=e.target.closest(".slide");if(!s)return;const j=+s.dataset.i;if(j!==cur){e.preventDefault();goTo(j)}},true);
   document.addEventListener("keydown",function kd(e){if(!document.body.contains(track)){document.removeEventListener("keydown",kd);return}
-    if(e.key==="ArrowRight")goTo(cur+1);else if(e.key==="ArrowLeft")goTo(cur-1)});
+    if(e.key==="ArrowDown")goTo(cur+1);else if(e.key==="ArrowUp")goTo(cur-1)});
   const io=new IntersectionObserver(es=>es.forEach(e=>{
     if(e.target===car){carOn=e.isIntersecting&&e.intersectionRatio>=.6;sync()}
     if(hasIntro&&e.target===secs[0])view.classList.toggle("onlight",e.isIntersecting&&e.intersectionRatio>=.5);
