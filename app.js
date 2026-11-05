@@ -76,7 +76,7 @@ function wireFeed(list,start=0,hasIntro=false){
   paint();
   slides.forEach(c=>{const im=c.querySelector(".fg");if(!im)return;const ok=()=>im.classList.add("ld");im.complete?ok():im.onload=ok});
   const goTo=(k,smooth=true)=>{k=Math.max(0,Math.min(slides.length-1,k));const s=slides[k];
-    track.scrollTo({top:s.offsetTop+s.offsetHeight/2-track.clientHeight/2,behavior:smooth?"smooth":"auto"})};
+    track.scrollTo({top:s.offsetTop,behavior:smooth?"smooth":"auto"})};
   const ARR='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',DN='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   const sync=()=>{
     dock.classList.toggle("off",!carOn);
@@ -92,8 +92,8 @@ function wireFeed(list,start=0,hasIntro=false){
   };
   let tk=false;
   const onScroll=()=>{if(tk)return;tk=true;requestAnimationFrame(()=>{tk=false;
-    const mid=track.scrollTop+track.clientHeight/2;let best=0,bd=1e9;
-    slides.forEach((s,j)=>{const d=Math.abs(s.offsetTop+s.offsetHeight/2-mid);if(d<bd){bd=d;best=j}});
+    const mid=track.scrollTop;let best=0,bd=1e9;
+    slides.forEach((s,j)=>{const d=Math.abs(s.offsetTop-mid);if(d<bd){bd=d;best=j}});
     if(best!==cur){if(cur>=0&&!first)swiped=true;first=false;cur=best;sync()}})};
   track.addEventListener("scroll",onScroll,{passive:true});
   prev.onclick=()=>goTo(cur-1);next.onclick=()=>{if(cur<slides.length-1)goTo(cur+1);else if(hasIntro){const t=feed.scrollTop+feed.clientHeight;feed.scrollTo({top:t,behavior:"smooth"})}};

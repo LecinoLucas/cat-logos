@@ -433,3 +433,16 @@ a{color:inherit;text-decoration:none}
 @media(max-height:700px){.card.car{--th:calc(100vh - 66px - 122px);--sh:calc(var(--th) - 66px)}@supports (height:100dvh){.card.car{--th:calc(100dvh - 66px - 122px)}}}
 @media(min-width:700px){.card.car{--th:calc(100vh - 66px - 142px);--sh:calc(var(--th) - 78px);--sw:calc((var(--sh) - 48px)*9/16)}@supports (height:100dvh){.card.car{--th:calc(100dvh - 66px - 142px)}}}
 @media(min-width:700px){.car .nav.prev,.car .nav.next{left:auto;right:calc(50% - var(--sw)/2 - 78px)}}
+
+/* ===== oferta grande no alto; a próxima aparece embaixo, meio ofuscada, atrás da barra ===== */
+.card.car{--top:56px;--bot:100px;--th:calc(100vh - var(--top) - var(--bot));--sh:calc(var(--th) - 46px);padding-top:calc(var(--top) + env(safe-area-inset-top,0px));padding-bottom:calc(var(--bot) + env(safe-area-inset-bottom,0px))}
+@supports (height:100dvh){.card.car{--th:calc(100dvh - var(--top) - var(--bot))}}
+.car .track{padding:0;scroll-snap-type:y mandatory;justify-content:flex-start}
+.car .track::after{content:"";flex:0 0 calc(var(--th) - var(--sh));display:block}
+.car .slide{scroll-snap-align:start;transform:scale(.94);transform-origin:50% 0;opacity:.55;filter:blur(1.5px) brightness(.58)}
+.car .slide.act{transform:none;opacity:1;filter:none}
+.car .slide .frame{height:calc(var(--sh) - 42px)}
+.car .nav.prev{top:calc(var(--top) + 120px)}.car .nav.next{top:calc(var(--top) + 172px)}
+@media(max-height:700px){.card.car{--top:50px;--bot:88px;--sh:calc(var(--th) - 40px)}.car .slide .frame{height:calc(var(--sh) - 38px)}}
+@media(min-width:700px){.card.car{--top:56px;--bot:100px;--sw:calc((var(--sh) - 42px)*9/16)}.car .nav.prev{top:calc(50% - 64px)}.car .nav.next{top:calc(50% - 12px)}}
+@media(max-width:699px){.car .nav{width:34px;height:34px;right:6px;background:#0d1a2ea6;border-color:#ffffff40}.car .nav.prev{top:calc(50% - 60px)}.car .nav.next{top:calc(50% - 18px)}}
