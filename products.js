@@ -51,6 +51,7 @@ window.CATEGORIES = [
   {group:"Marcas",key:"simmons",name:"Simmons",cover:"simmons-casal.jpg",black:true},
   {group:"Marcas",key:"plumatex",name:"Plumatex"},
   {group:"Marcas",key:"probel",name:"Probel",cover:"probel-guarda-costas-king.jpg",black:true},
+  {group:"Marcas",key:"herval",name:"Herval",cover:"herval-king.jpg",black:true},
   {group:"Marcas",key:"outras-marcas",name:"Outras marcas"},
 
   {group:"Complementos",key:"cabeceiras",name:"Cabeceiras"},
@@ -127,6 +128,7 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"sealy-royal-foam-queen.jpg",tags:["sealy"],leg:"Sealy Royal Foam Látex Queen",preco:"R$ 2.798 no Pix",name:"Colchão Sealy Royal Foam Látex Queen (1,58 × 1,98 m)"},
   {cat:"colchao",top:true,img:"sealy-miami.jpg",leg:"Sealy Miami Macio",preco:"Solteiro R$ 1.097 · Solteirão R$ 1.449",tags:["sealy"],name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"probel-guarda-costas-king.jpg",leg:"Probel Guarda Costas King",preco:"R$ 4.998 no Pix",tags:["probel"],name:"Colchão Probel Espuma Firme com Gel Linha Guarda Costas + Box King (1,93 × 2,03 m)"},
+  {cat:"colchao",top:true,img:"herval-king.jpg",tags:["herval"],leg:"Herval Molas Firme + Box King",preco:"R$ 2.895 no Pix",name:"Colchão Herval de Molas Firme + Box King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",leg:"King Koil Hotelaria Queen",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
   {cat:"colchao",top:true,img:"simmons-queen.jpg",leg:"Simmons Extra Firme Queen",preco:"R$ 4.998 no Pix",tags:["simmons"],name:"Colchão Simmons Mola Extra Firme Queen (última peça)"},
   {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",leg:"King Koil Crystal Queen",preco:"R$ 10.345 no Pix",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
