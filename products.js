@@ -119,6 +119,7 @@ window.PRODUCTS = [
   {cat:"box-bau",top:true,img:"box-casal.jpg",leg:"Box Baú Casal",preco:"R$ 1.199",name:"Box Baú Casal (1,38 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-queen.jpg",leg:"Box Baú Queen",preco:"R$ 1.399",name:"Box Baú Queen (1,58 × 1,98 m)"},
   {cat:"box-bau",top:true,img:"box-king.jpg",leg:"Box Baú King",preco:"R$ 1.899",name:"Box Baú King (1,93 × 2,03 m)"},
+  {cat:"colchao-bau",top:true,img:"molas-bau-casal-queen.jpg",leg:"Colchão + Box Baú Casal e Queen",preco:"Casal R$ 2.690 · Queen R$ 3.285 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Casal e Queen)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-queen.jpg",leg:"Colchão + Box Baú Queen",preco:"R$ 3.960 no Pix",name:"Colchão Molas Ensacadas + Box Baú Queen (1,58 × 1,98 m)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-king.jpg",leg:"Colchão + Box Baú King",preco:"R$ 4.597 no Pix",name:"Colchão Molas Ensacadas + Box Baú King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"hotelaria-solteiro.jpg",leg:"Colchão Hotelaria + Box Solteiro",preco:"R$ 999 no Pix",name:"Colchão Molas de Hotelaria Firme + Box Solteiro"},
