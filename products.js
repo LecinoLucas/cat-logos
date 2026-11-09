@@ -34,7 +34,7 @@ window.CATEGORIES = [
   // Para ativar uma categoria: ponha as fotos em img/ofertas/ (+ miniatura em img/ofertas/t/), use cat:"<key>" nos produtos e, se quiser, defina cover.
   {group:"Black Friday",black:true,key:"box-bau",name:"Baús",cover:"box-queen.jpg"},
   {group:"Black Friday",black:true,key:"colchao-bau",name:"Colchão + Box Baú",cover:"molas-bau-solteiro-solteirao.jpg"},
-  {group:"Black Friday",black:true,key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
+  {group:"Black Friday",black:true,key:"colchao",name:"Colchões",cover:"sealy-miami.jpg"},
   {group:"Black Friday",black:true,key:"tricama",name:"Tricama 3 em 1",cover:"tricama-promo.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"video-mesas-cabeceira.jpg",pos:"50% 40%"},
   {group:"Black Friday",black:true,key:"cama-posta",name:"Cama posta",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
@@ -49,7 +49,7 @@ window.CATEGORIES = [
   {group:"Marcas",key:"king-koil",name:"King Koil",cover:"kingkoil-queen.jpg",black:true},
   {group:"Marcas",key:"ecoflex",name:"Ecoflex"},
   {group:"Marcas",key:"inducol",name:"Inducol"},
-  {group:"Marcas",key:"sealy",name:"Sealy",cover:"sealy-queen.jpg",black:true},
+  {group:"Marcas",key:"sealy",name:"Sealy",cover:"sealy-miami.jpg",black:true},
   {group:"Marcas",key:"simmons",name:"Simmons",cover:"simmons-casal.jpg",black:true},
   {group:"Marcas",key:"plumatex",name:"Plumatex"},
   {group:"Marcas",key:"probel",name:"Probel",cover:"probel-guarda-costas-king.jpg",black:true},
@@ -140,14 +140,12 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"hotelaria-solteiro.jpg",leg:"Colchão Hotelaria + Box Solteiro",preco:"R$ 999 no Pix",name:"Colchão Molas de Hotelaria Firme + Box Solteiro"},
   {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",leg:"King Koil Firme Solteiro",preco:"R$ 1.398 no Pix",tags:["king-koil"],name:"Colchão King Koil Firme Solteiro"},
   {cat:"colchao",top:true,img:"simmons-casal.jpg",leg:"Simmons Firme Casal",preco:"R$ 3.297 no Pix",tags:["simmons"],name:"Colchão Simmons Firme Casal"},
-  {cat:"colchao",top:true,img:"sealy-queen.jpg",leg:"Sealy Intermediário Queen",preco:"R$ 2.199 no Pix",tags:["sealy"],name:"Colchão Sealy Conforto Intermediário Queen"},
   {cat:"colchao",top:true,img:"sealy-joy.jpg",leg:"Sealy Joy Intermediário",preco:"Solteiro R$ 1.049 · Solteirão R$ 1.396",tags:["sealy"],name:"Colchão Sealy Joy Molas Ensacadas Conforto Intermediário (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"sealy-royal-foam-queen.jpg",tags:["sealy"],leg:"Sealy Royal Foam Látex Queen",preco:"R$ 2.798 no Pix",name:"Colchão Sealy Royal Foam Látex Queen (1,58 × 1,98 m)"},
   {cat:"colchao",top:true,img:"sealy-miami.jpg",leg:"Sealy Miami Macio",preco:"Solteiro R$ 1.097 · Solteirão R$ 1.449",tags:["sealy"],name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"probel-guarda-costas-king.jpg",leg:"Probel Guarda Costas King",preco:"R$ 4.998 no Pix",tags:["probel"],name:"Colchão Probel Espuma Firme com Gel Linha Guarda Costas + Box King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"herval-king.jpg",tags:["herval"],leg:"Herval Molas Firme + Box King",preco:"R$ 2.895 no Pix",name:"Colchão Herval de Molas Firme + Box King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",leg:"King Koil Hotelaria Queen",preco:"R$ 3.296 no Pix",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
-  {cat:"colchao",top:true,img:"simmons-queen.jpg",leg:"Simmons Extra Firme Queen",preco:"R$ 4.998 no Pix",tags:["simmons"],name:"Colchão Simmons Mola Extra Firme Queen (última peça)"},
   {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",leg:"King Koil Crystal Queen",preco:"R$ 10.345 no Pix",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
   {cat:"colchao",top:true,img:"kingkoil-diamond-queen.jpg",leg:"King Koil Diamond Queen",preco:"R$ 6.987 no Pix",tags:["king-koil"],name:"Colchão com Látex Diamond King Koil Queen (última peça)"}
 ];
