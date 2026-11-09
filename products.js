@@ -37,6 +37,7 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
   {group:"Black Friday",black:true,key:"tricama",name:"Tricama 3 em 1",cover:"tricama-promo.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"video-mesas-cabeceira.jpg",pos:"50% 40%"},
+  {group:"Black Friday",black:true,key:"cama-posta",name:"Cama posta",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
@@ -120,6 +121,10 @@ window.PRODUCTS = [
   {cat:"mesas",img:"mesa-mh5410.jpg",leg:"Mesa MH5410",preco:"Consulte o valor",name:"Mesa de cabeceira MH5410",back:"Todos os modelos"},
   {cat:"mesas",img:"mesa-lino.jpg",leg:"Mesa LINO",preco:"Consulte o valor",name:"Mesa de cabeceira LINO",back:"Todos os modelos"},
   {cat:"mesas",img:"mesa-milos.jpg",leg:"Mesa MILOS",preco:"Consulte o valor",name:"Mesa de cabeceira MILOS",back:"Todos os modelos"},
+  {cat:"cama-posta",top:true,img:"coord-azul-solteiro.jpg",leg:"Coordenado 5 peças azul · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças azul linho toque 300 fios Solteiro"},
+  {cat:"cama-posta",top:true,img:"coord-rose-solteiro.jpg",leg:"Coordenado 5 peças rosê · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças rosê linho toque 300 fios Solteiro"},
+  {cat:"cama-posta",video:"video-coordenado-rose.mp4",img:"video-coordenado-rose.jpg",leg:"Coordenado rosê · veja de perto",name:"Vídeo: Coordenado rosê",wa:"Coordenado 5 peças rosê"},
+  {cat:"camas",top:true,img:"bicama-solteiro.jpg",leg:"Bicama de molas Solteiro",preco:"R$ 1.799 no Pix",name:"Colchão Molas Firme + Bicama de Molas Solteiro (0,88 × 1,88 m)"},
   {cat:"camas",video:"video-bicama-molas.mp4",img:"video-bicama-molas.jpg",tags:["bicamas-loja"],leg:"Bicama de molas · veja de perto",preco:"R$ 1.299 (de R$ 1.699)",name:"Vídeo: Bicama de molas",wa:"Bicama de molas"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
