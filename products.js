@@ -110,7 +110,7 @@ window.PRODUCTS = [
   {cat:"box-gold",loja:true,img:"box-gold-14.jpg",name:"Box Gold",ratio:"1/1"},
   {cat:"box-gold",loja:true,img:"box-gold-15.jpg",name:"Box Gold",ratio:"1/1"},
   // ── Black Friday ──
-  {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",leg:"Box Baú · todos os tamanhos",preco:"Solteiro ao King · a partir de R$ 999",name:"Box Baú (tabela de preços: Solteiro ao King)"},
+  {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",med:["solteiro","solteirao","casal","queen","king"],leg:"Box Baú · todos os tamanhos",preco:"Solteiro ao King · a partir de R$ 999",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
   {cat:"tricama",top:true,img:"tricama-promo.jpg",leg:"Tricama 3 em 1 · aço e 2 anos de garantia",preco:"10x R$ 333,87 · R$ 3.050 à vista",name:"Tricama 3 em 1 (estrutura em aço, 2 anos de garantia)"},
   {cat:"mesas",top:true,video:"video-mesas-cabeceira.mp4",img:"video-mesas-cabeceira.jpg",leg:"Toque no modelo preferido",chips:[{t:"DIME",img:"mesa-dime.jpg"},{t:"MILETO",img:"mesa-mileto.jpg"},{t:"MH5404",img:"mesa-mh5404.jpg"},{t:"MH5405",img:"mesa-mh5405.jpg"},{t:"MH5410",img:"mesa-mh5410.jpg"},{t:"LINO",img:"mesa-lino.jpg"},{t:"MILOS",img:"mesa-milos.jpg"}],name:"Vídeo: Mesas de cabeceira",wa:"Mesas de cabeceira"},

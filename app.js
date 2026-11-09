@@ -39,9 +39,16 @@ const COND="Até 10x no cartão · Condições especiais no Pix";
 const imgFull=p=>p.url||`img/ofertas/${p.img}`;
 const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);
 const catThumb=c=>c.coverUrl||(c.cover?`img/ofertas/t/${c.cover}`:"");
-const catOf=k=>{const c=CATEGORIES.find(c=>c.key===k);return visCat(c)?c:undefined};
+const MEDIDAS=[["solteiro","Solteiro","0,88 × 1,88"],["solteirao","Solteirão","1,08 × 1,98"],["casal","Casal","1,38 × 1,88"],["queen","Queen","1,58 × 1,98"],["king","King","1,93 × 2,03"]];
+const medOf=p=>{if(p.med)return p.med;const t=(String(p.name||"")+" "+String(p.leg||"")).replace(/king koil/ig,"");const r=[];
+  if(/solteir[ãa]o/i.test(t))r.push("solteirao");
+  if(/solteiro/i.test(t.replace(/solteir[ãa]o/ig,"")))r.push("solteiro");
+  if(/casal/i.test(t))r.push("casal");if(/queen/i.test(t))r.push("queen");if(/\bking\b/i.test(t))r.push("king");return r};
 const visCat=c=>!!c&&(!STORE.soBlack||!!c.black);
-const inCat=k=>visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===k||(p.tags&&p.tags.includes(k))):[];
+const catVis=k=>visCat(CATEGORIES.find(c=>c.key===k));
+const medList=m=>PRODUCTS.filter(p=>catVis(p.cat)&&medOf(p).includes(m));
+const catOf=k=>{if(k.indexOf("medida-")===0){const m=MEDIDAS.find(x=>x[0]===k.slice(7));return m?{key:k,name:m[1]}:undefined}const c=CATEGORIES.find(c=>c.key===k);return visCat(c)?c:undefined};
+const inCat=k=>k.indexOf("medida-")===0?medList(k.slice(7)):(visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===k||(p.tags&&p.tags.includes(k))):[]);
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
@@ -160,7 +167,7 @@ const ROUTES={
     const tile=c=>{const n=inCat(c.key).length;
       return catThumb(c)&&n?`<a class="cat" href="#/c/${c.key}/0"><img src="${catThumb(c)}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`
       :`<a class="cat soon" href="#/c/${c.key}"><span><b>${c.name}</b><small>${n?`${n} ${n===1?"oferta":"ofertas"}`:"Em breve"}</small></span></a>`};
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header>${groups.map(g=>`<section class="grpbox">${g.n?`<h2 class="grp">${esc(g.n==="Marcas"&&STORE.soBlack?"Black por marca":g.n)}</h2>`:""}<div class="cats">${g.l.map(tile).join("")}</div></section>`).join("")}<a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
+    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><section class="medbox"><h2 class="grp">Procurando uma medida?</h2><div class="meds">${MEDIDAS.map(m=>{const n=medList(m[0]).length;return n?`<a class="med" href="#/c/medida-${m[0]}/0"><b>${m[1]}</b><small>${m[2]} m</small><i>${n}</i></a>`:""}).join("")}</div></section>${groups.map(g=>`<section class="grpbox">${g.n?`<h2 class="grp">${esc(g.n==="Marcas"&&STORE.soBlack?"Black por marca":g.n)}</h2>`:""}<div class="cats">${g.l.map(tile).join("")}</div></section>`).join("")}<a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
   },
   loja(){
     const S=STORE,rows=[];
