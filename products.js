@@ -36,7 +36,7 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"colchao-bau",name:"Colchão + Box Baú",cover:"molas-bau-solteiro-solteirao.jpg"},
   {group:"Black Friday",black:true,key:"colchao",name:"Colchões",cover:"sealy-queen.jpg"},
   {group:"Black Friday",black:true,key:"tricama",name:"Tricama 3 em 1",cover:"tricama-promo.jpg",pos:"50% 30%"},
-  {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"video-mesas-cabeceira.jpg",pos:"50% 40%"},
+  {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"mesas-tabela.jpg",pos:"50% 40%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
@@ -113,6 +113,7 @@ window.PRODUCTS = [
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
   {cat:"tricama",top:true,img:"tricama-promo.jpg",leg:"Tricama 3 em 1 · aço e 2 anos de garantia",preco:"10x R$ 333,87 · R$ 3.050 à vista",name:"Tricama 3 em 1 (estrutura em aço, 2 anos de garantia)"},
   {cat:"mesas",top:true,video:"video-mesas-cabeceira.mp4",img:"video-mesas-cabeceira.jpg",leg:"Mesas de cabeceira · qual combina com o seu quarto?",name:"Vídeo: Mesas de cabeceira",wa:"Mesas de cabeceira"},
+  {cat:"mesas",top:true,img:"mesas-tabela.jpg",leg:"Mesas de cabeceira · tabela de preços",preco:"20% no Pix · 10% parcelado",name:"Mesas de cabeceira (tabela com todos os modelos)"},
   {cat:"camas",video:"video-bicama-molas.mp4",img:"video-bicama-molas.jpg",tags:["bicamas-loja"],leg:"Bicama de molas · veja de perto",preco:"R$ 1.299 (de R$ 1.699)",name:"Vídeo: Bicama de molas",wa:"Bicama de molas"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
