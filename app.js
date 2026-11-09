@@ -22,6 +22,7 @@ function openWam(text){
   wam.hidden=false;requestAnimationFrame(()=>wam.classList.add("in"));
 }
 document.addEventListener("click",e=>{
+  if(e.target.closest&&e.target.closest(".chip2"))return;
   const a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');
   if(!a)return;
   if(a.hasAttribute("data-direct")){setTimeout(closeWam,150);return}

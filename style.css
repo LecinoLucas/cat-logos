@@ -456,3 +456,10 @@ a{color:inherit;text-decoration:none}
 .car .cap .chips2::-webkit-scrollbar{display:none}
 .car .cap .chips2:has(.bk){justify-content:center}
 .car .chip2{flex:none}
+/* a barra de baixo não pode bloquear toques nas ofertas; só os botões dela recebem toque */
+.dock2{pointer-events:none}
+.dock2 .btns,.dock2 .btns a{pointer-events:auto}
+.dock2.off .btns,.dock2.off .btns a{pointer-events:none}
+.car .slide{position:relative}
+.car .slide.act{z-index:3}
+.car .slide:not(.act) .cap{pointer-events:none}
