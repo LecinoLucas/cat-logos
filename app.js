@@ -64,7 +64,7 @@ function feedHTML(list,opts={}){
     const nc=cap(p)?"":" nocap";
     return p.video
       ?`<div class="slide vid${nc}" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span>${cap(p)}</div>`
-      :`<a class="slide${nc}" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span>${cap(p)}</a>`}).join("");
+      :`<a class="slide${nc}" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}>${p.selo?`<span class="selo"><i>${esc(p.selo)}</i>${p.selo2?`<small>${esc(p.selo2)}</small>`:""}</span>`:""}<img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span>${cap(p)}</a>`}).join("");
   const ARW=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Oferta anterior">${ARW("M5 15l7-7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima oferta">${ARW("M5 9l7 7 7-7")}</button></section>`;
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
