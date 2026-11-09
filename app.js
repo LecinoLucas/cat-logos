@@ -44,7 +44,12 @@ const inCat=k=>visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
-  const cap=p=>{const t=String(p.leg||p.name||"").replace(/^Vídeo: /,"");return `<span class="cap"><b>${esc(t)}</b>${p.preco?`<em>${esc(p.preco)}</em>`:""}</span>`};
+  const catKey=list[0]&&list[0].cat;
+  const idxOf=(cat,img)=>{const l=PRODUCTS.filter(x=>x.cat===cat||(x.tags&&x.tags.includes(cat)));return l.findIndex(x=>x.img===img)};
+  const cap=p=>{const t=String(p.leg||p.name||"").replace(/^Vídeo: /,"");
+    const ch=p.chips?`<span class="chips2">${p.chips.map(c=>{const k=idxOf(p.cat,c.img);return k<0?"":`<span class="chip2" role="link" tabindex="0" data-go="#/c/${p.cat}/${k}">${esc(c.t)}</span>`}).join("")}</span>`:"";
+    const bk=p.back?`<span class="chips2"><span class="chip2 bk" role="link" tabindex="0" data-go="#/c/${p.cat}/0">‹ ${esc(p.back)}</span></span>`:"";
+    return `<span class="cap"><b>${esc(t)}</b>${p.preco?`<em>${esc(p.preco)}</em>`:""}${ch}${bk}</span>`};
   const slides=list.map((p,i)=>{
     const st=p.ratio?` style="aspect-ratio:${p.ratio.replace("/"," / ")}"`:"";
     return p.video
@@ -97,6 +102,7 @@ function wireFeed(list,start=0,hasIntro=false){
     if(best!==cur){if(cur>=0&&!first)swiped=true;first=false;cur=best;sync()}})};
   track.addEventListener("scroll",onScroll,{passive:true});
   prev.onclick=()=>goTo(cur-1);next.onclick=()=>{if(cur<slides.length-1)goTo(cur+1);else if(hasIntro){const t=feed.scrollTop+feed.clientHeight;feed.scrollTo({top:t,behavior:"smooth"})}};
+  track.addEventListener("click",e=>{const c=e.target.closest(".chip2");if(c){e.preventDefault();e.stopPropagation();location.hash=c.dataset.go}},true);
   track.addEventListener("click",e=>{const s=e.target.closest(".slide");if(!s)return;const j=+s.dataset.i;if(j!==cur){e.preventDefault();goTo(j)}},true);
   document.addEventListener("keydown",function kd(e){if(!document.body.contains(track)){document.removeEventListener("keydown",kd);return}
     if(e.key==="ArrowDown")goTo(cur+1);else if(e.key==="ArrowUp")goTo(cur-1)});
