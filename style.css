@@ -473,3 +473,8 @@ a{color:inherit;text-decoration:none}
 .med i{position:absolute;top:-7px;right:-4px;min-width:20px;height:20px;border-radius:99px;background:#17325a;color:#fff;font-style:normal;font-size:.58rem;font-weight:700;display:grid;place-items:center;padding:0 5px}
 .med:active{background:#17325a0d}
 @media(max-width:360px){.med b{font-size:.9rem}}
+
+/* sem legenda redundante: foto maior; fonte única (Montserrat) nas legendas que sobram */
+.car .slide.nocap .frame{height:calc(var(--sh) - 8px)}
+.car .cap b{font-family:var(--sans);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:none}
+.car .cap em{font-size:.62rem}

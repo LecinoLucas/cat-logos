@@ -57,12 +57,14 @@ function feedHTML(list,opts={}){
   const cap=p=>{const t=String(p.leg||p.name||"").replace(/^Vídeo: /,"");
     const ch=p.chips?`<span class="chips2">${p.chips.map(c=>{const k=idxOf(p.cat,c.img);return k<0?"":`<span class="chip2" role="link" tabindex="0" data-go="#/c/${p.cat}/${k}">${esc(c.t)}</span>`}).join("")}</span>`:"";
     const bk=p.back?`<span class="chips2"><span class="chip2 bk" role="link" tabindex="0" data-go="#/c/${p.cat}/0">‹ ${esc(p.back)}</span></span>`:"";
+    if(p.preco&&!p.keepcap&&!p.chips&&!p.back)return "";
     return `<span class="cap"><b>${esc(t)}</b>${p.preco?`<em>${esc(p.preco)}</em>`:""}${ch}${bk}</span>`};
   const slides=list.map((p,i)=>{
     const st=p.ratio?` style="aspect-ratio:${p.ratio.replace("/"," / ")}"`:"";
+    const nc=cap(p)?"":" nocap";
     return p.video
-      ?`<div class="slide vid" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span>${cap(p)}</div>`
-      :`<a class="slide" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span>${cap(p)}</a>`}).join("");
+      ?`<div class="slide vid${nc}" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span>${cap(p)}</div>`
+      :`<a class="slide${nc}" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}><img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span>${cap(p)}</a>`}).join("");
   const ARW=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Oferta anterior">${ARW("M5 15l7-7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima oferta">${ARW("M5 9l7 7 7-7")}</button></section>`;
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
