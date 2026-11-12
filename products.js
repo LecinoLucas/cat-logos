@@ -37,7 +37,7 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"colchao",name:"Colchões",cover:"sealy-miami.jpg"},
   {group:"Black Friday",black:true,key:"tricama",name:"Tricama 3 em 1",cover:"tricama-promo.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"video-mesas-cabeceira.jpg",pos:"50% 40%"},
-  {group:"Black Friday",black:true,key:"cama-posta",name:"Cama posta",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
+  {group:"Black Friday",black:true,key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
   {group:"Black Friday",black:true,key:"cama-auxiliar",name:"Cama auxiliar",cover:"video-cama-auxiliar.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
