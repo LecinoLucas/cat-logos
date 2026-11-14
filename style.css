@@ -547,3 +547,31 @@ a{color:inherit;text-decoration:none}
 .grid .tile[hidden]{display:none}
 .bar h1{font-size:1.9rem}
 @media(min-width:700px){.mt b{font-size:1.9rem}}
+
+/* ───────── Tela do produto: foto grande + cartão flutuante ───────── */
+.car .slide.pc{position:relative;--fw:min(92cqw,calc((var(--sh) - 130px)*.8))}
+.car .slide.pc .frame{width:var(--fw);height:calc(var(--sh) - 130px);aspect-ratio:auto;max-width:none;background:#0f2140}
+.car .slide.pc .frame img{object-fit:cover}
+.fcard{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:calc(var(--fw) - 22px);z-index:3;display:flex;flex-direction:column;padding:13px 15px 12px;border-radius:22px;background:rgba(14,28,52,.84);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid #ffffff2e;box-shadow:0 24px 38px -18px #000e,inset 0 1px 0 #ffffff22;text-align:left;cursor:default}
+.fcard .eb{font-style:normal;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;color:#d2b27a;font-weight:600;line-height:1.3}
+.fcard .nm{font-family:var(--serif);font-weight:600;font-size:1.38rem;line-height:1.08;color:#fff;margin:3px 0 9px}
+.fcard .mcs{display:flex;gap:8px}
+.fcard .mc{flex:1;text-align:center;padding:8px 4px;border:1.5px solid #ffffff40;border-radius:14px;cursor:pointer;color:#fff;-webkit-tap-highlight-color:transparent;transition:background .2s,color .2s;display:flex;flex-direction:column;gap:1px}
+.fcard .mc b{font-size:.74rem;font-weight:700}
+.fcard .mc small{font-size:.54rem;font-weight:500;opacity:.75}
+.fcard .mc.on{background:#a9c8f2;border-color:#a9c8f2;color:#17325a}
+.fcard .sz{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.fcard .sz b{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:#a9c8f2}
+.fcard .sz small{font-size:.66rem;font-weight:500;color:#ffffffa8}
+.fcard .pr{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-top:10px;padding-top:9px;border-top:1px solid #ffffff22}
+.fcard .pr[hidden]{display:none}
+.fcard .val{display:flex;align-items:baseline;gap:5px;color:#fff;font-family:var(--sans);font-weight:700;line-height:1;white-space:nowrap;font-feature-settings:"lnum","tnum"}
+.fcard .val small{font-size:.9rem;font-weight:600;color:#a9c8f2}
+.fcard .val em{font-style:normal;font-size:2.15rem;letter-spacing:-.035em}
+.fcard .val sup{font-size:.9rem;font-weight:600;letter-spacing:0;margin-left:-3px;opacity:.85}
+.fcard .rt{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right}
+.fcard .tg{text-decoration:none;background:#a9c8f2;color:#17325a;font-size:.52rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.fcard s{font-size:.66rem;color:#ffffff99;text-decoration:line-through}
+.fcard .px{font-size:.68rem;font-weight:600;color:#ffffffd6;white-space:nowrap}
+.fcard .ob{font-style:normal;font-size:.58rem;line-height:1.35;color:#ffffff8c;text-align:center;margin-top:9px}
+@media(max-height:700px){.car .slide.pc .frame{height:calc(var(--sh) - 110px)}.fcard{padding:10px 13px 10px}.fcard .nm{font-size:1.15rem;margin-bottom:6px}.fcard .val em{font-size:1.75rem}.fcard .ob{display:none}}

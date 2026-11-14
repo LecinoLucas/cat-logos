@@ -22,7 +22,7 @@ function openWam(text){
   wam.hidden=false;requestAnimationFrame(()=>wam.classList.add("in"));
 }
 document.addEventListener("click",e=>{
-  if(e.target.closest&&e.target.closest(".chip2"))return;
+  if(e.target.closest&&e.target.closest(".chip2,.mc"))return;
   const a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');
   if(!a)return;
   if(a.hasAttribute("data-direct")){setTimeout(closeWam,150);return}
@@ -36,7 +36,15 @@ const LOGO=(c="")=>`<span class="logo ${c}">${CLOUD}<b>${esc((window.STORE&&STOR
 const brand=`<a class="brand" href="#/" aria-label="Início">${LOGO()}</a>`;
 const fmt=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
 const COND="Até 10x no cartão · Condições especiais no Pix";
-const imgFull=p=>p.url||`img/ofertas/${p.img}`;
+const CARD=p=>!p.url&&!p.video&&window.CARDS&&window.CARDS[p.img];
+const imgFull=p=>p.url||(CARD(p)?`img/ofertas/c/${p.img}`:`img/ofertas/${p.img}`);
+const money=v=>{const i=String(v).lastIndexOf(",");return i<0?`<em>${esc(v)}</em>`:`<em>${esc(v.slice(0,i))}</em><sup>${esc(v.slice(i))}</sup>`};
+const cardHTML=c=>{const o=c.o,tag=c.tag||"no Pix";
+  const pick=o.length>1?`<span class="mcs">${o.map((x,k)=>`<span class="mc${k?"":" on"}" role="button" tabindex="0" data-k="${k}"><b>${esc(x.m)}</b><small>${esc(x.d)}</small></span>`).join("")}</span>`
+    :`<span class="sz"><b>${esc(o[0].m)}</b>${o[0].d?`<small>${esc(o[0].d)}</small>`:""}</span>`;
+  const pr=o.map((x,k)=>`<span class="pr"${k?" hidden":""} data-k="${k}"><span class="val"><small>R$</small>${money(x.p)}</span><span class="rt"><u class="tg">${esc(tag)}</u>${x.de?`<s>De R$ ${esc(x.de)}</s>`:""}${x.x?`<span class="px">${/^\d+x R\$/.test(x.x)?"ou ":""}${esc(x.x)}</span>`:""}</span></span>`).join("");
+  return `<span class="fcard"><i class="eb">${esc(c.eb)}</i><b class="nm">${esc(c.n)}</b>${pick}${pr}${c.obs?`<i class="ob">${esc(c.obs)}</i>`:""}</span>`};
+const waSel=(p,sl)=>{const c=CARD(p),k=sl&&+sl.dataset.k||0;return c&&c.o.length>1?wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.wa||p.name} — medida ${c.o[k].m}`):waProd(p)};
 const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);
 const catThumb=c=>c.coverUrl||(c.cover?`img/ofertas/t/${c.cover}`:"");
 const MEDIDAS=[["solteiro","Solteiro","0,88 × 1,88"],["solteirao","Solteirão","1,08 × 1,98"],["casal","Casal","1,38 × 1,88"],["queen","Queen","1,58 × 1,98"],["king","King","1,93 × 2,03"]];
@@ -62,10 +70,10 @@ function feedHTML(list,opts={}){
     return `<span class="cap"><b>${esc(t)}</b>${p.preco?`<em>${esc(p.preco)}</em>`:""}${ch}${bk}</span>`};
   const slides=list.map((p,i)=>{
     const st=p.ratio?` style="aspect-ratio:${p.ratio.replace("/"," / ")}"`:"";
-    const nc=cap(p)?"":" nocap";
+    const pc=CARD(p),nc=pc?" pc nocap":(cap(p)?"":" nocap");
     return p.video
       ?`<div class="slide vid${nc}" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span>${cap(p)}</div>`
-      :`<a class="slide${nc}" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}>${p.selo?`<span class="selo"><i>${esc(p.selo)}</i>${p.selo2?`<small>${esc(p.selo2)}</small>`:""}</span>`:""}<img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||"50% 50%"}"></span>${cap(p)}</a>`}).join("");
+      :`<a class="slide${nc}" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}>${p.selo?`<span class="selo"><i>${esc(p.selo)}</i>${p.selo2?`<small>${esc(p.selo2)}</small>`:""}</span>`:""}<img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||(pc?"8% 40%":"50% 50%")}"></span>${pc?cardHTML(pc):cap(p)}</a>`}).join("");
   const ARW=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Oferta anterior">${ARW("M5 15l7-7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima oferta">${ARW("M5 9l7 7 7-7")}</button></section>`;
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
@@ -146,7 +154,7 @@ function wireFeed(list,start=0,hasIntro=false){
     const last=cur>=slides.length-1;
     const pb=dock.querySelector(".prog b");if(pb)pb.style.width=((cur+1)/slides.length*100)+"%";
     count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint dn${swiped&&!last?" gone":""}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para baixo"}${last&&!hasIntro?"":DN}</span>`;
-    fab.href=waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
+    fab.href=slides[cur].dataset.href||waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
     prev.classList.toggle("dis",cur===0);next.classList.toggle("dis",last&&true);
   };
   let tk=false;
@@ -157,6 +165,12 @@ function wireFeed(list,start=0,hasIntro=false){
   track.addEventListener("scroll",onScroll,{passive:true});
   prev.onclick=()=>goTo(cur-1);next.onclick=()=>{if(cur<slides.length-1)goTo(cur+1);else if(hasIntro){const t=feed.scrollTop+feed.clientHeight;feed.scrollTo({top:t,behavior:"smooth"})}};
   track.addEventListener("click",e=>{const c=e.target.closest(".chip2");if(c){e.preventDefault();e.stopPropagation();location.hash=c.dataset.go}},true);
+  const setMed=(m,k)=>{const sl=m.closest(".slide"),p=list[+sl.dataset.i];sl.dataset.k=k;
+    sl.querySelectorAll(".mc").forEach(x=>x.classList.toggle("on",x===m));
+    sl.querySelectorAll(".pr").forEach(x=>x.hidden=x.dataset.k!==String(k));
+    sl.dataset.href=waSel(p,sl);if(sl.hasAttribute("href"))sl.setAttribute("href",sl.dataset.href);if(+sl.dataset.i===cur)fab.href=sl.dataset.href};
+  track.addEventListener("click",e=>{const m=e.target.closest(".mc");if(!m)return;e.preventDefault();e.stopPropagation();
+    if(+m.closest(".slide").dataset.i!==cur){goTo(+m.closest(".slide").dataset.i);return}setMed(m,m.dataset.k)},true);
   track.addEventListener("click",e=>{const s=e.target.closest(".slide");if(!s)return;const j=+s.dataset.i;if(j!==cur){e.preventDefault();goTo(j)}},true);
   document.addEventListener("keydown",function kd(e){if(!document.body.contains(track)){document.removeEventListener("keydown",kd);return}
     if(e.key==="ArrowDown")goTo(cur+1);else if(e.key==="ArrowUp")goTo(cur-1)});
