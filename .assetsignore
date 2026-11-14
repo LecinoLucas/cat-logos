@@ -4,3 +4,5 @@ wrangler.jsonc
 .gitignore
 node_modules
 img/folhetos
+.github
+supabase
