@@ -36,6 +36,7 @@ const LOGO=(c="")=>`<span class="logo ${c}">${CLOUD}<b>${esc((window.STORE&&STOR
 const brand=`<a class="brand" href="#/" aria-label="Início">${LOGO()}</a>`;
 const fmt=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
 const COND="Até 10x no cartão · Condições especiais no Pix";
+const HOME_VIDEOS=["video-black-resumo.mp4","video-black-esperar.mp4","video-box-bau-qualidade.mp4"];
 const PANEL=new Set(["molas-bau-solteiro-solteirao.jpg", "molas-bau-casal-queen.jpg", "molas-bau-queen.jpg", "molas-bau-king.jpg", "inducol-casal-box.jpg", "inducol-casal.jpg", "inducol-hotelaria-solteiro.jpg", "hotelaria-solteiro.jpg", "kingkoil-solteiro.jpg", "simmons-casal.jpg", "sealy-queen.jpg", "sealy-joy.jpg", "sealy-royal-foam-queen.jpg", "sealy-miami.jpg", "probel-guarda-costas-king.jpg", "herval-king.jpg", "kingkoil-queen.jpg", "kingkoil-crystal-queen.jpg", "kingkoil-nanobionic-queen.jpg", "kingkoil-diamond-queen.jpg", "bicama-solteiro.jpg", "bicama-casal.jpg", "box-solteiro.jpg", "box-solteirao.jpg", "box-casal.jpg", "box-queen.jpg", "box-king.jpg", "coord-azul-solteiro.jpg", "coord-rose-solteiro.jpg", "coord3-azul-claro.jpg", "coord3-rosa-antigo.jpg", "travesseiro-pluma.jpg"]);
 const imgFull=p=>p.url||`img/ofertas/${p.img}`;
 const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);
@@ -79,15 +80,18 @@ function feedHTML(list,opts={}){
   if(opts.home){
     const cov=c=>PANEL.has(c)?`img/ofertas/c/${c}`:`img/ofertas/t/${c}`;
     const vc=VITRINE.map(v=>{const n=inCat(v.key).length;return n?`<a class="vc2" href="#/c/${v.key}"><img src="${cov(v.cover)}" alt="" style="object-position:${v.pos||"50% 35%"}"><span><b>${esc(v.name)}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span><i class="go" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></i></a>`:""}).join("");
-    const mt=MEDIDAS.filter(m=>medList(m[0]).length).map(m=>{const n=medList(m[0]).length;const w=Math.round(parseFloat(m[2].replace(",","."))/1.93*100);return `<a class="mr" href="#/c/medida-${m[0]}"><b>${m[1]}</b><span>${m[2]} m</span><em>${n} ${n===1?"oferta":"ofertas"}</em><i class="rb" aria-hidden="true"><u style="width:${w}%"></u></i></a>`}).join("");
+    const MFOTO={solteiro:"kingkoil-solteiro.jpg",solteirao:"sealy-joy.jpg",casal:"simmons-casal.jpg",queen:"sealy-royal-foam-queen.jpg",king:"herval-king.jpg"};
+    const mt=MEDIDAS.filter(m=>medList(m[0]).length).map(m=>{const l=medList(m[0]),n=l.length,w=Math.round(parseFloat(m[2].replace(",","."))/1.93*100),f=MFOTO[m[0]]||l[0].img;return `<a class="mc3" href="#/c/medida-${m[0]}"><img src="${cov(f)}" alt="" loading="lazy"><span><b>${m[1]}</b><em>${m[2]} m</em><i class="rb" aria-hidden="true"><u style="width:${w}%"></u></i><small>${n} ${n===1?"oferta":"ofertas"}</small></span><i class="go" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></i></a>`}).join("");
     const bc=CATEGORIES.filter(c=>c.group==="Marcas"&&visCat(c)&&inCat(c.key).length).map(c=>`<a class="mc2" href="#/c/${c.key}">${esc(c.name)}</a>`).join("");
     const ds=inCat("destaques").map((p,i)=>`<a class="mp" href="#/c/destaques/${i}" aria-label="${esc(p.leg||p.name)}"><img loading="lazy" src="${imgThumb(p)}" alt="" style="object-position:${p.pos||"50% 50%"}">${p.video?'<i class="pl"></i>':""}</a>`).join("");
-    const DOTS=n=>`<i class="dots" aria-hidden="true">${[0,1,2].map(k=>`<u${k===n?' class="on"':""}></u>`).join("")}</i>`;
+    const HV=HOME_VIDEOS.map(f=>PRODUCTS.find(p=>p.video===f)).filter(Boolean),TOT=HV.length+3;
+    const DOTS=n=>`<i class="dots" aria-hidden="true">${Array.from({length:TOT},(_,k)=>`<u${k===n?' class="on"':""}></u>`).join("")}</i>`;
     const CUE='<span class="cue2">Deslize<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>';
-    const choose=`<section class="card pgp"><p class="ey">Black Friday${STORE.destaque?" · "+esc(STORE.destaque):""}</p><h2>Qual a medida<br>da sua cama?</h2><div class="mrs">${mt}</div>${CUE}${DOTS(0)}</section>`
-      +`<section class="card pgp"><p class="ey">Categorias</p><h2>Ou escolha<br>o produto</h2><div class="vg2">${vc}</div>${DOTS(1)}</section>`
+    const choose=`<section class="card pgp"><p class="ey">Black Friday${STORE.destaque?" · "+esc(STORE.destaque):""}</p><h2>Qual a medida<br>da sua cama?</h2><div class="mg">${mt}</div>${CUE}${DOTS(HV.length)}</section>`
+      +`<section class="card pgp"><p class="ey">Categorias</p><h2>Ou escolha<br>o produto</h2><div class="vg2">${vc}</div>${DOTS(HV.length+1)}</section>`
       +`<section class="card pgp"><p class="ey">Destaques</p><h2>Mais procurados</h2>${ds?`<div class="strip">${ds}</div>`:""}${bc?`<p class="lab2">Por marca</p><div class="mcs2">${bc}</div>`:""}<div class="cta2"><a class="wa2" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}<span>Falar no WhatsApp</span></a><a class="lnk2" href="#/loja">Conheça a Pioneira</a></div>${DOTS(2)}</section>`;
-    return `<div class="feed home">${intro}${choose}</div>`;
+    const vids=HV.map((p,k)=>`<section class="card hv"><span class="frame"><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" type="button" aria-label="Ligar ou desligar o som"></button></span>${CUE}${DOTS(k)}</section>`).join("");
+    return `<div class="feed home">${intro}${vids}${choose}</div>`;
   }
   return `<div class="feed">${intro}${car}${end}</div><div class="dock2 off"><i class="prog" aria-hidden="true"><b></b></i><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
 }
@@ -175,11 +179,23 @@ function wireFeed(list,start=0,hasIntro=false){
   if(!hasIntro){feed.scrollTop=0;carOn=true}
 }
 
+function wireHomeVideos(feed){
+  const secs=[...feed.querySelectorAll(".hv")];if(!secs.length)return;
+  const SPK='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/>',ON=SPK+'<path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',OFF=SPK+'<path d="M17 9l5 6M22 9l-5 6"/></svg>';
+  let sound=false;const paint=()=>secs.forEach(c=>{c.querySelector(".snd").innerHTML=sound?ON:OFF});paint();
+  secs.forEach(c=>{const v=c.querySelector("video");
+    c.querySelector(".snd").onclick=e=>{e.stopPropagation();sound=!sound;secs.forEach(x=>x.querySelector("video").muted=!sound);paint()};
+    c.querySelector(".frame").onclick=()=>{v.paused?v.play().catch(()=>{}):v.pause()}});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target.querySelector("video");
+    if(e.isIntersecting&&e.intersectionRatio>=.6){v.muted=!sound;v.play().catch(()=>{})}else v.pause()}),{root:feed,threshold:[0,.6,1]});
+  secs.forEach(c=>io.observe(c));
+}
 const ROUTES={
   home(toChoose){
     app.innerHTML=`<div class="view dark onlight">${feedHTML([],{home:true,intro:true})}<header class="over">${brand}</header></div>`;
     const feed=$(".feed"),hv=feed.closest(".view");wireIntro(feed);
-    if(toChoose)requestAnimationFrame(()=>{feed.scrollTop=feed.clientHeight});
+    wireHomeVideos(feed);
+    if(toChoose)requestAnimationFrame(()=>{const t=feed.querySelector(".mg");if(t)feed.scrollTop=t.closest(".card").offsetTop});
   },
   categorias(){ROUTES.home(true)},
   loja(){
