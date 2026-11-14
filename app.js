@@ -44,6 +44,10 @@ const cardHTML=c=>{const o=c.o,tag=c.tag||"no Pix";
     :`<span class="sz"><b>${esc(o[0].m)}</b>${o[0].d?`<small>${esc(o[0].d)}</small>`:""}</span>`;
   const pr=o.map((x,k)=>`<span class="pr"${k?" hidden":""} data-k="${k}"><span class="val"><small>R$</small>${money(x.p)}</span><span class="rt"><span class="tl"><u class="tg">${esc(tag)}</u>${x.de?`<s>De R$ ${esc(x.de)}</s>`:""}</span>${x.x?`<span class="px">${/^\d+x R\$/.test(x.x)?"ou ":""}${esc(x.x)}</span>`:""}</span></span>`).join("");
   return `<span class="fcard"><i class="eb">${esc(c.eb)}</i><b class="nm">${esc(c.n)}</b>${pick}${pr}${c.obs?`<i class="ob">${esc(c.obs)}</i>`:""}</span>`};
+const cdHTML=c=>{const o=c.o,tag=(c.tag||"no Pix").toUpperCase();
+  const par=x=>{const m=/^(\d+)x R\$ (.+)$/i.exec(x||"");return m?`ou ${m[1]}X de R$ ${m[2]}`:(x||"")};
+  const cols=o.map(x=>`<span class="col"><b class="nm">${esc(x.m)}</b>${x.d?`<small class="dim">${esc(x.d)}</small>`:""}<i class="hr"></i>${x.de?`<s class="de">De <b>R$ ${esc(x.de)}</b></s>`:""}<em class="pv">${esc(x.p)}</em><u class="tg">${esc(tag)}</u>${x.x?`<span class="px">${esc(par(x.x))}</span>`:""}</span>`).join("");
+  return `<span class="fcard cdc"><i class="eb">${esc(c.t||c.eb)}</i><span class="cols n${o.length}">${cols}</span>${c.obs?`<i class="ob">${esc(c.obs)}</i>`:""}<i class="bn">PIONEIRA COLCHÕES</i></span>`};
 const waSel=(p,sl)=>{const c=CARD(p),k=sl&&+sl.dataset.k||0;return c&&c.o.length>1?wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.wa||p.name} — medida ${c.o[k].m}`):waProd(p)};
 const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);
 const catThumb=c=>c.coverUrl||(c.cover?`img/ofertas/t/${c.cover}`:"");
@@ -70,10 +74,10 @@ function feedHTML(list,opts={}){
     return `<span class="cap"><b>${esc(t)}</b>${p.preco?`<em>${esc(p.preco)}</em>`:""}${ch}${bk}</span>`};
   const slides=list.map((p,i)=>{
     const st=p.ratio?` style="aspect-ratio:${p.ratio.replace("/"," / ")}"`:"";
-    const pc=CARD(p),nc=pc?" pc nocap":(cap(p)?"":" nocap");
+    const pc=CARD(p),nc=pc?(pc.cd?" pc cd nocap":" pc nocap"):(cap(p)?"":" nocap");
     return p.video
       ?`<div class="slide vid${nc}" data-i="${i}" aria-label="${esc(p.name)}"><span class="frame"${st}><video src="img/ofertas/${p.video}" poster="img/ofertas/${p.img}" muted loop playsinline preload="none"></video><button class="snd" aria-label="Ligar ou desligar o som"></button></span>${cap(p)}</div>`
-      :`<a class="slide${nc}" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}>${p.selo?`<span class="selo"><i>${esc(p.selo)}</i>${p.selo2?`<small>${esc(p.selo2)}</small>`:""}</span>`:""}<img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||(pc?"8% 40%":"50% 50%")}"></span>${pc?cardHTML(pc):cap(p)}</a>`}).join("");
+      :`<a class="slide${nc}" data-i="${i}" data-href="${waProd(p)}" target="_blank" rel="noopener" aria-label="${esc(p.name)}"><span class="frame"${st}>${p.selo?`<span class="selo"><i>${esc(p.selo)}</i>${p.selo2?`<small>${esc(p.selo2)}</small>`:""}</span>`:""}<img class="fg" ${i<2?"":'loading="lazy"'} src="${imgFull(p)}" alt="${esc(p.name)}" style="object-position:${p.pos||(pc?"8% 40%":"50% 50%")}"></span>${pc?(pc.cd?cdHTML(pc):cardHTML(pc)):cap(p)}</a>`}).join("");
   const ARW=d=>`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const car=`<section class="card car"><div class="track">${slides}</div><button class="nav prev" type="button" aria-label="Oferta anterior">${ARW("M5 15l7-7 7 7")}</button><button class="nav next" type="button" aria-label="Próxima oferta">${ARW("M5 9l7 7 7-7")}</button></section>`;
   const dm=(STORE.destaque||"").match(/^(.*?)(\d+)\s*%\s*(.*)$/);
@@ -210,7 +214,7 @@ const ROUTES={
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";
-    app.innerHTML=`<div class="view dark${l.some(p=>CARD(p)&&CARD(p).full)?" imm":""}">${feedHTML(l)}<header class="over slim"><a class="pill ib" href="#/c/${k}" aria-label="Voltar para ${esc(c.name)}">${BACK}</a>${brand}<i class="sp"></i></header></div>`;
+    app.innerHTML=`<div class="view dark">${feedHTML(l)}<header class="over slim"><a class="pill ib" href="#/c/${k}" aria-label="Voltar para ${esc(c.name)}">${BACK}</a>${brand}<i class="sp"></i></header></div>`;
     wireFeed(l,Math.min(+n||0,l.length-1));
   }
 };

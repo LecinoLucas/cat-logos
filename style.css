@@ -589,40 +589,38 @@ a{color:inherit;text-decoration:none}
 .car .slide.pc:not(.act){opacity:0}
 .dock2 .prog{display:none}
 
-/* Versão imersiva (teste em um produto): foto até o topo, logo e voltar por cima, sem barra de rolagem embaixo */
-.view.imm .card.car{--top:0px;--bot:88px;--sh:var(--th)}
-.view.imm .over{background:none}
-.view.imm .over .brand{filter:drop-shadow(0 1px 6px #000a)}
-.view.imm .car .slide.pc{--fw:100cqw}
-.view.imm .car .slide.pc .frame{width:100%;height:var(--sh);border-radius:0 0 28px 28px}
-.view.imm .fcard{bottom:14px}
-.view.imm .dock2 .count,.view.imm .dock2 .prog{display:none}
-.view.imm .car .slide.pc .frame{background:none;box-shadow:none;border-radius:0;overflow:visible}
-.view.imm .car .slide.pc .frame img.fg{position:absolute;inset:60px 0 auto 0;width:100%;height:auto;max-height:none;object-fit:fill;-webkit-mask-image:linear-gradient(transparent,#000 9%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 9%,#000 82%,transparent)}
-/* imersivo: logo no canto direito; preço "em escada" (Pix + valor cortado, valor, parcelado) */
-.view.imm .over .sp{display:none}
-.view.imm .over .brand{margin-left:auto}
-.view.imm .fcard .pr{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:3px 10px}
-.view.imm .fcard .pr[hidden]{display:none}
-.view.imm .fcard .rt{display:contents}
-.view.imm .fcard .tg{order:1}
-.view.imm .fcard s{order:2}
-.view.imm .fcard .val{order:3;flex:0 0 100%;margin-top:2px}
-.view.imm .fcard .px{order:4;flex:0 0 100%;text-align:left}
-/* imersivo v2: foto inteira sem esmaecer nas bordas, colada ao topo; cartão sobrepõe a base da foto */
-.view.imm .car .slide.pc{--fh:min(580px,calc(var(--sh) - 215px))}
-.view.imm .car .slide.pc .frame{height:var(--fh);border-radius:0 0 26px 26px;overflow:hidden;background:#0f2140;box-shadow:0 20px 40px -24px #000c}
-.view.imm .car .slide.pc .frame img.fg{inset:0;width:100%;height:100%;object-fit:cover;object-position:8% 50%;-webkit-mask-image:none;mask-image:none}
-.view.imm .fcard{bottom:auto;top:calc(var(--fh) - 84px)}
-.view.imm .car .slide.pc{--fh:calc(var(--sh) - 150px)}
-.view.imm .fcard{top:auto;bottom:10px}
-/* parcelado em escada: alinhado à direita, logo abaixo do ",00" */
-.view.imm .fcard .pr{display:grid;grid-template-columns:max-content 1fr;align-items:center;column-gap:10px;row-gap:3px}
-.view.imm .fcard .pr[hidden]{display:none}
-.view.imm .fcard .tg{grid-area:1/1;justify-self:start}
-.view.imm .fcard s{grid-area:1/2;justify-self:start}
-.view.imm .fcard .val{grid-area:2/1;flex:none;margin-top:2px}
-.view.imm .fcard .px{grid-area:3/1;flex:none;justify-self:end;text-align:right}
-.fcard .tl{display:contents}
-.view.imm .fcard .tl{grid-area:1/1/2/3;display:flex;align-items:center;gap:10px;justify-self:start}
-.view.imm .fcard .tg,.view.imm .fcard s{grid-area:auto}
+/* ═══ Cartão no estilo da arte (3 produtos de teste): foto até o topo + cartão nativo ═══ */
+/* todos os slides ganham o espaço do topo por dentro, para a foto poder subir até a borda */
+.card.car{padding-top:0!important}
+.car .slide{--tp:calc(var(--top) + env(safe-area-inset-top,0px));height:calc(var(--sh) + var(--tp));flex:0 0 calc(var(--sh) + var(--tp));padding-top:var(--tp);box-sizing:border-box}
+.over.slim .sp{display:none}
+.over.slim .brand{margin-left:auto;filter:drop-shadow(0 1px 6px #0009)}
+.car .slide.cd{padding-top:0}
+.car .slide.cd .frame{width:100%;max-width:none;aspect-ratio:auto;height:calc(var(--sh) + var(--tp) - 235px);border-radius:0 0 26px 26px;box-shadow:0 18px 30px -22px #000}
+.car .slide.cd .frame img.fg{object-fit:cover;object-position:8% 0}
+.fcard.cdc{left:16px;right:16px;width:auto;transform:none;bottom:8px;padding:15px 13px 10px;border-radius:26px;background:rgba(30,48,98,.95);backdrop-filter:none;-webkit-backdrop-filter:none;text-align:center;align-items:stretch}
+.cdc .eb{display:block;color:#a9c8f2;font-size:.55rem;letter-spacing:.3em;line-height:1.5;text-align:center}
+.cdc .cols{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;margin-top:5px;position:relative}
+.cdc .cols.n2::after{content:"";position:absolute;left:50%;top:12px;bottom:2px;width:1px;background:#ffffff26}
+.cdc .col{display:flex;flex-direction:column;align-items:center;padding:0 6px}
+.cdc .nm{font-family:var(--serif);font-weight:500;font-size:1.8rem;line-height:1.1;color:#fff}
+.cdc .hr{display:block;height:1px;background:#ffffff26;align-self:stretch;margin:7px 0 0}
+.cdc .dim{font-size:.78rem;font-weight:600;color:#ffffff9e;margin-top:10px;order:3}
+.cdc .nm{order:1}.cdc .hr{order:2}.cdc s{order:4}.cdc .pv{order:5}.cdc .tg{order:6}.cdc .px{order:7}
+.cdc s{font-size:.72rem;color:#ffffffb8;margin-top:3px}
+.cdc .pv{font-style:normal;font-family:var(--sans);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:2px;color:#fff;font-feature-settings:"lnum","tnum"}
+.cdc .tg{margin-top:3px;padding:2px 8px;border-radius:5px;font-size:.5rem}
+.cdc .px{font-size:.68rem;font-weight:700;color:#ffffffd0;margin-top:6px}
+.cdc .ob{display:block;font-style:normal;font-size:.78rem;color:#ffffffd8;margin-top:10px}
+.cdc .bn{display:block;font-style:normal;font-size:.47rem;letter-spacing:.38em;color:#ffffff70;margin-top:5px}
+/* um tamanho só: nome e medida na mesma linha, preço à esquerda */
+.cdc .cols.n1 .col{display:grid;grid-template-columns:1fr auto;align-items:baseline;text-align:left;padding:0 4px}
+.cdc .cols.n1 .nm{grid-area:1/1}.cdc .cols.n1 .dim{grid-area:1/2;margin:0;order:0}
+.cdc .cols.n1 .hr{grid-area:2/1/3/3}
+.cdc .cols.n1 s{grid-area:3/1/4/3}
+.cdc .cols.n1 .pv{grid-area:4/1;font-size:1.9rem}
+.cdc .cols.n1 .tg{grid-area:4/2;justify-self:end;align-self:center}
+.cdc .cols.n1 .px{grid-area:5/1/6/3;margin-top:4px}
+@media(max-height:700px){.car .slide.cd .frame{height:calc(var(--sh) + var(--tp) - 215px)}.cdc .ob,.cdc .bn{display:none}.cdc .nm{font-size:1.45rem}.cdc .pv{font-size:1.4rem}}
+.cdc s.de{text-decoration:none}.cdc s.de b{text-decoration:line-through;font-weight:400}
+.fcard .tl{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
