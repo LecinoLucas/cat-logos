@@ -42,7 +42,7 @@ const money=v=>{const i=String(v).lastIndexOf(",");return i<0?`<em>${esc(v)}</em
 const cardHTML=c=>{const o=c.o,tag=c.tag||"no Pix";
   const pick=o.length>1?`<span class="mcs">${o.map((x,k)=>`<span class="mc${k?"":" on"}" role="button" tabindex="0" data-k="${k}"><b>${esc(x.m)}</b><small>${esc(x.d)}</small></span>`).join("")}</span>`
     :`<span class="sz"><b>${esc(o[0].m)}</b>${o[0].d?`<small>${esc(o[0].d)}</small>`:""}</span>`;
-  const pr=o.map((x,k)=>`<span class="pr"${k?" hidden":""} data-k="${k}"><span class="val"><small>R$</small>${money(x.p)}</span><span class="rt"><u class="tg">${esc(tag)}</u>${x.de?`<s>De R$ ${esc(x.de)}</s>`:""}${x.x?`<span class="px">${/^\d+x R\$/.test(x.x)?"ou ":""}${esc(x.x)}</span>`:""}</span></span>`).join("");
+  const pr=o.map((x,k)=>`<span class="pr"${k?" hidden":""} data-k="${k}"><span class="val"><small>R$</small>${money(x.p)}</span><span class="rt"><span class="tl"><u class="tg">${esc(tag)}</u>${x.de?`<s>De R$ ${esc(x.de)}</s>`:""}</span>${x.x?`<span class="px">${/^\d+x R\$/.test(x.x)?"ou ":""}${esc(x.x)}</span>`:""}</span></span>`).join("");
   return `<span class="fcard"><i class="eb">${esc(c.eb)}</i><b class="nm">${esc(c.n)}</b>${pick}${pr}${c.obs?`<i class="ob">${esc(c.obs)}</i>`:""}</span>`};
 const waSel=(p,sl)=>{const c=CARD(p),k=sl&&+sl.dataset.k||0;return c&&c.o.length>1?wa(`Olá! Vi no catálogo da Black Friday e tenho interesse em: ${p.wa||p.name} — medida ${c.o[k].m}`):waProd(p)};
 const imgThumb=p=>p.thumb||(p.url?p.url:`img/ofertas/t/${p.img}`);

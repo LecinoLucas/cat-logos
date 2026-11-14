@@ -616,3 +616,13 @@ a{color:inherit;text-decoration:none}
 .view.imm .fcard{bottom:auto;top:calc(var(--fh) - 84px)}
 .view.imm .car .slide.pc{--fh:calc(var(--sh) - 150px)}
 .view.imm .fcard{top:auto;bottom:10px}
+/* parcelado em escada: alinhado à direita, logo abaixo do ",00" */
+.view.imm .fcard .pr{display:grid;grid-template-columns:max-content 1fr;align-items:center;column-gap:10px;row-gap:3px}
+.view.imm .fcard .pr[hidden]{display:none}
+.view.imm .fcard .tg{grid-area:1/1;justify-self:start}
+.view.imm .fcard s{grid-area:1/2;justify-self:start}
+.view.imm .fcard .val{grid-area:2/1;flex:none;margin-top:2px}
+.view.imm .fcard .px{grid-area:3/1;flex:none;justify-self:end;text-align:right}
+.fcard .tl{display:contents}
+.view.imm .fcard .tl{grid-area:1/1/2/3;display:flex;align-items:center;gap:10px;justify-self:start}
+.view.imm .fcard .tg,.view.imm .fcard s{grid-area:auto}
