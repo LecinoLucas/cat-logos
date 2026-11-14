@@ -78,8 +78,8 @@ function feedHTML(list,opts={}){
   const end=opts.closing?`<section class="card end"><div class="endbox">${LOGO("big")}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   if(opts.home){
     const cov=c=>PANEL.has(c)?`img/ofertas/c/${c}`:`img/ofertas/t/${c}`;
-    const vc=VITRINE.map(v=>{const n=inCat(v.key).length;return n?`<a class="vc2" href="#/c/${v.key}"><img src="${cov(v.cover)}" alt="" style="object-position:${v.pos||"50% 35%"}"><span><b>${esc(v.name)}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`:""}).join("");
-    const mt=MEDIDAS.filter(m=>medList(m[0]).length).map(m=>{const n=medList(m[0]).length;return `<a class="mr" href="#/c/medida-${m[0]}"><b>${m[1]}</b><span>${m[2]} m</span><em>${n}</em><i>›</i></a>`}).join("");
+    const vc=VITRINE.map(v=>{const n=inCat(v.key).length;return n?`<a class="vc2" href="#/c/${v.key}"><img src="${cov(v.cover)}" alt="" style="object-position:${v.pos||"50% 35%"}"><span><b>${esc(v.name)}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span><i class="go" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></i></a>`:""}).join("");
+    const mt=MEDIDAS.filter(m=>medList(m[0]).length).map(m=>{const n=medList(m[0]).length;const w=Math.round(parseFloat(m[2].replace(",","."))/1.93*100);return `<a class="mr" href="#/c/medida-${m[0]}"><b>${m[1]}</b><span>${m[2]} m</span><em>${n} ${n===1?"oferta":"ofertas"}</em><i class="rb" aria-hidden="true"><u style="width:${w}%"></u></i></a>`}).join("");
     const bc=CATEGORIES.filter(c=>c.group==="Marcas"&&visCat(c)&&inCat(c.key).length).map(c=>`<a class="mc2" href="#/c/${c.key}">${esc(c.name)}</a>`).join("");
     const ds=inCat("destaques").map((p,i)=>`<a class="mp" href="#/c/destaques/${i}" aria-label="${esc(p.leg||p.name)}"><img loading="lazy" src="${imgThumb(p)}" alt="" style="object-position:${p.pos||"50% 50%"}">${p.video?'<i class="pl"></i>':""}</a>`).join("");
     const DOTS=n=>`<i class="dots" aria-hidden="true">${[0,1,2].map(k=>`<u${k===n?' class="on"':""}></u>`).join("")}</i>`;
@@ -179,7 +179,6 @@ const ROUTES={
   home(toChoose){
     app.innerHTML=`<div class="view dark onlight">${feedHTML([],{home:true,intro:true})}<header class="over">${brand}</header></div>`;
     const feed=$(".feed"),hv=feed.closest(".view");wireIntro(feed);
-    let hk=0;feed.addEventListener("scroll",()=>{if(hk)return;hk=requestAnimationFrame(()=>{hk=0;hv.classList.toggle("onlight",feed.scrollTop<feed.clientHeight*.5)})},{passive:true});
     if(toChoose)requestAnimationFrame(()=>{feed.scrollTop=feed.clientHeight});
   },
   categorias(){ROUTES.home(true)},
