@@ -588,3 +588,14 @@ a{color:inherit;text-decoration:none}
 /* sem o "espiar" borrado da próxima foto nem a barra de progresso */
 .car .slide.pc:not(.act){opacity:0}
 .dock2 .prog{display:none}
+
+/* Versão imersiva (teste em um produto): foto até o topo, logo e voltar por cima, sem barra de rolagem embaixo */
+.view.imm .card.car{--top:0px;--bot:88px;--sh:var(--th)}
+.view.imm .over{background:none}
+.view.imm .over .brand{filter:drop-shadow(0 1px 6px #000a)}
+.view.imm .car .slide.pc{--fw:100cqw}
+.view.imm .car .slide.pc .frame{width:100%;height:var(--sh);border-radius:0 0 28px 28px}
+.view.imm .fcard{bottom:14px}
+.view.imm .dock2 .count,.view.imm .dock2 .prog{display:none}
+.view.imm .car .slide.pc .frame{background:none;box-shadow:none;border-radius:0;overflow:visible}
+.view.imm .car .slide.pc .frame img.fg{position:absolute;inset:60px 0 auto 0;width:100%;height:auto;max-height:none;object-fit:fill;-webkit-mask-image:linear-gradient(transparent,#000 9%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 9%,#000 82%,transparent)}

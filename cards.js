@@ -7,7 +7,7 @@ const o=(t,de,p,x)=>O(t[0],t[1],de,p,x);
 const COR="Verifique as cores disponíveis.",CORB="Verifique as cores do box baú disponíveis.",NB="Não acompanha o box.";
 const BX=(t,de,p)=>({eb:"Box baú",n:"Box baú",tag:"+ 5% no Pix",o:[o(t,de,p,"até 10x sem juros")],obs:COR+" Colchão e objetos decorativos não inclusos."});
 window.CARDS={
-"molas-bau-solteiro-solteirao.jpg":{eb:"Colchão + Box baú",n:"Molas ensacadas macio",o:[o(S,"2.820,00","2.047,00","10x R$ 234,00"),o(SO,"3.289,00","2.494,00","10x R$ 270,00")],obs:CORB},
+"molas-bau-solteiro-solteirao.jpg":{full:1,eb:"Colchão + Box baú",n:"Molas ensacadas macio",o:[o(S,"2.820,00","2.047,00","10x R$ 234,00"),o(SO,"3.289,00","2.494,00","10x R$ 270,00")],obs:CORB},
 "molas-bau-casal-queen.jpg":{eb:"Colchão + Box baú",n:"Molas ensacadas macio",o:[o(C,"3.489,00","2.690,00","10x R$ 293,00"),o(Q,"4.280,00","3.285,00","10x R$ 359,00")],obs:"Não acompanha a cabeceira."},
 "molas-bau-queen.jpg":{eb:"Colchão + Box baú",n:"Molas ensacadas",o:[o(Q,"5.280,00","3.960,00","10x R$ 430,00")],obs:CORB},
 "molas-bau-king.jpg":{eb:"Colchão + Box baú",n:"Molas ensacadas",o:[o(K,"5.789,00","4.597,00","10x R$ 489,00")],obs:CORB},
