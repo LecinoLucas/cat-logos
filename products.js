@@ -39,6 +39,7 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"video-mesas-cabeceira.jpg",pos:"50% 40%"},
   {group:"Black Friday",black:true,key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
   {group:"Black Friday",black:true,key:"cama-auxiliar",name:"Cama auxiliar",cover:"video-cama-auxiliar.jpg",pos:"50% 30%"},
+  {group:"Black Friday",black:true,key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
@@ -58,7 +59,6 @@ window.CATEGORIES = [
   {group:"Marcas",key:"outras-marcas",name:"Outras marcas"},
 
   {group:"Complementos",key:"cabeceiras",name:"Cabeceiras"},
-  {group:"Complementos",key:"travesseiros",name:"Travesseiros"},
   {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
@@ -113,6 +113,7 @@ window.PRODUCTS = [
   // ── Black Friday ──
   {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",med:["solteiro","solteirao","casal","queen","king"],leg:"Box Baú · todos os tamanhos",preco:"Solteiro ao King · a partir de R$ 999",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
+  {cat:"campanha",top:true,video:"video-black-resumo.mp4",img:"video-black-resumo.jpg",leg:"Black Friday Pioneira · até 60% off",name:"Vídeo: Black Friday Pioneira (resumo das ofertas)",wa:"as ofertas da Black Friday"},
   {cat:"tricama",top:true,img:"tricama-promo.jpg",keepcap:true,leg:"Tricama 3 em 1 · aço e 2 anos de garantia",preco:"10x R$ 333,87 · R$ 3.050 à vista",name:"Tricama 3 em 1 (estrutura em aço, 2 anos de garantia)"},
   {cat:"mesas",top:true,video:"video-mesas-cabeceira.mp4",img:"video-mesas-cabeceira.jpg",leg:"Toque no modelo preferido",chips:[{t:"DIME",img:"mesa-dime.jpg"},{t:"MILETO",img:"mesa-mileto.jpg"},{t:"MH5404",img:"mesa-mh5404.jpg"},{t:"MH5405",img:"mesa-mh5405.jpg"},{t:"MH5410",img:"mesa-mh5410.jpg"},{t:"LINO",img:"mesa-lino.jpg"},{t:"MILOS",img:"mesa-milos.jpg"}],name:"Vídeo: Mesas de cabeceira",wa:"Mesas de cabeceira"},
   {cat:"mesas",img:"mesa-dime.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira DIME",back:"Todos os modelos"},
@@ -122,6 +123,7 @@ window.PRODUCTS = [
   {cat:"mesas",img:"mesa-mh5410.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira MH5410",back:"Todos os modelos"},
   {cat:"mesas",img:"mesa-lino.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira LINO",back:"Todos os modelos"},
   {cat:"mesas",img:"mesa-milos.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira MILOS",back:"Todos os modelos"},
+  {cat:"travesseiros",top:true,img:"travesseiro-pluma.jpg",leg:"Travesseiro Toque de Pluma",preco:"R$ 19,90 no Pix",name:"Travesseiro Toque de Pluma suporte médio 50x70"},
   {cat:"cama-auxiliar",top:true,video:"video-cama-auxiliar.mp4",img:"video-cama-auxiliar.jpg",med:["solteiro","solteirao"],preco:"x",leg:"Cama auxiliar molas ensacadas",name:"Vídeo: Cama auxiliar de molas ensacadas (Solteiro e Solteirão)",wa:"Cama auxiliar de molas ensacadas"},
   {cat:"cama-posta",top:true,img:"coord-azul-solteiro.jpg",leg:"Coordenado 5 peças azul · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças azul linho toque 300 fios Solteiro"},
   {cat:"cama-posta",top:true,img:"coord-rose-solteiro.jpg",leg:"Coordenado 5 peças rosê · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças rosê linho toque 300 fios Solteiro"},
@@ -141,6 +143,8 @@ window.PRODUCTS = [
   {cat:"colchao-bau",top:true,img:"molas-bau-casal-queen.jpg",leg:"Colchão + Box Baú Casal e Queen",preco:"Casal R$ 2.690 · Queen R$ 3.285 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Casal e Queen)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-queen.jpg",leg:"Colchão + Box Baú Queen",preco:"R$ 3.960 no Pix",name:"Colchão Molas Ensacadas + Box Baú Queen (1,58 × 1,98 m)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-king.jpg",leg:"Colchão + Box Baú King",preco:"R$ 4.597 no Pix",name:"Colchão Molas Ensacadas + Box Baú King (1,93 × 2,03 m)"},
+  {cat:"colchao",top:true,img:"inducol-casal-box.jpg",med:["casal"],tags:["inducol"],leg:"Inducol Hotelaria Casal + Box",preco:"R$ 1.449 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme + Box Casal (1,38 × 1,88 m)"},
+  {cat:"colchao",top:true,img:"inducol-casal.jpg",med:["casal"],tags:["inducol"],leg:"Inducol Hotelaria Casal",preco:"R$ 1.098 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme Casal (1,38 × 1,88 m)"},
   {cat:"colchao",top:true,img:"inducol-hotelaria-solteiro.jpg",med:["solteiro"],tags:["inducol"],leg:"Inducol Hotelaria Solteiro",preco:"R$ 799 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme Solteiro (0,88 × 1,88 m)"},
   {cat:"colchao",top:true,img:"hotelaria-solteiro.jpg",leg:"Colchão Hotelaria + Box Solteiro",preco:"R$ 999 no Pix",name:"Colchão Molas de Hotelaria Firme + Box Solteiro"},
   {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",leg:"King Koil Firme Solteiro",preco:"R$ 1.398 no Pix",tags:["king-koil"],name:"Colchão King Koil Firme Solteiro"},
@@ -153,5 +157,6 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"herval-king.jpg",tags:["herval"],leg:"Herval Molas Firme + Box King",preco:"R$ 2.895 no Pix",name:"Colchão Herval de Molas Firme + Box King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",leg:"King Koil Hotelaria Queen",preco:"R$ 3.296 no Pix",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
   {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",leg:"King Koil Crystal Queen",preco:"R$ 10.345 no Pix",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
+  {cat:"colchao",top:true,img:"kingkoil-nanobionic-queen.jpg",med:["queen"],tags:["king-koil"],leg:"King Koil Látex Nanobionic Queen",preco:"R$ 14.845 no Pix",name:"Colchão King Koil com Látex e Tecnologia Nanobionic Queen (1,58 × 1,98 m)"},
   {cat:"colchao",top:true,img:"kingkoil-diamond-queen.jpg",leg:"King Koil Diamond Queen",preco:"R$ 6.987 no Pix",tags:["king-koil"],name:"Colchão com Látex Diamond King Koil Queen (última peça)"}
 ];
