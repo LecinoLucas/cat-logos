@@ -599,3 +599,13 @@ a{color:inherit;text-decoration:none}
 .view.imm .dock2 .count,.view.imm .dock2 .prog{display:none}
 .view.imm .car .slide.pc .frame{background:none;box-shadow:none;border-radius:0;overflow:visible}
 .view.imm .car .slide.pc .frame img.fg{position:absolute;inset:60px 0 auto 0;width:100%;height:auto;max-height:none;object-fit:fill;-webkit-mask-image:linear-gradient(transparent,#000 9%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 9%,#000 82%,transparent)}
+/* imersivo: logo no canto direito; preço "em escada" (Pix + valor cortado, valor, parcelado) */
+.view.imm .over .sp{display:none}
+.view.imm .over .brand{margin-left:auto}
+.view.imm .fcard .pr{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:3px 10px}
+.view.imm .fcard .pr[hidden]{display:none}
+.view.imm .fcard .rt{display:contents}
+.view.imm .fcard .tg{order:1}
+.view.imm .fcard s{order:2}
+.view.imm .fcard .val{order:3;flex:0 0 100%;margin-top:2px}
+.view.imm .fcard .px{order:4;flex:0 0 100%;text-align:left}
