@@ -210,7 +210,7 @@ const ROUTES={
   },
   viewer(k,n){
     const c=catOf(k),l=inCat(k);if(!c||!l.length)return location.hash="#/";
-    app.innerHTML=`<div class="view dark">${feedHTML(l)}<header class="over"><a class="pill" href="#/c/${k}">${BACK}${c.name}</a>${brand}</header></div>`;
+    app.innerHTML=`<div class="view dark">${feedHTML(l)}<header class="over slim"><a class="pill ib" href="#/c/${k}" aria-label="Voltar para ${esc(c.name)}">${BACK}</a>${brand}<i class="sp"></i></header></div>`;
     wireFeed(l,Math.min(+n||0,l.length-1));
   }
 };

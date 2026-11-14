@@ -575,3 +575,16 @@ a{color:inherit;text-decoration:none}
 .fcard .px{font-size:.68rem;font-weight:600;color:#ffffffd6;white-space:nowrap}
 .fcard .ob{font-style:normal;font-size:.58rem;line-height:1.35;color:#ffffff8c;text-align:center;margin-top:9px}
 @media(max-height:700px){.car .slide.pc .frame{height:calc(var(--sh) - 110px)}.fcard{padding:10px 13px 10px}.fcard .nm{font-size:1.15rem;margin-bottom:6px}.fcard .val em{font-size:1.75rem}.fcard .ob{display:none}}
+
+/* Topo enxuto da tela do produto: só o ícone de voltar e a logo */
+.over.slim{padding-left:14px;padding-right:14px}
+.over .pill.ib{width:40px;height:40px;padding:0;justify-content:center;gap:0;border-radius:50%;background:#0d1a2e99;color:#fff;border:1px solid #ffffff44;box-shadow:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.over .pill.ib svg{width:18px;height:18px}
+.over.slim .sp{width:40px;height:40px}
+.over.slim .brand{flex-direction:column;gap:2px}
+/* menos poluição: sem setas sobre a foto (a rolagem já leva ao próximo) e sem aviso miúdo no cartão */
+.car .nav{display:none!important}
+.fcard .ob{display:none}
+/* sem o "espiar" borrado da próxima foto nem a barra de progresso */
+.car .slide.pc:not(.act){opacity:0}
+.dock2 .prog{display:none}
