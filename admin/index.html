@@ -46,12 +46,12 @@ button.link{background:none;border:0;color:var(--blue);font:inherit;font-size:.6
   <div class="brand"><svg viewBox="0 0 64 40"><path fill="#6db3f0" d="M16 38a12 12 0 0 1-2-23.8A15 15 0 0 1 43 11a13 13 0 0 1 6 27z"/></svg><div>pioneira<small>COLCHÕES</small></div></div>
   <form class="card" id="fLogin" autocomplete="on">
     <h2 style="text-align:center">Área restrita</h2>
-    <div class="row"><div><label for="em">E-mail</label><input id="em" type="email" autocomplete="username" required></div></div>
+    <div class="row"><div><label for="em">Usuário</label><input id="em" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Admin" required></div></div>
     <div class="row"><div><label for="pw">Senha</label><input id="pw" type="password" autocomplete="current-password" required></div></div>
     <button class="btn" style="width:100%" id="bLogin">Entrar</button>
     <p class="msg err" id="mLogin" hidden></p>
   </form>
-  <p class="hint">Acesso só para a equipe. Quem cria os acessos é o administrador do Supabase.</p>
+  <p class="hint">Acesso restrito.</p>
 </section>
 
 <section id="vApp" hidden>
@@ -107,6 +107,8 @@ const esc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",
 const show=(id,on)=>$(id).hidden=!on;
 const say=(id,t,cls)=>{const e=$(id);e.textContent=t||"";e.className="msg"+(cls?" "+cls:"");e.hidden=!t};
 const BUCKET="fotos";
+// "Admin" vira admin@pioneira.local (o usuário criado no Supabase). Quem digita um e-mail completo entra com ele.
+const loginEmail=u=>{u=String(u||"").trim();return u.includes("@")?u:u.toLowerCase()+"@"+((window.SUPABASE&&SUPABASE.loginDomain)||"pioneira.local")};
 let sb=null,cats=[],items=[],picked=[];
 
 function boot(){
@@ -132,9 +134,9 @@ async function enter(session){
 
 $("fLogin").addEventListener("submit",async e=>{
   e.preventDefault();say("mLogin","");$("bLogin").disabled=true;
-  const {data,error}=await sb.auth.signInWithPassword({email:$("em").value.trim(),password:$("pw").value});
+  const {data,error}=await sb.auth.signInWithPassword({email:loginEmail($("em").value),password:$("pw").value});
   $("bLogin").disabled=false;
-  if(error){say("mLogin","E-mail ou senha incorretos.","err");return}
+  if(error){say("mLogin","Usuário ou senha incorretos.","err");return}
   $("pw").value="";enter(data.session);
 });
 $("bOut").onclick=async()=>{await sb.auth.signOut();location.reload()};

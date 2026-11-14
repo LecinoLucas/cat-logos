@@ -1,6 +1,6 @@
 -- Pioneira Colchões · área restrita do catálogo
 -- Como usar: Supabase → SQL Editor → New query → cole TUDO isto → Run.
--- Antes de rodar, troque SEU-EMAIL@exemplo.com (no fim do arquivo) pelo e-mail de quem vai administrar.
+-- O administrador é o usuário "Admin" (admin@pioneira.local). Crie esse usuário em Authentication → Users com a senha escolhida.
 
 -- ───────── Tabelas ─────────
 create table if not exists public.categorias (
@@ -94,7 +94,7 @@ insert into public.categorias (slug, nome, grupo, ordem) values
   ('protetores',    'Protetores',     'Complementos', 110)
 on conflict (slug) do nothing;
 
--- ───────── Administradores (TROQUE O E-MAIL) ─────────
+-- ───────── Administradores ─────────
 insert into public.admins (email) values
-  ('SEU-EMAIL@exemplo.com')
+  ('admin@pioneira.local')
 on conflict (email) do nothing;

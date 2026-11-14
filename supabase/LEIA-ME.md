@@ -9,13 +9,13 @@ O catálogo continua funcionando sem isto. Depois de ligar, quem tem login sobe 
 
 ## 2. Criar as tabelas e as regras de segurança
 1. No projeto: **SQL Editor → New query**.
-2. Abra `supabase/schema.sql`, troque **SEU-EMAIL@exemplo.com** (no fim do arquivo) pelo e-mail de quem vai administrar. Para mais de uma pessoa, repita a linha com outro e-mail.
+2. Abra `supabase/schema.sql`. O administrador já está como **admin@pioneira.local** (é o usuário "Admin" da tela de login).
 3. Cole tudo no editor e clique **Run**.
 
 ## 3. Travar o cadastro e criar os logins
 1. **Authentication → Sign In / Providers → Email**: desligue **Allow new users to sign up** (assim ninguém de fora consegue criar conta).
 2. **Authentication → Users → Add user → Create new user**: informe e-mail e senha e marque **Auto Confirm User**.
-   Crie um usuário por pessoa. O e-mail precisa ser o mesmo que está na tabela `admins` do passo 2.
+   Use o e-mail **admin@pioneira.local** e a senha que você escolher. Na tela `/admin/` o login é só **Admin** + a senha. A senha fica só no Supabase, nunca no código.
 
 ## 4. Ligar o catálogo
 1. **Project Settings → API**: copie a **Project URL** e a chave **anon public**.
