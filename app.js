@@ -77,11 +77,16 @@ function feedHTML(list,opts={}){
   const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Escolher o que procura"><span>Deslize para escolher</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${LOGO("big")}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
   if(opts.home){
-    const vc=VITRINE.map(v=>{const n=inCat(v.key).length;return n?`<a class="vc" href="#/c/${v.key}"><img src="img/ofertas/t/${v.cover}" alt="" style="object-position:${v.pos||"50% 35%"}"><span><b>${esc(v.name)}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`:""}).join("");
-    const mt=MEDIDAS.filter(m=>medList(m[0]).length).map(m=>{const n=medList(m[0]).length;return `<a class="mt" href="#/c/medida-${m[0]}"><b>${m[1]}</b><small>${m[2]} m</small><i>${n} ${n===1?"oferta":"ofertas"}</i></a>`}).join("");
-    const bc=CATEGORIES.filter(c=>c.group==="Marcas"&&visCat(c)&&inCat(c.key).length).map(c=>`<a class="mchip" href="#/c/${c.key}">${esc(c.name)}</a>`).join("");
+    const cov=c=>PANEL.has(c)?`img/ofertas/c/${c}`:`img/ofertas/t/${c}`;
+    const vc=VITRINE.map(v=>{const n=inCat(v.key).length;return n?`<a class="vc2" href="#/c/${v.key}"><img src="${cov(v.cover)}" alt="" style="object-position:${v.pos||"50% 35%"}"><span><b>${esc(v.name)}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`:""}).join("");
+    const mt=MEDIDAS.filter(m=>medList(m[0]).length).map(m=>{const n=medList(m[0]).length;return `<a class="mr" href="#/c/medida-${m[0]}"><b>${m[1]}</b><span>${m[2]} m</span><em>${n}</em><i>›</i></a>`}).join("");
+    const bc=CATEGORIES.filter(c=>c.group==="Marcas"&&visCat(c)&&inCat(c.key).length).map(c=>`<a class="mc2" href="#/c/${c.key}">${esc(c.name)}</a>`).join("");
     const ds=inCat("destaques").map((p,i)=>`<a class="mp" href="#/c/destaques/${i}" aria-label="${esc(p.leg||p.name)}"><img loading="lazy" src="${imgThumb(p)}" alt="" style="object-position:${p.pos||"50% 50%"}">${p.video?'<i class="pl"></i>':""}</a>`).join("");
-    const choose=`<section class="card choose"><h2>Qual a medida da sua cama?</h2><div class="mtiles">${mt}</div><h2 class="h2b">Ou escolha o produto</h2><div class="vgrid">${vc}</div>${bc?`<p class="lab">Por marca</p><div class="mchips">${bc}</div>`:""}${ds?`<p class="lab">Mais procurados</p><div class="strip">${ds}</div>`:""}<div class="cta"><a class="dockwa" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}<span>Falar no WhatsApp</span></a><a class="lnk" href="#/loja">Conheça a Pioneira</a></div></section>`;
+    const DOTS=n=>`<i class="dots" aria-hidden="true">${[0,1,2].map(k=>`<u${k===n?' class="on"':""}></u>`).join("")}</i>`;
+    const CUE='<span class="cue2">Deslize<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>';
+    const choose=`<section class="card pgp"><p class="ey">Black Friday${STORE.destaque?" · "+esc(STORE.destaque):""}</p><h2>Qual a medida<br>da sua cama?</h2><div class="mrs">${mt}</div>${CUE}${DOTS(0)}</section>`
+      +`<section class="card pgp"><p class="ey">Categorias</p><h2>Ou escolha<br>o produto</h2><div class="vg2">${vc}</div>${DOTS(1)}</section>`
+      +`<section class="card pgp"><p class="ey">Destaques</p><h2>Mais procurados</h2>${ds?`<div class="strip">${ds}</div>`:""}${bc?`<p class="lab2">Por marca</p><div class="mcs2">${bc}</div>`:""}<div class="cta2"><a class="wa2" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}<span>Falar no WhatsApp</span></a><a class="lnk2" href="#/loja">Conheça a Pioneira</a></div>${DOTS(2)}</section>`;
     return `<div class="feed home">${intro}${choose}</div>`;
   }
   return `<div class="feed">${intro}${car}${end}</div><div class="dock2 off"><i class="prog" aria-hidden="true"><b></b></i><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
@@ -173,7 +178,8 @@ function wireFeed(list,start=0,hasIntro=false){
 const ROUTES={
   home(toChoose){
     app.innerHTML=`<div class="view dark onlight">${feedHTML([],{home:true,intro:true})}<header class="over">${brand}</header></div>`;
-    const feed=$(".feed");wireIntro(feed);
+    const feed=$(".feed"),hv=feed.closest(".view");wireIntro(feed);
+    let hk=0;feed.addEventListener("scroll",()=>{if(hk)return;hk=requestAnimationFrame(()=>{hk=0;hv.classList.toggle("onlight",feed.scrollTop<feed.clientHeight*.5)})},{passive:true});
     if(toChoose)requestAnimationFrame(()=>{feed.scrollTop=feed.clientHeight});
   },
   categorias(){ROUTES.home(true)},
