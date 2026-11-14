@@ -47,8 +47,9 @@ const medOf=p=>{if(p.med)return p.med;const t=(String(p.name||"")+" "+String(p.l
 const visCat=c=>!!c&&(!STORE.soBlack||!!c.black);
 const catVis=k=>visCat(CATEGORIES.find(c=>c.key===k));
 const medList=m=>PRODUCTS.filter(p=>catVis(p.cat)&&medOf(p).includes(m));
-const catOf=k=>{if(k.indexOf("medida-")===0){const m=MEDIDAS.find(x=>x[0]===k.slice(7));return m?{key:k,name:m[1]}:undefined}const c=CATEGORIES.find(c=>c.key===k);return visCat(c)?c:undefined};
-const inCat=k=>k.indexOf("medida-")===0?medList(k.slice(7)):(visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===k||(p.tags&&p.tags.includes(k))):[]);
+const vitOf=k=>VITRINE.find(v=>v.key===k&&v.cats);
+const catOf=k=>{if(k==="destaques")return{key:k,name:"Mais procurados"};const v=vitOf(k);if(v)return{key:k,name:v.name};if(k.indexOf("medida-")===0){const m=MEDIDAS.find(x=>x[0]===k.slice(7));return m?{key:k,name:m[1]}:undefined}const c=CATEGORIES.find(c=>c.key===k);return visCat(c)?c:undefined};
+const inCat=k=>{if(k==="destaques")return PRODUCTS.filter(p=>p.dest&&catVis(p.cat));const v=vitOf(k);if(v)return PRODUCTS.filter(p=>v.cats.includes(p.cat)&&catVis(p.cat));return k.indexOf("medida-")===0?medList(k.slice(7)):(visCat(CATEGORIES.find(c=>c.key===k))?PRODUCTS.filter(p=>p.cat===k||(p.tags&&p.tags.includes(k))):[])};
 
 // Rolagem vertical em tela cheia. opts.closing → última tela com convite; opts.start → índice inicial.
 function feedHTML(list,opts={}){
@@ -72,9 +73,52 @@ function feedHTML(list,opts={}){
   const sp=(STORE.selo||"").split(" ");
   const seal=sp.length>=2?`<div class="seal"><small>${esc(sp[0])}</small><b>${esc(sp[1])}</b><small>${esc(sp.slice(2).join(" "))}</small></div>`:"";
   const puff=(l,t,dx,dl)=>`<i class="puff" style="left:${l}%;top:${t}%;--dx:${dx}px;animation-delay:${dl}s">${CLOUD}</i>`;
-  const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Ver as ofertas"><span>Deslize para ver as ofertas</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button><a class="catcover" href="#/categorias">${GRID}<span>Ver categorias</span></a></div></section>`:"";
+  const intro=opts.intro?`<section class="card intro light v3"><div class="rig"><div class="swing"><i class="rope"></i><div class="tagbox tagscroll"><img class="tagimg" src="img/etiqueta-pendurada.webp" alt="Black Friday Pioneira">${puff(64,6,34,2.4)}${puff(76,16,50,3.9)}${puff(58,2,-18,5.4)}</div></div></div><div class="copy">${STORE.periodo?`<b class="when">${esc(STORE.periodo)}</b>`:""}${big}<span class="hair"></span>${STORE.subtitulo?`<p class="sub">${fmt(STORE.subtitulo)}</p>`:""}</div><div class="dock"><button class="cue" type="button" aria-label="Escolher o que procura"><span>Deslize para escolher</span><i class="ring"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></i></button></div></section>`:"";
   const end=opts.closing?`<section class="card end"><div class="endbox">${LOGO("big")}<h3>Gostou?</h3><p>Veja todas as categorias<br>ou fale direto com a gente.</p><a class="ghost" href="#/categorias">Ver categorias</a><a class="ghost" href="#/loja">Conheça a Pioneira</a><a class="solid" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}Falar no WhatsApp</a></div></section>`:"";
+  if(opts.home){
+    const vc=VITRINE.map(v=>{const n=inCat(v.key).length;return n?`<a class="vc" href="#/c/${v.key}"><img src="img/ofertas/t/${v.cover}" alt="" style="object-position:${v.pos||"50% 35%"}"><span><b>${esc(v.name)}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`:""}).join("");
+    const mc=MEDIDAS.filter(m=>medList(m[0]).length).map(m=>`<a class="mchip" href="#/c/medida-${m[0]}">${m[1]}</a>`).join("");
+    const bc=CATEGORIES.filter(c=>c.group==="Marcas"&&visCat(c)&&inCat(c.key).length).map(c=>`<a class="mchip" href="#/c/${c.key}">${esc(c.name)}</a>`).join("");
+    const ds=inCat("destaques").map((p,i)=>`<a class="mp" href="#/c/destaques/${i}" aria-label="${esc(p.leg||p.name)}"><img loading="lazy" src="${imgThumb(p)}" alt="" style="object-position:${p.pos||"50% 50%"}">${p.video?'<i class="pl"></i>':""}</a>`).join("");
+    const choose=`<section class="card choose"><h2>O que você procura?</h2><div class="vgrid">${vc}</div>${mc?`<p class="lab">Procurando uma medida?</p><div class="mchips">${mc}</div>`:""}${bc?`<p class="lab">Por marca</p><div class="mchips">${bc}</div>`:""}${ds?`<p class="lab">Mais procurados</p><div class="strip">${ds}</div>`:""}<div class="cta"><a class="dockwa" target="_blank" rel="noopener" href="${wa("Olá! Vi o catálogo da Black Friday e gostaria de saber mais.")}">${WAI}<span>Falar no WhatsApp</span></a><a class="lnk" href="#/loja">Conheça a Pioneira</a></div></section>`;
+    return `<div class="feed home">${intro}${choose}</div>`;
+  }
   return `<div class="feed">${intro}${car}${end}</div><div class="dock2 off"><i class="prog" aria-hidden="true"><b></b></i><div class="count" aria-hidden="true"></div><div class="btns"><a class="dk-cat" href="#/categorias">${GRID}<span>Categorias</span></a><a class="fab" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"></a></div></div>`;
+}
+function wireIntro(feed){
+  const introEl=feed.querySelector(".intro");
+  if(introEl){
+    const num=introEl.querySelector(".num");
+    if(num){const to=+num.dataset.to,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(!reduce){num.textContent="0";const t0=performance.now()+1250,dur=1700;
+        const step=now=>{const k=Math.max(0,Math.min(1,(now-t0)/dur));num.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1&&document.body.contains(num))requestAnimationFrame(step)};
+        requestAnimationFrame(step)}}
+    let ticking=false;
+    feed.addEventListener("scroll",()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{
+      const p=Math.max(0,Math.min(1,feed.scrollTop/(feed.clientHeight*.42)));
+      introEl.style.setProperty("--p",p.toFixed(3));ticking=false})},{passive:true});
+    // inclinação: giroscópio do celular (Android) ou mouse no computador
+    const ts=introEl.querySelector(".tagscroll");let tx=0,ty=0,cx=0,cy=0,base=null,raf=0;
+    const clamp=(v,m)=>Math.max(-m,Math.min(m,v));
+    const loop=()=>{cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
+      ts.style.setProperty("--ry",cx.toFixed(2)+"deg");ts.style.setProperty("--rx",cy.toFixed(2)+"deg");
+      raf=(Math.abs(tx-cx)>.05||Math.abs(ty-cy)>.05)?requestAnimationFrame(loop):0};
+    const kick=()=>{if(!raf)raf=requestAnimationFrame(loop)};
+    window.addEventListener("deviceorientation",e=>{
+      if(e.gamma==null||e.beta==null)return;
+      if(!base)base={g:e.gamma,b:e.beta};
+      tx=clamp((e.gamma-base.g)*.5,12);ty=clamp(-(e.beta-base.b)*.4,10);kick()},{passive:true});
+    introEl.addEventListener("pointermove",e=>{
+      if(e.pointerType!=="mouse")return;const r=introEl.getBoundingClientRect();
+      tx=clamp(((e.clientX-r.left)/r.width-.5)*28,14);ty=clamp(-((e.clientY-r.top)/r.height-.5)*20,10);kick()});
+  }
+  const go=feed.querySelector(".cue");
+  if(go)go.onclick=()=>{
+    const top=feed.clientHeight;
+    feed.style.scrollSnapType="none";
+    try{feed.scrollTo({top,behavior:"smooth"})}catch(e){feed.scrollTop=top}
+    setTimeout(()=>{feed.scrollTop=top;feed.style.scrollSnapType=""},750);
+  };
 }
 function wireFeed(list,start=0,hasIntro=false){
   const feed=$(".feed"),count=$(".count"),fab=$(".fab"),dock=$(".dock2"),view=feed.closest(".view");
@@ -121,56 +165,17 @@ function wireFeed(list,start=0,hasIntro=false){
     if(hasIntro&&e.target===secs[0])view.classList.toggle("onlight",e.isIntersecting&&e.intersectionRatio>=.5);
   }),{root:feed,threshold:[0,.5,.6,.8,1]});
   secs.forEach(c=>io.observe(c));
-  const introEl=feed.querySelector(".intro");
-  if(introEl){
-    const num=introEl.querySelector(".num");
-    if(num){const to=+num.dataset.to,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if(!reduce){num.textContent="0";const t0=performance.now()+1250,dur=1700;
-        const step=now=>{const k=Math.max(0,Math.min(1,(now-t0)/dur));num.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1&&document.body.contains(num))requestAnimationFrame(step)};
-        requestAnimationFrame(step)}}
-    let ticking=false;
-    feed.addEventListener("scroll",()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{
-      const p=Math.max(0,Math.min(1,feed.scrollTop/(feed.clientHeight*.42)));
-      introEl.style.setProperty("--p",p.toFixed(3));ticking=false})},{passive:true});
-    // inclinação: giroscópio do celular (Android) ou mouse no computador
-    const ts=introEl.querySelector(".tagscroll");let tx=0,ty=0,cx=0,cy=0,base=null,raf=0;
-    const clamp=(v,m)=>Math.max(-m,Math.min(m,v));
-    const loop=()=>{cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;
-      ts.style.setProperty("--ry",cx.toFixed(2)+"deg");ts.style.setProperty("--rx",cy.toFixed(2)+"deg");
-      raf=(Math.abs(tx-cx)>.05||Math.abs(ty-cy)>.05)?requestAnimationFrame(loop):0};
-    const kick=()=>{if(!raf)raf=requestAnimationFrame(loop)};
-    window.addEventListener("deviceorientation",e=>{
-      if(e.gamma==null||e.beta==null)return;
-      if(!base)base={g:e.gamma,b:e.beta};
-      tx=clamp((e.gamma-base.g)*.5,12);ty=clamp(-(e.beta-base.b)*.4,10);kick()},{passive:true});
-    introEl.addEventListener("pointermove",e=>{
-      if(e.pointerType!=="mouse")return;const r=introEl.getBoundingClientRect();
-      tx=clamp(((e.clientX-r.left)/r.width-.5)*28,14);ty=clamp(-((e.clientY-r.top)/r.height-.5)*20,10);kick()});
-  }
-  const go=feed.querySelector(".cue");
-  if(go)go.onclick=()=>{
-    const top=feed.clientHeight;
-    feed.style.scrollSnapType="none";
-    try{feed.scrollTo({top,behavior:"smooth"})}catch(e){feed.scrollTop=top}
-    setTimeout(()=>{feed.scrollTop=top;feed.style.scrollSnapType=""},750);
-  };
   requestAnimationFrame(()=>{goTo(Math.max(0,start),false);cur=Math.max(0,start);sync();onScroll()});
   if(!hasIntro){feed.scrollTop=0;carOn=true}
 }
 
 const ROUTES={
-  home(){
-    const list=PRODUCTS.filter(p=>p.top);const l=list.length?list:PRODUCTS;
-    app.innerHTML=`<div class="view dark">${feedHTML(l,{closing:true,intro:true})}<header class="over">${brand}</header></div>`;
-    wireFeed(l,0,true);
+  home(toChoose){
+    app.innerHTML=`<div class="view dark onlight">${feedHTML([],{home:true,intro:true})}<header class="over">${brand}</header></div>`;
+    const feed=$(".feed");wireIntro(feed);
+    if(toChoose)requestAnimationFrame(()=>{feed.scrollTop=feed.clientHeight});
   },
-  categorias(){
-    const groups=[];CATEGORIES.filter(c=>visCat(c)&&(inCat(c.key).length||c.mostrar)).forEach(c=>{let g=groups.find(x=>x.n===(c.group||""));if(!g)groups.push(g={n:c.group||"",l:[]});g.l.push(c)});
-    const tile=c=>{const n=inCat(c.key).length;
-      return catThumb(c)&&n?`<a class="cat" href="#/c/${c.key}"><img src="${catThumb(c)}" alt="" style="object-position:${c.pos||"top"}"><span><b>${c.name}</b><small>${n} ${n===1?"oferta":"ofertas"}</small></span></a>`
-      :`<a class="cat soon" href="#/c/${c.key}"><span><b>${c.name}</b><small>${n?`${n} ${n===1?"oferta":"ofertas"}`:"Em breve"}</small></span></a>`};
-    app.innerHTML=`<div class="view light scroll"><header class="bar"><span></span><h1>Categorias</h1><a class="ic" href="#/" aria-label="Fechar">${CLOSE}</a></header><section class="medbox"><h2 class="grp">Procurando uma medida?</h2><div class="meds">${MEDIDAS.map(m=>{const n=medList(m[0]).length;return n?`<a class="med" href="#/c/medida-${m[0]}"><b>${m[1]}</b><small>${m[2]} m</small><i>${n}</i></a>`:""}).join("")}</div></section>${groups.map(g=>`<section class="grpbox">${g.n?`<h2 class="grp">${esc(g.n==="Marcas"&&STORE.soBlack?"Black por marca":g.n)}</h2>`:""}<div class="cats">${g.l.map(tile).join("")}</div></section>`).join("")}<a class="aboutlink" href="#/loja">A Pioneira<small>Pagamento, contato e atendimento</small></a></div>`;
-  },
+  categorias(){ROUTES.home(true)},
   loja(){
     const S=STORE,rows=[];
     if(S.endereco)rows.push(["Endereço",esc(S.endereco)]);

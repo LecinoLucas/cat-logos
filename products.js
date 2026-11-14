@@ -29,6 +29,15 @@ window.STORE = {
   destaque: "Até 60% off",           // o número antes do % conta de 0 até ele quando a página abre
   subtitulo: "O conforto que você ama com o preço que **não volta mais.**"   // **texto** = destaque em azul
 };
+// Vitrine da tela inicial ("O que você procura?"): cartões com foto. cats = junta várias categorias; sem cats = categoria existente.
+window.VITRINE = [
+  {key:"v-box",name:"Box Baú",cats:["box-bau","colchao-bau"],cover:"box-queen.jpg",pos:"50% 30%"},
+  {key:"colchao",name:"Colchões",cover:"kingkoil-queen.jpg",pos:"50% 40%"},
+  {key:"v-camas",name:"Camas",cats:["camas","tricama","cama-auxiliar"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
+  {key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 40%"},
+  {key:"mesas",name:"Mesas de cabeceira",cover:"mesa-mh5405.jpg",pos:"50% 45%"},
+  {key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 40%"}
+];
 window.CATEGORIES = [
   // group: título da seção na tela de categorias. Sem "cover" = categoria sem fotos ainda (aparece como "Em breve").
   // Para ativar uma categoria: ponha as fotos em img/ofertas/ (+ miniatura em img/ofertas/t/), use cat:"<key>" nos produtos e, se quiser, defina cover.
@@ -111,10 +120,10 @@ window.PRODUCTS = [
   {cat:"box-gold",loja:true,img:"box-gold-14.jpg",name:"Box Gold",ratio:"1/1"},
   {cat:"box-gold",loja:true,img:"box-gold-15.jpg",name:"Box Gold",ratio:"1/1"},
   // ── Black Friday ──
-  {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",med:["solteiro","solteirao","casal","queen","king"],leg:"Box Baú · todos os tamanhos",preco:"Solteiro ao King · a partir de R$ 999",name:"Box Baú (tabela de preços: Solteiro ao King)"},
+  {cat:"box-bau",top:true,img:"box-bau-tabela.jpg",dest:true,med:["solteiro","solteirao","casal","queen","king"],leg:"Box Baú · todos os tamanhos",preco:"Solteiro ao King · a partir de R$ 999",name:"Box Baú (tabela de preços: Solteiro ao King)"},
   {cat:"campanha",top:true,video:"video-black-esperar.mp4",img:"video-black-esperar.jpg",name:"Vídeo: Por que esperar pode sair caro?",wa:"as ofertas da Black Friday"},
   {cat:"campanha",top:true,video:"video-black-resumo.mp4",img:"video-black-resumo.jpg",leg:"Black Friday Pioneira · até 60% off",name:"Vídeo: Black Friday Pioneira (resumo das ofertas)",wa:"as ofertas da Black Friday"},
-  {cat:"tricama",top:true,img:"tricama-promo.jpg",keepcap:true,leg:"Tricama 3 em 1 · aço e 2 anos de garantia",preco:"10x R$ 333,87 · R$ 3.050 à vista",name:"Tricama 3 em 1 (estrutura em aço, 2 anos de garantia)"},
+  {cat:"tricama",top:true,img:"tricama-promo.jpg",dest:true,keepcap:true,leg:"Tricama 3 em 1 · aço e 2 anos de garantia",preco:"10x R$ 333,87 · R$ 3.050 à vista",name:"Tricama 3 em 1 (estrutura em aço, 2 anos de garantia)"},
   {cat:"mesas",top:true,video:"video-mesas-cabeceira.mp4",img:"video-mesas-cabeceira.jpg",leg:"Toque no modelo preferido",chips:[{t:"DIME",img:"mesa-dime.jpg"},{t:"MILETO",img:"mesa-mileto.jpg"},{t:"MH5404",img:"mesa-mh5404.jpg"},{t:"MH5405",img:"mesa-mh5405.jpg"},{t:"MH5410",img:"mesa-mh5410.jpg"},{t:"LINO",img:"mesa-lino.jpg"},{t:"MILOS",img:"mesa-milos.jpg"}],name:"Vídeo: Mesas de cabeceira",wa:"Mesas de cabeceira"},
   {cat:"mesas",img:"mesa-dime.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira DIME",back:"Todos os modelos"},
   {cat:"mesas",img:"mesa-mileto.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira MILETO",back:"Todos os modelos"},
@@ -124,13 +133,13 @@ window.PRODUCTS = [
   {cat:"mesas",img:"mesa-lino.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira LINO",back:"Todos os modelos"},
   {cat:"mesas",img:"mesa-milos.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira MILOS",back:"Todos os modelos"},
   {cat:"travesseiros",top:true,img:"travesseiro-pluma.jpg",leg:"Travesseiro Toque de Pluma",preco:"R$ 19,90 no Pix",name:"Travesseiro Toque de Pluma suporte médio 50x70"},
-  {cat:"cama-auxiliar",top:true,video:"video-cama-auxiliar.mp4",img:"video-cama-auxiliar.jpg",med:["solteiro","solteirao"],preco:"x",leg:"Cama auxiliar molas ensacadas",name:"Vídeo: Cama auxiliar de molas ensacadas (Solteiro e Solteirão)",wa:"Cama auxiliar de molas ensacadas"},
+  {cat:"cama-auxiliar",top:true,video:"video-cama-auxiliar.mp4",dest:true,img:"video-cama-auxiliar.jpg",med:["solteiro","solteirao"],preco:"x",leg:"Cama auxiliar molas ensacadas",name:"Vídeo: Cama auxiliar de molas ensacadas (Solteiro e Solteirão)",wa:"Cama auxiliar de molas ensacadas"},
   {cat:"cama-posta",top:true,img:"coord-azul-solteiro.jpg",leg:"Coordenado 5 peças azul · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças azul linho toque 300 fios Solteiro"},
   {cat:"cama-posta",top:true,img:"coord-rose-solteiro.jpg",leg:"Coordenado 5 peças rosê · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças rosê linho toque 300 fios Solteiro"},
   {cat:"cama-posta",top:true,img:"coord3-azul-claro.jpg",leg:"Coordenado 3 peças azul claro",preco:"R$ 299 no Pix",name:"Coordenado 3 peças dupla face azul claro micropercal 200 fios Solteiro"},
   {cat:"cama-posta",top:true,img:"coord3-rosa-antigo.jpg",leg:"Coordenado 3 peças rosa antigo",preco:"R$ 299 no Pix",name:"Coordenado 3 peças dupla face rosa antigo micropercal 200 fios Solteiro"},
   {cat:"cama-posta",video:"video-coordenado-rose.mp4",img:"video-coordenado-rose.jpg",leg:"Coordenado rosê · veja de perto",name:"Vídeo: Coordenado rosê",wa:"Coordenado 5 peças rosê"},
-  {cat:"camas",top:true,img:"bicama-solteiro.jpg",leg:"Bicama de molas Solteiro",preco:"R$ 1.799 no Pix",name:"Colchão Molas Firme + Bicama de Molas Solteiro (0,88 × 1,88 m)"},
+  {cat:"camas",top:true,img:"bicama-solteiro.jpg",dest:true,leg:"Bicama de molas Solteiro",preco:"R$ 1.799 no Pix",name:"Colchão Molas Firme + Bicama de Molas Solteiro (0,88 × 1,88 m)"},
   {cat:"camas",video:"video-bicama-molas.mp4",img:"video-bicama-molas.jpg",tags:["bicamas-loja"],leg:"Bicama de molas · veja de perto",preco:"R$ 1.299 (de R$ 1.699)",name:"Vídeo: Bicama de molas",wa:"Bicama de molas"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
@@ -139,7 +148,7 @@ window.PRODUCTS = [
   {cat:"box-bau",top:true,img:"box-casal.jpg",leg:"Box Baú Casal",preco:"R$ 1.199",name:"Box Baú Casal (1,38 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-queen.jpg",leg:"Box Baú Queen",preco:"R$ 1.399",name:"Box Baú Queen (1,58 × 1,98 m)"},
   {cat:"box-bau",top:true,img:"box-king.jpg",leg:"Box Baú King",preco:"R$ 1.899",name:"Box Baú King (1,93 × 2,03 m)"},
-  {cat:"colchao-bau",top:true,img:"molas-bau-solteiro-solteirao.jpg",leg:"Colchão + Box Baú Solteiro e Solteirão",preco:"Solteiro R$ 2.047 · Solteirão R$ 2.494 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Solteiro e Solteirão)"},
+  {cat:"colchao-bau",top:true,img:"molas-bau-solteiro-solteirao.jpg",dest:true,leg:"Colchão + Box Baú Solteiro e Solteirão",preco:"Solteiro R$ 2.047 · Solteirão R$ 2.494 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Solteiro e Solteirão)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-casal-queen.jpg",leg:"Colchão + Box Baú Casal e Queen",preco:"Casal R$ 2.690 · Queen R$ 3.285 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Casal e Queen)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-queen.jpg",leg:"Colchão + Box Baú Queen",preco:"R$ 3.960 no Pix",name:"Colchão Molas Ensacadas + Box Baú Queen (1,58 × 1,98 m)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-king.jpg",leg:"Colchão + Box Baú King",preco:"R$ 4.597 no Pix",name:"Colchão Molas Ensacadas + Box Baú King (1,93 × 2,03 m)"},
