@@ -547,3 +547,31 @@ a{color:inherit;text-decoration:none}
 .grid .tile[hidden]{display:none}
 .bar h1{font-size:1.9rem}
 @media(min-width:700px){.mt b{font-size:1.9rem}}
+
+/* ═══ Tela do produto: foto sobe até o topo, logo flutuante à direita, voltar só ícone ═══ */
+.card.car{padding-top:0!important}
+.car .slide{height:calc(var(--sh) + var(--top));flex:0 0 calc(var(--sh) + var(--top))}
+.car .slide .frame{height:calc(var(--sh) + var(--top) - 42px);border-radius:0 0 24px 24px}
+.over.top .brand{filter:drop-shadow(0 1px 6px #000a)}
+.over.top .pill.ib{width:40px;height:40px;padding:0;justify-content:center;gap:0;border-radius:50%;background:#0d1a2e99;color:#fff;border:1px solid #ffffff44;box-shadow:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.over.top .pill.ib svg{width:18px;height:18px}
+@media(max-height:700px){.car .slide .frame{height:calc(var(--sh) + var(--top) - 38px)}}
+.car .slide .frame{max-width:100cqw;width:100%}
+
+/* ganha tela: sem barra de progresso, contador, aviso de rolar, setas nem a foto seguinte espiando; a arte (cartão) fica intacta */
+.dock2 .prog,.dock2 .count{display:none}
+.dock2{padding:8px 16px calc(14px + env(safe-area-inset-bottom,0px))!important;background:none!important}
+.car .nav{display:none!important}
+.card.car{--bot:76px;--sh:var(--th)}
+.car .track::after{flex-basis:0}
+.car .slide:not(.act){opacity:0}
+.car .slide{height:calc(var(--sh) + var(--top));flex:0 0 calc(var(--sh) + var(--top))}
+.car .slide .frame{height:min(177.78cqw,calc(var(--sh) + var(--top) - 6px));width:auto;max-width:100cqw;aspect-ratio:9/16}
+@media(max-height:700px){.card.car{--bot:68px}.car .slide .frame{height:min(177.78cqw,calc(var(--sh) + var(--top) - 6px))}}
+
+/* artes com faixa de preço: a foto ganha a altura que sobrava e o cartão desce, colado nos botões */
+.car .slide .frame.pn{--F:calc(var(--sh) + var(--top) - 6px);--W:min(100cqw,calc(var(--F)*9/16));width:var(--W);height:var(--F);max-width:none;aspect-ratio:auto;--B:calc(var(--W)*16/9*.375)}
+.frame.pn .pa,.frame.pn .pb{position:absolute;left:0;width:100%;object-fit:cover}
+.frame.pn .pa{top:0;height:calc(var(--F) - var(--B) + 26px);object-position:0% 0}
+.frame.pn .pb{bottom:0;height:var(--B);object-position:50% 100%;-webkit-mask-image:linear-gradient(transparent,#000 26px);mask-image:linear-gradient(transparent,#000 26px)}
+.frame.pn .pa{bottom:auto}.frame.pn .pb{top:auto}
