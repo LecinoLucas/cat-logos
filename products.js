@@ -133,6 +133,7 @@ window.PRODUCTS = [
   {cat:"mesas",img:"mesa-lino.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira LINO",back:"Todos os modelos"},
   {cat:"mesas",img:"mesa-milos.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira MILOS",back:"Todos os modelos"},
   {cat:"travesseiros",top:true,img:"travesseiro-pluma.jpg",leg:"Travesseiro Toque de Pluma",preco:"R$ 19,90 no Pix",name:"Travesseiro Toque de Pluma suporte médio 50x70"},
+  {cat:"travesseiros",top:true,img:"travesseiro-visco-gel.jpg",leg:"Travesseiro Visco Gel 50 × 70",preco:"R$ 192 no Pix",name:"Travesseiro Visco Gel anti pressão refrescante 50x70 (enchimento em flocos)"},
   {cat:"cama-auxiliar",top:true,video:"video-cama-auxiliar.mp4",dest:true,img:"video-cama-auxiliar.jpg",med:["solteiro","solteirao"],preco:"x",leg:"Cama auxiliar molas ensacadas",name:"Vídeo: Cama auxiliar de molas ensacadas (Solteiro e Solteirão)",wa:"Cama auxiliar de molas ensacadas"},
   {cat:"cama-posta",video:"video-coordenado-rose.mp4",img:"video-coordenado-rose.jpg",leg:"Coordenado rosê · veja de perto",name:"Vídeo: Coordenado rosê",wa:"Coordenado 5 peças rosê"},
   {cat:"cama-posta",top:true,img:"coord-azul-solteiro.jpg",leg:"Coordenado 5 peças azul · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças azul linho toque 300 fios Solteiro"},
