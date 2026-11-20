@@ -33,7 +33,7 @@ window.STORE = {
 window.VITRINE = [
   {key:"v-box",name:"Box Baú",cats:["box-bau","colchao-bau"],cover:"box-queen.jpg",pos:"50% 30%"},
   {key:"colchao",name:"Colchões",cover:"kingkoil-queen.jpg",pos:"50% 40%"},
-  {key:"v-camas",name:"Camas",cats:["camas","tricama","cama-auxiliar"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
+  {key:"v-camas",name:"Camas",cats:["camas","tricama","cama-auxiliar","cabeceiras"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
   {key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 40%"},
   {key:"mesas",name:"Mesas de cabeceira",cover:"mesa-mh5405.jpg",pos:"50% 45%"},
   {key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 40%"}
@@ -49,6 +49,7 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
   {group:"Black Friday",black:true,key:"cama-auxiliar",name:"Cama auxiliar",cover:"video-cama-auxiliar.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 30%"},
+  {group:"Black Friday",black:true,key:"cabeceiras",name:"Cabeceiras",cover:"cabeceira-la-fiori.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
@@ -67,7 +68,6 @@ window.CATEGORIES = [
   {group:"Marcas",key:"herval",name:"Herval",cover:"herval-king.jpg",black:true},
   {group:"Marcas",key:"outras-marcas",name:"Outras marcas"},
 
-  {group:"Complementos",key:"cabeceiras",name:"Cabeceiras"},
   {group:"Complementos",key:"protetores",name:"Protetores"}
 ];
 window.PRODUCTS = [
@@ -145,6 +145,7 @@ window.PRODUCTS = [
   {cat:"camas",video:"video-bicama-molas.mp4",img:"video-bicama-molas.jpg",tags:["bicamas-loja"],leg:"Bicama de molas · veja de perto",preco:"R$ 1.299 (de R$ 1.699)",name:"Vídeo: Bicama de molas",wa:"Bicama de molas"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"camas",top:true,img:"cama-urban-queen.jpg",med:["queen"],leg:"Cama Urban Queen",preco:"R$ 1.997 no Pix",name:"Cama Urban Queen (1,58 × 1,98 m), não acompanha o colchão"},
+  {cat:"cabeceiras",top:true,img:"cabeceira-la-fiori.jpg",med:["solteiro","solteirao","casal","queen","king"],leg:"Cabeceira La Fiori · Solteiro ao King",preco:"Solteiro ao King · a partir de R$ 389",name:"Cabeceira La Fiori (Solteiro ao King)"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",leg:"Box Baú Solteiro",preco:"R$ 999",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-solteirao.jpg",leg:"Box Baú Solteirão",preco:"R$ 1.100",name:"Box Baú Solteirão (1,08 × 1,98 m)"},
