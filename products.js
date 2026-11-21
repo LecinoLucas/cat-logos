@@ -174,4 +174,7 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",leg:"King Koil Crystal Queen",preco:"R$ 10.345 no Pix",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
   {cat:"colchao",top:true,img:"kingkoil-nanobionic-queen.jpg",med:["queen"],tags:["king-koil"],leg:"King Koil Látex Nanobionic Queen",preco:"R$ 14.845 no Pix",name:"Colchão King Koil com Látex e Tecnologia Nanobionic Queen (1,58 × 1,98 m)"},
   {cat:"colchao",top:true,img:"kingkoil-diamond-queen.jpg",leg:"King Koil Diamond Queen",preco:"R$ 6.987 no Pix",tags:["king-koil"],name:"Colchão com Látex Diamond King Koil Queen (última peça)"}
+  {cat:"colchao",top:true,img:"kingkoil-diamond-king.jpg",med:["king"],tags:["king-koil"],leg:"King Koil Diamond King",preco:"R$ 10.715 no Pix",name:"Colchão com Látex Diamond King Koil King (1,93 × 2,03 m)"},
+  {cat:"colchao",top:true,img:"kingkoil-diamond-queen-2.jpg",med:["queen"],tags:["king-koil"],leg:"King Koil Diamond Queen",preco:"R$ 8.620 no Pix",name:"Colchão Diamond com Látex King Koil Queen"},
+  {cat:"colchao",top:true,img:"molas-firme-queen-699.jpg",med:["queen"],leg:"Colchão Molas Ensacadas Firme Queen",preco:"R$ 699 no Pix",name:"Colchão Molas Ensacadas Firme Queen (1,58 × 1,98 m)"},
 ];
