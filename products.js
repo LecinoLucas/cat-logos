@@ -138,6 +138,7 @@ window.PRODUCTS = [
   {cat:"cama-posta",top:true,img:"coord3-azul-claro.jpg",leg:"Coordenado 3 peças azul claro",preco:"R$ 299 no Pix",name:"Coordenado 3 peças dupla face azul claro micropercal 200 fios Solteiro"},
   {cat:"cama-posta",top:true,img:"coord3-rosa-antigo.jpg",leg:"Coordenado 3 peças rosa antigo",preco:"R$ 299 no Pix",name:"Coordenado 3 peças dupla face rosa antigo micropercal 200 fios Solteiro"},
   {cat:"cama-posta",top:true,img:"colcha-dupla-face-casal-queen.jpg",med:["casal","queen"],leg:"Kit colcha dupla face 3 peças · Casal e Queen",preco:"Casal R$ 345 · Queen R$ 399 no Pix",name:"Kit colcha dupla face 3 peças (Casal e Queen, retirada na loja)"},
+  {cat:"cama-posta",top:true,img:"colcha-floral-casal.jpg",med:["casal"],leg:"Kit colcha dupla face 3 peças · Casal",preco:"R$ 349 no Pix",name:"Kit colcha dupla face 3 peças floral Casal (retirada na loja)"},
   {cat:"camas",top:true,img:"bicama-solteiro.jpg",dest:true,leg:"Bicama de molas Solteiro",preco:"R$ 1.799 no Pix",name:"Colchão Molas Firme + Bicama de Molas Solteiro (0,88 × 1,88 m)"},
   {cat:"camas",video:"video-bicama-molas.mp4",img:"video-bicama-molas.jpg",tags:["bicamas-loja"],leg:"Bicama de molas · veja de perto",preco:"R$ 1.299 (de R$ 1.699)",name:"Vídeo: Bicama de molas",wa:"Bicama de molas"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
