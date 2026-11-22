@@ -143,6 +143,7 @@ window.PRODUCTS = [
   {cat:"camas",video:"video-bicama-molas.mp4",img:"video-bicama-molas.jpg",tags:["bicamas-loja"],leg:"Bicama de molas · veja de perto",preco:"R$ 1.299 (de R$ 1.699)",name:"Vídeo: Bicama de molas",wa:"Bicama de molas"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"camas",top:true,img:"cama-urban-queen.jpg",med:["queen"],leg:"Cama Urban Queen",preco:"R$ 1.997 no Pix",name:"Cama Urban Queen (1,58 × 1,98 m), não acompanha o colchão"},
+  {cat:"camas",top:true,video:"video-cama-auxiliar-mostruario.mp4",img:"video-cama-auxiliar-mostruario.jpg",med:["solteiro"],selo:"Peça de mostruário",selo2:"Última unidade",leg:"Cama auxiliar molas Solteiro",preco:"x",name:"Vídeo: Cama auxiliar de molas Solteiro (mostruário)",wa:"Cama auxiliar de molas Solteiro (peça de mostruário)"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",leg:"Box Baú Solteiro",preco:"R$ 999",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-solteirao.jpg",leg:"Box Baú Solteirão",preco:"R$ 1.100",name:"Box Baú Solteirão (1,08 × 1,98 m)"},
