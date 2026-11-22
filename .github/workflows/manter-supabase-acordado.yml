@@ -1,6 +1,7 @@
-# Cutuca o Supabase a cada 3 dias para o plano grátis não pausar o projeto por inatividade (7 dias).
-# Lê a URL e a chave PÚBLICA (anon) do config.js da branch catalogo-loja. Não usa segredo nenhum.
-# Se o Supabase não responder 200, a execução fica vermelha e o GitHub avisa por e-mail.
+# Cutuca o banco do Supabase a cada 3 dias, para o plano grátis não pausar o projeto por inatividade (pausa após 7 dias parado).
+# Usa só a URL e a chave PÚBLICA (anon), as mesmas que já ficam no config.js do site. Não usa segredo nenhum.
+# Faz uma leitura de verdade no banco. Se o Supabase não responder 200, a execução fica vermelha e o GitHub avisa por e-mail.
+# Para rodar na hora: aba Actions > "Manter Supabase acordado" > Run workflow.
 name: Manter Supabase acordado
 
 on:
@@ -11,18 +12,23 @@ on:
 permissions:
   contents: read
 
+env:
+  SUPABASE_URL: https://xgcjcpqeowotlfumettz.supabase.co
+  SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnY2pjcHFlb3dvdGxmdW1ldHR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ2MTYzNTIsImV4cCI6MjExMDE5MjM1Mn0.jCgsli59k76DIVCXAVEVb_q33YmsFa1iLuC5re5Z0eQ
+
 jobs:
   cutucar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: catalogo-loja
-      - name: Fazer um pedido ao Supabase
+      - name: Fazer um pedido ao banco
         run: |
-          url=$(sed -n 's/.*url: *"\([^"]*\)".*/\1/p' config.js | head -1)
-          key=$(sed -n 's/.*key: *"\([^"]*\)".*/\1/p' config.js | head -1)
-          if [ -z "$url" ] || [ -z "$key" ]; then echo "config.js ainda está vazio; nada a fazer."; exit 0; fi
-          code=$(curl -s -o /dev/null -w "%{http_code}" -H "apikey: $key" -H "Authorization: Bearer $key" "$url/rest/v1/categorias?select=slug&limit=1")
-          echo "Supabase respondeu: $code"
-          [ "$code" = "200" ]
+          for i in 1 2 3; do
+            code=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
+              -H "apikey: $SUPABASE_ANON_KEY" -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+              "$SUPABASE_URL/rest/v1/categorias?select=slug&limit=1")
+            echo "Tentativa $i: Supabase respondeu $code"
+            [ "$code" = "200" ] && { cat /tmp/resp.json; echo; exit 0; }
+            sleep 20
+          done
+          echo "O Supabase não respondeu 200. O projeto pode estar pausado: abra o painel do Supabase e toque em Restore."
+          exit 1
