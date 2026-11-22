@@ -1,3 +1,10 @@
+
+// ───── Estatísticas anônimas (só registra se o Supabase estiver ligado em config.js) ─────
+const TRK=(()=>{const S=window.SUPABASE;if(!S||!S.url||!S.key)return()=>{};
+  let sid="";try{sid=localStorage.getItem("pc_sid")||"";if(!sid){sid=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,"").slice(0,24);localStorage.setItem("pc_sid",sid)}}catch(e){sid="x"+Math.random().toString(36).slice(2,12)}
+  const seen=new Set();
+  return (tipo,alvo,extra,once)=>{try{const k=tipo+"|"+(alvo||"");if(once){if(seen.has(k))return;seen.add(k)}
+    fetch(S.url+"/rest/v1/eventos",{method:"POST",keepalive:true,headers:{apikey:S.key,Authorization:"Bearer "+S.key,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({sid,tipo,alvo:alvo?String(alvo).slice(0,150):null,extra:extra?String(extra).slice(0,150):null})}).catch(()=>{})}catch(e){}}})();
 const $=s=>document.querySelector(s);
 const app=$("#app");
 const CLOUD='<svg class="cloud" viewBox="0 0 64 40" aria-hidden="true"><path fill="#6db3f0" d="M16 38a12 12 0 0 1-2-23.8A15 15 0 0 1 43 11a13 13 0 0 1 6 27z"/></svg>';
@@ -26,6 +33,7 @@ document.addEventListener("click",e=>{
   const a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');
   if(!a)return;
   if(a.hasAttribute("data-direct")){setTimeout(closeWam,150);return}
+  {const sl=document.querySelector(".slide.act");TRK("whatsapp",location.hash.replace(/^#\/?/,"")||"inicio",sl&&sl.getAttribute("aria-label"))}
   if(ATD.length<2)return;
   e.preventDefault();const q=new URL(a.href).searchParams.get("text")||"";openWam(q);
 },true);
@@ -156,6 +164,7 @@ function wireFeed(list,start=0,hasIntro=false){
     const last=cur>=slides.length-1;
     const pb=dock.querySelector(".prog b");if(pb)pb.style.width=((cur+1)/slides.length*100)+"%";
     count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint dn${swiped&&!last?" gone":""}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para baixo"}${last&&!hasIntro?"":DN}</span>`;
+    TRK("produto",(list[cur].leg||list[cur].name||"").replace(/^Vídeo: /,""),location.hash.replace(/^#\/?/,""),true);
     fab.href=waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
     prev.classList.toggle("dis",cur===0);next.classList.toggle("dis",last&&true);
   };
@@ -223,6 +232,7 @@ const ROUTES={
   }
 };
 function route(){
+  {const h0=location.hash.replace(/^#\/?/,"").split("/");if(h0[0]==="c"&&h0[1])TRK(h0[1].indexOf("medida-")===0?"medida":"categoria",h0[1],null,true)}
   const h=location.hash.replace(/^#\/?/,"").split("/");
   if(h[0]==="categorias")ROUTES.categorias();
   else if(h[0]==="loja")ROUTES.loja();
@@ -248,3 +258,4 @@ Promise.race([loadRemote(),new Promise(r=>setTimeout(r,1200))]).then(route);
 // abertura curta, só na primeira vez da sessão
 const sp=$("#splash");let seen=false;try{seen=sessionStorage.getItem("sp")}catch(e){}
 if(seen)sp.remove();else{try{sessionStorage.setItem("sp","1")}catch(e){}setTimeout(()=>{sp.classList.add("out");setTimeout(()=>sp.remove(),600)},1000)}
+TRK("abriu",null,document.referrer?new URL(document.referrer,location.href).hostname:"direto",true);

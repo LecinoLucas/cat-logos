@@ -98,3 +98,51 @@ on conflict (slug) do nothing;
 insert into public.admins (email) values
   ('admin@pioneira.local')
 on conflict (email) do nothing;
+
+-- ───────── Estatísticas (sem dados pessoais) ─────────
+create table if not exists public.eventos (
+  id         bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  sid        text not null check (char_length(sid) <= 40),   -- código anônimo do aparelho
+  tipo       text not null check (tipo in ('abriu','produto','categoria','medida','whatsapp','rolou')),
+  alvo       text check (char_length(alvo) <= 160),            -- produto / categoria / medida
+  extra      text check (char_length(extra) <= 160)
+);
+create index if not exists eventos_tipo_idx on public.eventos (tipo, created_at desc);
+create index if not exists eventos_dia_idx  on public.eventos (created_at desc);
+alter table public.eventos enable row level security;
+drop policy if exists "eventos: qualquer um registra" on public.eventos;
+drop policy if exists "eventos: admin le"            on public.eventos;
+create policy "eventos: qualquer um registra" on public.eventos for insert to anon, authenticated with check (true);
+create policy "eventos: admin le"            on public.eventos for select to authenticated using (public.is_admin());
+
+-- Resumo para o painel (só administrador consegue chamar)
+create or replace function public.resumo_estatisticas(dias int default 30)
+returns jsonb language plpgsql stable security definer set search_path = public as $$
+declare r jsonb;
+begin
+  if not public.is_admin() then raise exception 'sem permissão'; end if;
+  select jsonb_build_object(
+    'visitantes', (select count(distinct sid) from eventos where created_at > now() - make_interval(days => dias)),
+    'aberturas',  (select count(*) from eventos where tipo='abriu'    and created_at > now() - make_interval(days => dias)),
+    'whatsapp',   (select count(*) from eventos where tipo='whatsapp' and created_at > now() - make_interval(days => dias)),
+    'por_dia', coalesce((select jsonb_agg(x order by x->>'dia') from (
+        select jsonb_build_object('dia', to_char((created_at at time zone 'America/Sao_Paulo')::date,'YYYY-MM-DD'), 'visitantes', count(distinct sid)) x
+        from eventos where created_at > now() - make_interval(days => dias) group by 1 ) t),'[]'::jsonb),
+    'top_produtos', coalesce((select jsonb_agg(x) from (
+        select jsonb_build_object('alvo',alvo,'aberturas',count(*),'visitantes',count(distinct sid)) x from eventos
+        where tipo='produto' and created_at > now() - make_interval(days => dias) group by alvo order by count(*) desc limit 15) t),'[]'::jsonb),
+    'top_whatsapp', coalesce((select jsonb_agg(x) from (
+        select jsonb_build_object('alvo',coalesce(alvo,'(geral)'),'cliques',count(*)) x from eventos
+        where tipo='whatsapp' and created_at > now() - make_interval(days => dias) group by alvo order by count(*) desc limit 15) t),'[]'::jsonb),
+    'categorias', coalesce((select jsonb_agg(x) from (
+        select jsonb_build_object('alvo',alvo,'toques',count(*)) x from eventos
+        where tipo in ('categoria','medida') and created_at > now() - make_interval(days => dias) group by alvo order by count(*) desc limit 15) t),'[]'::jsonb),
+    'horas', coalesce((select jsonb_agg(x order by (x->>'hora')::int) from (
+        select jsonb_build_object('hora', extract(hour from created_at at time zone 'America/Sao_Paulo')::int, 'aberturas', count(*)) x
+        from eventos where tipo='abriu' and created_at > now() - make_interval(days => dias) group by 1) t),'[]'::jsonb)
+  ) into r;
+  return r;
+end $$;
+revoke all on function public.resumo_estatisticas(int) from public, anon;
+grant execute on function public.resumo_estatisticas(int) to authenticated;
