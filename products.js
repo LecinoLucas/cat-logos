@@ -33,7 +33,7 @@ window.STORE = {
 window.VITRINE = [
   {key:"v-box",name:"Box Baú",cats:["box-bau","colchao-bau"],cover:"box-queen.jpg",pos:"50% 30%"},
   {key:"colchao",name:"Colchões",cover:"kingkoil-queen.jpg",pos:"50% 40%"},
-  {key:"v-camas",name:"Camas",cats:["camas","tricama","cama-auxiliar","cabeceiras"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
+  {key:"v-camas",name:"Camas",cats:["camas","tricama","cama-auxiliar"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
   {key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 40%"},
   {key:"mesas",name:"Mesas de cabeceira",cover:"mesa-mh5405.jpg",pos:"50% 45%"},
   {key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 40%"}
@@ -49,7 +49,6 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
   {group:"Black Friday",black:true,key:"cama-auxiliar",name:"Cama auxiliar",cover:"video-cama-auxiliar.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 30%"},
-  {group:"Black Friday",black:true,key:"cabeceiras",name:"Cabeceiras",cover:"cabeceira-la-fiori.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
@@ -145,8 +144,6 @@ window.PRODUCTS = [
   {cat:"camas",video:"video-bicama-molas.mp4",img:"video-bicama-molas.jpg",tags:["bicamas-loja"],leg:"Bicama de molas · veja de perto",preco:"R$ 1.299 (de R$ 1.699)",name:"Vídeo: Bicama de molas",wa:"Bicama de molas"},
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"camas",top:true,img:"cama-urban-queen.jpg",med:["queen"],leg:"Cama Urban Queen",preco:"R$ 1.997 no Pix",name:"Cama Urban Queen (1,58 × 1,98 m), não acompanha o colchão"},
-  {cat:"cabeceiras",top:true,img:"cabeceira-la-fiori.jpg",med:["solteiro","solteirao","casal","queen","king"],leg:"Cabeceira La Fiori · Solteiro ao King",preco:"Solteiro ao King · a partir de R$ 389",name:"Cabeceira La Fiori (Solteiro ao King)"},
-  {cat:"cabeceiras",top:true,img:"cabeceira-lumina.jpg",med:["solteirao","casal","queen","king"],leg:"Cabeceira Lumina · Solteirão ao King",preco:"Solteirão ao King · a partir de R$ 499",name:"Cabeceira Lumina (Solteirão ao King)"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",leg:"Box Baú Solteiro",preco:"R$ 999",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-solteirao.jpg",leg:"Box Baú Solteirão",preco:"R$ 1.100",name:"Box Baú Solteirão (1,08 × 1,98 m)"},
@@ -155,10 +152,7 @@ window.PRODUCTS = [
   {cat:"box-bau",top:true,img:"box-king.jpg",leg:"Box Baú King",preco:"R$ 1.899",name:"Box Baú King (1,93 × 2,03 m)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-solteiro-solteirao.jpg",dest:true,leg:"Colchão + Box Baú Solteiro e Solteirão",preco:"Solteiro R$ 2.047 · Solteirão R$ 2.494 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Solteiro e Solteirão)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-casal-queen.jpg",leg:"Colchão + Box Baú Casal e Queen",preco:"Casal R$ 2.690 · Queen R$ 3.285 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Casal e Queen)"},
-  {cat:"colchao-bau",top:true,img:"molas-bau-queen.jpg",leg:"Colchão + Box Baú Queen",preco:"R$ 3.960 no Pix",name:"Colchão Molas Ensacadas + Box Baú Queen (1,58 × 1,98 m)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-king.jpg",leg:"Colchão + Box Baú King",preco:"R$ 4.597 no Pix",name:"Colchão Molas Ensacadas + Box Baú King (1,93 × 2,03 m)"},
-  {cat:"colchao",top:true,img:"inducol-casal-box.jpg",med:["casal"],tags:["inducol"],leg:"Inducol Hotelaria Casal + Box",preco:"R$ 1.449 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme + Box Casal (1,38 × 1,88 m)"},
-  {cat:"colchao",top:true,img:"inducol-casal.jpg",med:["casal"],tags:["inducol"],leg:"Inducol Hotelaria Casal",preco:"R$ 1.098 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme Casal (1,38 × 1,88 m)"},
   {cat:"colchao",top:true,img:"inducol-hotelaria-solteiro.jpg",med:["solteiro"],tags:["inducol"],leg:"Inducol Hotelaria Solteiro",preco:"R$ 799 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme Solteiro (0,88 × 1,88 m)"},
   {cat:"colchao",top:true,img:"hotelaria-solteiro.jpg",leg:"Colchão Hotelaria + Box Solteiro",preco:"R$ 999 no Pix",name:"Colchão Molas de Hotelaria Firme + Box Solteiro"},
   {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",leg:"King Koil Firme Solteiro",preco:"R$ 1.398 no Pix",tags:["king-koil"],name:"Colchão King Koil Firme Solteiro"},
@@ -173,7 +167,6 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",leg:"King Koil Hotelaria Queen",preco:"R$ 3.296 no Pix",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
   {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",leg:"King Koil Crystal Queen",preco:"R$ 10.345 no Pix",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
   {cat:"colchao",top:true,img:"kingkoil-nanobionic-queen.jpg",med:["queen"],tags:["king-koil"],leg:"King Koil Látex Nanobionic Queen",preco:"R$ 14.845 no Pix",name:"Colchão King Koil com Látex e Tecnologia Nanobionic Queen (1,58 × 1,98 m)"},
-  {cat:"colchao",top:true,img:"kingkoil-diamond-queen.jpg",leg:"King Koil Diamond Queen",preco:"R$ 6.987 no Pix",tags:["king-koil"],name:"Colchão com Látex Diamond King Koil Queen (última peça)"},
   {cat:"colchao",top:true,img:"kingkoil-diamond-king.jpg",med:["king"],tags:["king-koil"],leg:"King Koil Diamond King",preco:"R$ 10.715 no Pix",name:"Colchão com Látex Diamond King Koil King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"kingkoil-diamond-queen-2.jpg",med:["queen"],tags:["king-koil"],leg:"King Koil Diamond Queen",preco:"R$ 8.620 no Pix",name:"Colchão Diamond com Látex King Koil Queen"},
   {cat:"colchao",top:true,img:"molas-firme-queen-699.jpg",med:["queen"],leg:"Colchão Molas Ensacadas Firme Queen",preco:"R$ 699 no Pix",name:"Colchão Molas Ensacadas Firme Queen (1,58 × 1,98 m)"}
