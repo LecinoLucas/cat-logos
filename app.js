@@ -32,8 +32,8 @@ document.addEventListener("click",e=>{
   if(e.target.closest&&e.target.closest(".chip2"))return;
   const a=e.target.closest&&e.target.closest('a[href^="https://wa.me/"]');
   if(!a)return;
-  {const sl=document.querySelector(".slide.act");TRK("whatsapp",location.hash.replace(/^#\/?/,"")||"inicio",sl&&sl.getAttribute("aria-label"))}
   if(a.hasAttribute("data-direct")){setTimeout(closeWam,150);return}
+  {const sl=document.querySelector(".slide.act");TRK("whatsapp",location.hash.replace(/^#\/?/,"")||"inicio",sl&&sl.getAttribute("aria-label"))}
   if(ATD.length<2)return;
   e.preventDefault();const q=new URL(a.href).searchParams.get("text")||"";openWam(q);
 },true);
