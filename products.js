@@ -153,6 +153,8 @@ window.PRODUCTS = [
   {cat:"colchao-bau",top:true,img:"molas-bau-solteiro-solteirao.jpg",dest:true,leg:"Colchão + Box Baú Solteiro e Solteirão",preco:"Solteiro R$ 2.047 · Solteirão R$ 2.494 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Solteiro e Solteirão)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-casal-queen.jpg",leg:"Colchão + Box Baú Casal e Queen",preco:"Casal R$ 2.690 · Queen R$ 3.285 no Pix",name:"Colchão Molas Ensacadas Macio + Box Baú (Casal e Queen)"},
   {cat:"colchao-bau",top:true,img:"molas-bau-king.jpg",leg:"Colchão + Box Baú King",preco:"R$ 4.597 no Pix",name:"Colchão Molas Ensacadas + Box Baú King (1,93 × 2,03 m)"},
+  {cat:"colchao",top:true,img:"inducol-casal-box-bege.jpg",med:["casal"],tags:["inducol"],leg:"Inducol Hotelaria Casal + Box",preco:"R$ 1.449 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme + Box Casal (1,38 × 1,88 m)"},
+  {cat:"colchao",top:true,img:"inducol-casal-bege.jpg",med:["casal"],tags:["inducol"],leg:"Inducol Hotelaria Casal",preco:"R$ 1.098 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme Casal (1,38 × 1,88 m)"},
   {cat:"colchao",top:true,img:"inducol-hotelaria-solteiro.jpg",med:["solteiro"],tags:["inducol"],leg:"Inducol Hotelaria Solteiro",preco:"R$ 799 no Pix",name:"Colchão Inducol Molas de Hotelaria Firme Solteiro (0,88 × 1,88 m)"},
   {cat:"colchao",top:true,img:"hotelaria-solteiro.jpg",leg:"Colchão Hotelaria + Box Solteiro",preco:"R$ 999 no Pix",name:"Colchão Molas de Hotelaria Firme + Box Solteiro"},
   {cat:"colchao",top:true,img:"kingkoil-solteiro.jpg",leg:"King Koil Firme Solteiro",preco:"R$ 1.398 no Pix",tags:["king-koil"],name:"Colchão King Koil Firme Solteiro"},
