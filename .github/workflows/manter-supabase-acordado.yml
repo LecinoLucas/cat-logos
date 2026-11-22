@@ -3,6 +3,7 @@
 # Faz uma leitura de verdade no banco. Se o Supabase não responder 200, a execução fica vermelha e o GitHub avisa por e-mail.
 # Para rodar na hora: aba Actions > "Manter Supabase acordado" > Run workflow.
 name: Manter Supabase acordado
+run-name: Cutucar o Supabase (${{ github.event_name }})
 
 on:
   schedule:
