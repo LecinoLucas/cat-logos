@@ -40,7 +40,7 @@ button.link{background:none;border:0;color:var(--blue);font:inherit;font-size:.6
 .login{max-width:380px;margin:12vh auto 0;padding:0 18px}.login .card{padding:24px}
 .login .brand{justify-content:center;margin-bottom:18px;font-size:1.2rem}
 .hint{font-size:.7rem;color:var(--mut);margin-top:14px;line-height:1.5;text-align:center}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:4px 0 16px}
 .kpi{background:#f4f8fd;border-radius:12px;padding:12px 10px;text-align:center}.kpi b{display:block;font-family:var(--serif);font-size:1.9rem;font-weight:600;line-height:1}.kpi span{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
 .rk{margin:0 0 18px;padding:0;list-style:none}.rk li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.78rem}.rk li i{grid-column:1/3;display:block;height:4px;border-radius:4px;background:#e3edf9;overflow:hidden}.rk li i u{display:block;height:100%;background:var(--blue)}.rk b{font-weight:700}
 .rk .n{color:var(--mut);font-size:.7rem}.st h3{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:14px 0 4px}
@@ -68,6 +68,7 @@ button.link{background:none;border:0;color:var(--blue);font:inherit;font-size:.6
     <div class="card st" id="stats">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">Estatísticas</h2><select id="stDias" style="width:auto;padding:8px 10px;font-size:.78rem"><option value="7">7 dias</option><option value="30" selected>30 dias</option><option value="90">90 dias</option></select></div>
       <p class="sub" style="margin:6px 0 4px">Contagem anônima: não guarda nome nem telefone, só um código do aparelho.</p>
+      <p class="sub" style="margin:0 0 8px;font-size:.7rem">Seus testes contam como visita. Para o celular da equipe não contar, abra uma vez <b>apioneiracolchoes.pages.dev/?equipe=1</b> nele (e <b>?equipe=0</b> para voltar a contar).</p>
       <div id="stBody"><p class="empty">Carregando…</p></div>
     </div>
     <h1>Fotos do catálogo</h1>
@@ -109,6 +110,7 @@ button.link{background:none;border:0;color:var(--blue);font:inherit;font-size:.6
 
 <p class="msg err" id="mBoot" hidden style="max-width:520px;margin:12vh auto;padding:0 18px"></p>
 
+<script src="../products.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="../config.js"></script>
 <script>
@@ -137,11 +139,17 @@ async function loadStats(){
   const rank=(arr,key,val,unit)=>{if(!arr||!arr.length)return '<p class="empty" style="padding:8px 0">Ainda sem dados.</p>';const m=Math.max(...arr.map(x=>x[val]));return '<ul class="rk">'+arr.map(x=>`<li><span>${esc(x[key]||"(sem nome)")}</span><b>${x[val]}${unit?` <span class="n">${unit}</span>`:""}</b><i><u style="width:${Math.max(4,Math.round(x[val]/m*100))}%"></u></i></li>`).join("")+'</ul>'};
   const h=Array.from({length:24},(_,i)=>{const f=(r.horas||[]).find(x=>x.hora===i);return f?f.aberturas:0}),mh=Math.max(1,...h);
   const dias=r.por_dia||[];
-  box.innerHTML=`<div class="kpis"><div class="kpi"><b>${r.visitantes}</b><span>Visitantes</span></div><div class="kpi"><b>${r.aberturas}</b><span>Aberturas</span></div><div class="kpi"><b>${r.whatsapp}</b><span>Cliques WhatsApp</span></div></div>
+  const taxa=r.visitantes?Math.round((r.conversas||0)/r.visitantes*1000)/10:0;
+  const vistos=new Set((r.vistos||[]).map(String));
+  const nome=p=>String(p.name||p.leg||"").replace(/^Vídeo: /,"").slice(0,150);
+  const lista=(window.PRODUCTS||[]).filter(p=>{const c=(window.CATEGORIES||[]).find(x=>x.key===p.cat);return c&&c.black}).map(nome);
+  const nunca=[...new Set(lista)].filter(n=>!vistos.has(n));
+  box.innerHTML=`<div class="kpis"><div class="kpi"><b>${r.visitantes}</b><span>Visitantes</span></div><div class="kpi"><b>${r.aberturas}</b><span>Aberturas</span></div><div class="kpi"><b>${r.whatsapp}</b><span>Cliques WhatsApp</span></div><div class="kpi" style="background:#eaf6ee"><b>${taxa}%</b><span>Chamaram no WhatsApp<br>(${r.conversas||0} de ${r.visitantes})</span></div></div>
   <h3>Produtos mais abertos</h3>${rank(r.top_produtos,"alvo","aberturas","")}
   <h3>Mais pedidos no WhatsApp</h3>${rank(r.top_whatsapp,"alvo","cliques","")}
   <h3>Categorias e medidas mais tocadas</h3>${rank(r.categorias,"alvo","toques","")}
   <h3>Visitantes por dia</h3>${rank(dias.slice(-14).reverse(),"dia","visitantes","")}
+  <h3>Produtos que ninguém abriu (${nunca.length} de ${new Set(lista).size})</h3>${nunca.length?'<ul class="rk">'+nunca.map(n=>`<li><span>${esc(n)}</span></li>`).join("")+'</ul>':'<p class="empty" style="padding:8px 0">Todos os produtos foram abertos.</p>'}
   <h3>Horário das aberturas</h3><div class="hrs">${h.map(v=>`<div style="height:${Math.round(v/mh*100)}%" title="${v}"></div>`).join("")}</div><div class="hl"><span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>23h</span></div>`;
 }
 

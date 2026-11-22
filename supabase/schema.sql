@@ -104,7 +104,7 @@ create table if not exists public.eventos (
   id         bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   sid        text not null check (char_length(sid) <= 40),   -- código anônimo do aparelho
-  tipo       text not null check (tipo in ('abriu','produto','categoria','medida','whatsapp','rolou')),
+  tipo       text not null check (tipo in ('abriu','produto','categoria','medida','whatsapp','rolou','video')),
   alvo       text check (char_length(alvo) <= 160),            -- produto / categoria / medida
   extra      text check (char_length(extra) <= 160)
 );
@@ -124,6 +124,7 @@ begin
   if not public.is_admin() then raise exception 'sem permissão'; end if;
   select jsonb_build_object(
     'visitantes', (select count(distinct sid) from eventos where created_at > now() - make_interval(days => dias)),
+    'conversas',  (select count(distinct sid) from eventos where tipo='whatsapp' and created_at > now() - make_interval(days => dias)),
     'aberturas',  (select count(*) from eventos where tipo='abriu'    and created_at > now() - make_interval(days => dias)),
     'whatsapp',   (select count(*) from eventos where tipo='whatsapp' and created_at > now() - make_interval(days => dias)),
     'por_dia', coalesce((select jsonb_agg(x order by x->>'dia') from (
@@ -132,6 +133,7 @@ begin
     'top_produtos', coalesce((select jsonb_agg(x) from (
         select jsonb_build_object('alvo',alvo,'aberturas',count(*),'visitantes',count(distinct sid)) x from eventos
         where tipo='produto' and created_at > now() - make_interval(days => dias) group by alvo order by count(*) desc limit 15) t),'[]'::jsonb),
+    'vistos', coalesce((select jsonb_agg(distinct alvo) from eventos where tipo='produto' and alvo is not null and created_at > now() - make_interval(days => dias)),'[]'::jsonb),
     'top_whatsapp', coalesce((select jsonb_agg(x) from (
         select jsonb_build_object('alvo',coalesce(alvo,'(geral)'),'cliques',count(*)) x from eventos
         where tipo='whatsapp' and created_at > now() - make_interval(days => dias) group by alvo order by count(*) desc limit 15) t),'[]'::jsonb),

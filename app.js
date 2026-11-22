@@ -1,9 +1,11 @@
 
 // ───── Estatísticas anônimas (só registra se o Supabase estiver ligado em config.js) ─────
 const TRK=(()=>{const S=window.SUPABASE;if(!S||!S.url||!S.key)return()=>{};
+  // aparelho da equipe: abra /?equipe=1 uma vez para parar de contar (e /?equipe=0 para voltar a contar)
+  try{const m=/[?&]equipe=(\d)/.exec(location.search);if(m){if(m[1]==="1")localStorage.setItem("pc_ignore","1");else localStorage.removeItem("pc_ignore")}}catch(e){}
   let sid="";try{sid=localStorage.getItem("pc_sid")||"";if(!sid){sid=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,"").slice(0,24);localStorage.setItem("pc_sid",sid)}}catch(e){sid="x"+Math.random().toString(36).slice(2,12)}
   const seen=new Set();
-  return (tipo,alvo,extra,once)=>{try{const k=tipo+"|"+(alvo||"");if(once){if(seen.has(k))return;seen.add(k)}
+  return (tipo,alvo,extra,once)=>{try{if(localStorage.getItem("pc_ignore"))return;const k=tipo+"|"+(alvo||"");if(once){if(seen.has(k))return;seen.add(k)}
     fetch(S.url+"/rest/v1/eventos",{method:"POST",keepalive:true,headers:{apikey:S.key,Authorization:"Bearer "+S.key,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({sid,tipo,alvo:alvo?String(alvo).slice(0,150):null,extra:extra?String(extra).slice(0,150):null})}).catch(()=>{})}catch(e){}}})();
 const $=s=>document.querySelector(s);
 const app=$("#app");
@@ -164,7 +166,7 @@ function wireFeed(list,start=0,hasIntro=false){
     const last=cur>=slides.length-1;
     const pb=dock.querySelector(".prog b");if(pb)pb.style.width=((cur+1)/slides.length*100)+"%";
     count.innerHTML=`<span class="n">${cur+1} / ${slides.length}</span><span class="hint dn${swiped&&!last?" gone":""}">${last?(hasIntro?"Role para ver mais":"Última foto"):"Deslize para baixo"}${last&&!hasIntro?"":DN}</span>`;
-    TRK("produto",(list[cur].leg||list[cur].name||"").replace(/^Vídeo: /,""),location.hash.replace(/^#\/?/,""),true);
+    TRK("produto",String(list[cur].name||list[cur].leg||"").replace(/^Vídeo: /,""),location.hash.replace(/^#\/?/,""),true);
     fab.href=waProd(list[cur]);fab.innerHTML=WAI+`<span>${esc(STORE.botao||"WhatsApp")}</span>`;
     prev.classList.toggle("dis",cur===0);next.classList.toggle("dis",last&&true);
   };
