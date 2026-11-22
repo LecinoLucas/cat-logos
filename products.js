@@ -33,7 +33,7 @@ window.STORE = {
 window.VITRINE = [
   {key:"v-box",name:"Box Baú",cats:["box-bau","colchao-bau"],cover:"box-queen.jpg",pos:"50% 30%"},
   {key:"colchao",name:"Colchões",cover:"kingkoil-queen.jpg",pos:"50% 40%"},
-  {key:"v-camas",name:"Camas",cats:["camas","tricama","cama-auxiliar"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
+  {key:"v-camas",name:"Camas",cats:["camas","tricama"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
   {key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 40%"},
   {key:"mesas",name:"Mesas de cabeceira",cover:"mesa-mh5405.jpg",pos:"50% 45%"},
   {key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 40%"}
@@ -47,7 +47,6 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"tricama",name:"Tricama 3 em 1",cover:"tricama-promo.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"video-mesas-cabeceira.jpg",pos:"50% 40%"},
   {group:"Black Friday",black:true,key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
-  {group:"Black Friday",black:true,key:"cama-auxiliar",name:"Cama auxiliar",cover:"video-cama-auxiliar.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 30%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
@@ -133,7 +132,6 @@ window.PRODUCTS = [
   {cat:"mesas",img:"mesa-milos.jpg",leg:"Consulte o valor",name:"Mesa de cabeceira MILOS",back:"Todos os modelos"},
   {cat:"travesseiros",top:true,img:"travesseiro-pluma.jpg",leg:"Travesseiro Toque de Pluma",preco:"R$ 19,90 no Pix",name:"Travesseiro Toque de Pluma suporte médio 50x70"},
   {cat:"travesseiros",top:true,img:"travesseiro-visco-gel.jpg",leg:"Travesseiro Visco Gel 50 × 70",preco:"R$ 192 no Pix",name:"Travesseiro Visco Gel anti pressão refrescante 50x70 (enchimento em flocos)"},
-  {cat:"cama-auxiliar",top:true,video:"video-cama-auxiliar.mp4",dest:true,img:"video-cama-auxiliar.jpg",med:["solteiro","solteirao"],preco:"x",leg:"Cama auxiliar molas ensacadas",name:"Vídeo: Cama auxiliar de molas ensacadas (Solteiro e Solteirão)",wa:"Cama auxiliar de molas ensacadas"},
   {cat:"cama-posta",video:"video-coordenado-rose.mp4",img:"video-coordenado-rose.jpg",leg:"Coordenado rosê · veja de perto",name:"Vídeo: Coordenado rosê",wa:"Coordenado 5 peças rosê"},
   {cat:"cama-posta",top:true,img:"coord-azul-solteiro.jpg",leg:"Coordenado 5 peças azul · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças azul linho toque 300 fios Solteiro"},
   {cat:"cama-posta",top:true,img:"coord-rose-solteiro.jpg",leg:"Coordenado 5 peças rosê · Solteiro",preco:"R$ 299 no Pix",name:"Coordenado 5 peças rosê linho toque 300 fios Solteiro"},
