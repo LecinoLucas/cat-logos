@@ -163,6 +163,8 @@ window.PRODUCTS = [
   {cat:"colchao",top:true,img:"sealy-miami.jpg",leg:"Sealy Miami Macio",preco:"Solteiro R$ 1.097 · Solteirão R$ 1.449",tags:["sealy"],name:"Colchão Sealy Miami Molas Ensacadas Macio (Solteiro e Solteirão)"},
   {cat:"colchao",top:true,img:"probel-guarda-costas-king.jpg",leg:"Probel Guarda Costas King",preco:"R$ 4.998 no Pix",tags:["probel"],name:"Colchão Probel Espuma Firme com Gel Linha Guarda Costas + Box King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"herval-king.jpg",tags:["herval"],leg:"Herval Molas Firme + Box King",preco:"R$ 2.895 no Pix",name:"Colchão Herval de Molas Firme + Box King (1,93 × 2,03 m)"},
+  {cat:"colchao",top:true,img:"herval-king-box-2552.jpg",med:["king"],tags:["herval"],leg:"Herval Molas Firme + Box King",preco:"R$ 2.552 no Pix",name:"Colchão Herval de Molas Firme + Box King (1,93 × 2,03 m)"},
+  {cat:"colchao",top:true,img:"herval-king-1960.jpg",med:["king"],tags:["herval"],leg:"Herval Molas Firme King",preco:"R$ 1.960 no Pix",name:"Colchão Herval de Molas Firme King (1,93 × 2,03 m)"},
   {cat:"colchao",top:true,img:"herval-casal.jpg",med:["casal"],tags:["herval"],leg:"Herval Molas Firme Casal",preco:"R$ 1.399 no Pix",name:"Colchão Herval de Molas Firme Casal (1,38 × 1,88 m)"},
   {cat:"colchao",top:true,img:"kingkoil-queen.jpg",leg:"King Koil Hotelaria Queen",preco:"R$ 3.296 no Pix",tags:["king-koil"],name:"Colchão King Koil Hotelaria Dupla Face Queen"},
   {cat:"colchao",top:true,img:"kingkoil-crystal-queen.jpg",leg:"King Koil Crystal Queen",preco:"R$ 10.345 no Pix",tags:["king-koil"],name:"Colchão Crystal com Látex Conforto Macio King Koil Queen"},
