@@ -480,9 +480,6 @@ a{color:inherit;text-decoration:none}
 .car .cap em{font-size:.62rem}
 
 /* selo informativo no canto da foto (ex.: peça de mostruário) */
-.selo{position:absolute;top:10px;right:10px;z-index:4;display:flex;flex-direction:column;align-items:flex-end;gap:3px;padding:7px 11px 7px;border-radius:12px;background:#faf8f4ee;color:#17325a;box-shadow:0 8px 18px -8px #000a;max-width:70%;pointer-events:none}
-.selo i{font-style:normal;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#a98a55;white-space:nowrap}
-.selo small{font-size:.52rem;letter-spacing:.04em;font-weight:600;color:#4b6285;text-align:right}
 
 /* ===== tela inicial: capa + "O que você procura?" ===== */
 .feed.home{scroll-snap-type:y proximity}
@@ -695,5 +692,21 @@ a{color:inherit;text-decoration:none}
 .mr3 .go{width:30px;height:30px;border-radius:50%;background:#17325a;color:#fff;display:grid;place-items:center;flex:none}
 .mr3:active{background:#17325a;color:#fff}.mr3:active em{color:#ffffffb0}.mr3:active small{color:#a9c8f2}.mr3:active .go{background:#fff;color:#17325a}
 @media(max-height:700px){.mr3{max-height:70px}.mr3 img{max-height:52px}.mr3 b{font-size:1.4rem}.ml{gap:8px;padding-bottom:32px}}
-.selo{top:84px}
 .view.lightart .over .brand{display:none}
+
+/* ═══ ETIQUETAS (selo) · estilo global ═══
+   Tipos: t-ultima (peça única, chama atenção), t-mostruario, t-info. O tipo vem do texto do selo em products.js.
+   Para mudar o visual de TODAS as etiquetas de um tipo, é só editar as variáveis abaixo. */
+:root{--selo-ultima-bg:#ffc233;--selo-ultima-fg:#3a2600;--selo-ultima-glow:#ffc233;
+      --selo-mostruario-bg:#a9c8f2;--selo-mostruario-fg:#10264a;--selo-mostruario-glow:#a9c8f2;
+      --selo-info-bg:#faf8f4;--selo-info-fg:#17325a;--selo-info-glow:#ffffff}
+.selo{--bg:var(--selo-info-bg);--fg:var(--selo-info-fg);--glow:var(--selo-info-glow);position:absolute;top:82px;right:12px;z-index:4;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 16px;border-radius:14px;background:var(--bg);color:var(--fg);box-shadow:0 10px 22px -8px #000c,0 0 0 2px #ffffffaa;max-width:72%;pointer-events:none;text-align:center;animation:selopulse 1.7s ease-in-out infinite}
+.selo.t-ultima{--bg:var(--selo-ultima-bg);--fg:var(--selo-ultima-fg);--glow:var(--selo-ultima-glow)}
+.selo.t-mostruario{--bg:var(--selo-mostruario-bg);--fg:var(--selo-mostruario-fg);--glow:var(--selo-mostruario-glow)}
+.selo i{font-style:normal;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--fg);white-space:nowrap;line-height:1.1}
+.selo small{font-size:.64rem;letter-spacing:.06em;font-weight:700;color:var(--fg);opacity:.85}
+.selo.mini{top:6px;right:6px;left:auto;bottom:auto;padding:4px 7px;border-radius:8px;max-width:62%}
+.selo.mini i{font-size:.52rem;letter-spacing:.1em}
+@keyframes selopulse{0%,100%{transform:scale(1);box-shadow:0 10px 22px -8px #000c,0 0 0 2px #ffffffaa,0 0 0 0 var(--glow)}
+  50%{transform:scale(1.07);box-shadow:0 10px 22px -8px #000c,0 0 0 2px #ffffffaa,0 0 20px 6px var(--glow)}}
+@media(prefers-reduced-motion:reduce){.selo,.selo.mini{animation:none}}
