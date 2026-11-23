@@ -696,3 +696,4 @@ a{color:inherit;text-decoration:none}
 .mr3:active{background:#17325a;color:#fff}.mr3:active em{color:#ffffffb0}.mr3:active small{color:#a9c8f2}.mr3:active .go{background:#fff;color:#17325a}
 @media(max-height:700px){.mr3{max-height:70px}.mr3 img{max-height:52px}.mr3 b{font-size:1.4rem}.ml{gap:8px;padding-bottom:32px}}
 .selo{top:84px}
+.view.lightart .over .brand{display:none}

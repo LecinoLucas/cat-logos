@@ -33,7 +33,7 @@ window.STORE = {
 window.VITRINE = [
   {key:"v-box",name:"Box Baú",cats:["box-bau","colchao-bau"],cover:"box-queen.jpg",pos:"50% 30%"},
   {key:"colchao",name:"Colchões",cover:"kingkoil-queen.jpg",pos:"50% 40%"},
-  {key:"v-camas",name:"Camas",cats:["camas","tricama"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
+  {key:"v-camas",name:"Camas",cats:["camas","tricama","cabeceiras"],cover:"bicama-solteiro.jpg",pos:"50% 40%"},
   {key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 40%"},
   {key:"mesas",name:"Mesas de cabeceira",cover:"mesa-mh5405.jpg",pos:"50% 45%"},
   {key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 40%"}
@@ -48,6 +48,7 @@ window.CATEGORIES = [
   {group:"Black Friday",black:true,key:"mesas",name:"Mesas de cabeceira",cover:"video-mesas-cabeceira.jpg",pos:"50% 40%"},
   {group:"Black Friday",black:true,key:"cama-posta",name:"Roupas de cama",cover:"coord-azul-solteiro.jpg",pos:"50% 35%"},
   {group:"Black Friday",black:true,key:"travesseiros",name:"Travesseiros",cover:"travesseiro-pluma.jpg",pos:"50% 30%"},
+  {group:"Black Friday",black:true,key:"cabeceiras",name:"Cabeceiras",cover:"cabeceiras-pronta-entrega-1.jpg",pos:"50% 20%"},
   {group:"Black Friday",black:true,key:"camas",name:"Bicama",cover:"bicama-casal.jpg",pos:"50% 30%"},
 
   {group:"Camas",key:"bicamas-loja",name:"Bicamas",cover:"bicamas-03.jpg",pos:"50% 50%"},
@@ -144,6 +145,8 @@ window.PRODUCTS = [
   {cat:"camas",top:true,img:"bicama-casal.jpg",leg:"Bicama de Molas Casal",preco:"R$ 2.443 no Pix",name:"Colchão Molas Firme + Bicama de Molas Casal"},
   {cat:"camas",top:true,img:"cama-urban-queen.jpg",med:["queen"],leg:"Cama Urban Queen",preco:"R$ 1.997 no Pix",name:"Cama Urban Queen (1,58 × 1,98 m), não acompanha o colchão"},
   {cat:"camas",top:true,video:"video-cama-auxiliar-mostruario.mp4",img:"video-cama-auxiliar-mostruario.jpg",med:["solteiro"],selo:"Peça de mostruário",selo2:"Última unidade",leg:"Cama auxiliar molas Solteiro",preco:"x",name:"Vídeo: Cama auxiliar de molas Solteiro (mostruário)",wa:"Cama auxiliar de molas Solteiro (peça de mostruário)"},
+  {cat:"cabeceiras",top:true,img:"cabeceiras-pronta-entrega-1.jpg",lightart:true,med:["solteiro","casal","queen","king"],leg:"Cabeceiras · pronta entrega",preco:"x",name:"Cabeceiras pronta entrega (Solteiro, Casal, Queen e King)"},
+  {cat:"cabeceiras",top:true,img:"cabeceiras-pronta-entrega-2.jpg",lightart:true,med:["solteirao","casal","queen","king"],leg:"Cabeceiras · pronta entrega",preco:"x",name:"Cabeceiras pronta entrega (Solteirão, Casal, Queen e King)"},
   {cat:"box-bau",top:true,video:"video-box-bau-qualidade.mp4",img:"video-box-bau-qualidade.jpg",name:"Vídeo: Antes de comprar um box baú, veja isso",wa:"Box Baú"},
   {cat:"box-bau",top:true,img:"box-solteiro.jpg",leg:"Box Baú Solteiro",preco:"R$ 999",name:"Box Baú Solteiro (0,88 × 1,88 m)"},
   {cat:"box-bau",top:true,img:"box-solteirao.jpg",leg:"Box Baú Solteirão",preco:"R$ 1.100",name:"Box Baú Solteirão (1,08 × 1,98 m)"},

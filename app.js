@@ -159,6 +159,7 @@ function wireFeed(list,start=0,hasIntro=false){
   const ARR='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',DN='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   const sync=()=>{
     dock.classList.toggle("off",!carOn);
+    if(cur>=0&&list[cur])view.classList.toggle("lightart",!!list[cur].lightart);
     if(cur<0)return;
     slides.forEach((c,j)=>{c.classList.toggle("act",j===cur);
       if(c.dataset.href){j===cur?c.setAttribute("href",c.dataset.href):c.removeAttribute("href")}});
