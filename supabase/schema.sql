@@ -134,6 +134,11 @@ begin
         select jsonb_build_object('alvo',alvo,'aberturas',count(*),'visitantes',count(distinct sid)) x from eventos
         where tipo='produto' and created_at > now() - make_interval(days => dias) group by alvo order by count(*) desc limit 15) t),'[]'::jsonb),
     'vistos', coalesce((select jsonb_agg(distinct alvo) from eventos where tipo='produto' and alvo is not null and created_at > now() - make_interval(days => dias)),'[]'::jsonb),
+    'origens', coalesce((select jsonb_agg(x) from (
+        select jsonb_build_object('alvo',coalesce(extra,'direto'),'visitas',count(distinct sid),
+          'chamaram',(select count(distinct e2.sid) from eventos e2 where e2.tipo='whatsapp' and e2.created_at > now() - make_interval(days => dias)
+                      and e2.sid in (select e3.sid from eventos e3 where e3.tipo='abriu' and coalesce(e3.extra,'direto')=coalesce(e.extra,'direto')))) x
+        from eventos e where tipo='abriu' and created_at > now() - make_interval(days => dias) group by coalesce(extra,'direto'), extra order by count(distinct sid) desc limit 15) t),'[]'::jsonb),
     'top_whatsapp', coalesce((select jsonb_agg(x) from (
         select jsonb_build_object('alvo',coalesce(alvo,'(geral)'),'cliques',count(*)) x from eventos
         where tipo='whatsapp' and created_at > now() - make_interval(days => dias) group by alvo order by count(*) desc limit 15) t),'[]'::jsonb),

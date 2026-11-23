@@ -139,12 +139,14 @@ async function loadStats(){
   const rank=(arr,key,val,unit)=>{if(!arr||!arr.length)return '<p class="empty" style="padding:8px 0">Ainda sem dados.</p>';const m=Math.max(...arr.map(x=>x[val]));return '<ul class="rk">'+arr.map(x=>`<li><span>${esc(x[key]||"(sem nome)")}</span><b>${x[val]}${unit?` <span class="n">${unit}</span>`:""}</b><i><u style="width:${Math.max(4,Math.round(x[val]/m*100))}%"></u></i></li>`).join("")+'</ul>'};
   const h=Array.from({length:24},(_,i)=>{const f=(r.horas||[]).find(x=>x.hora===i);return f?f.aberturas:0}),mh=Math.max(1,...h);
   const dias=r.por_dia||[];
+  const origens=(r.origens&&r.origens.length)?'<ul class="rk">'+r.origens.map(o=>{const nm=String(o.alvo||"direto").replace(/^campanha:/,"Campanha: ");return `<li><span>${esc(nm)}</span><b>${o.visitas} <span class="n">visitas · ${o.chamaram||0} chamaram</span></b></li>`}).join("")+'</ul>':'<p class="empty" style="padding:8px 0">Ainda sem dados.</p>';
   const taxa=r.visitantes?Math.round((r.conversas||0)/r.visitantes*1000)/10:0;
   const vistos=new Set((r.vistos||[]).map(String));
   const nome=p=>String(p.name||p.leg||"").replace(/^Vídeo: /,"").slice(0,150);
   const lista=(window.PRODUCTS||[]).filter(p=>{const c=(window.CATEGORIES||[]).find(x=>x.key===p.cat);return c&&c.black}).map(nome);
   const nunca=[...new Set(lista)].filter(n=>!vistos.has(n));
   box.innerHTML=`<div class="kpis"><div class="kpi"><b>${r.visitantes}</b><span>Visitantes</span></div><div class="kpi"><b>${r.aberturas}</b><span>Aberturas</span></div><div class="kpi"><b>${r.whatsapp}</b><span>Cliques WhatsApp</span></div><div class="kpi" style="background:#eaf6ee"><b>${taxa}%</b><span>Chamaram no WhatsApp<br>(${r.conversas||0} de ${r.visitantes})</span></div></div>
+  <h3>De onde vieram</h3>${origens}
   <h3>Produtos mais abertos</h3>${rank(r.top_produtos,"alvo","aberturas","")}
   <h3>Mais pedidos no WhatsApp</h3>${rank(r.top_whatsapp,"alvo","cliques","")}
   <h3>Categorias e medidas mais tocadas</h3>${rank(r.categorias,"alvo","toques","")}
