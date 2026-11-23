@@ -261,4 +261,5 @@ Promise.race([loadRemote(),new Promise(r=>setTimeout(r,1200))]).then(route);
 // abertura curta, só na primeira vez da sessão
 const sp=$("#splash");let seen=false;try{seen=sessionStorage.getItem("sp")}catch(e){}
 if(seen)sp.remove();else{try{sessionStorage.setItem("sp","1")}catch(e){}setTimeout(()=>{sp.classList.add("out");setTimeout(()=>sp.remove(),600)},1000)}
-TRK("abriu",null,document.referrer?new URL(document.referrer,location.href).hostname:"direto",true);
+{let de="";try{de=(new URLSearchParams(location.search).get("de")||"").toLowerCase().replace(/[^a-z0-9_-]/g,"").slice(0,30)}catch(e){}
+TRK("abriu",null,de?"campanha:"+de:(document.referrer?new URL(document.referrer,location.href).hostname:"direto"),true)}
